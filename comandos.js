@@ -4,6 +4,8 @@ const comandos = [
     "help",
     "clear",
     "exit",
+    "dataAlias apply cross-validation",
+    "exit",
     "run diagnostic",
     "check system health",
     "start process",
