@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="logo.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ORIS OS</title>
     <style>
@@ -21,7 +22,7 @@
 
         .banner {
             width: 80%;
-            max-width: 350px;  
+            max-width: 350px;
             margin-bottom: 20px;
         }
 
@@ -48,7 +49,7 @@
             box-shadow: 0px 0px 50px rgba(76, 175, 80, 0.7);
             overflow: hidden;
             transition: all 0.3s ease-in-out;
-            margin-bottom: 50px; 
+            margin-bottom: 50px;
         }
 
         .chat-box {
@@ -60,6 +61,8 @@
             padding: 15px;
             max-height: 60vh;
             transition: max-height 0.3s ease-in-out;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
 
         .message {
@@ -70,7 +73,6 @@
             display: flex;
             align-items: center;
             font-size: 16px;
-            word-wrap: break-word;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
@@ -178,6 +180,20 @@
         .send-btn i, .clear-btn i, .attach-btn i {
             margin-right: 8px;
         }
+
+        /* Additional animation for terminal output */
+        .terminal {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -195,7 +211,8 @@
     <footer>
         <p>© 2025 HoloFi. Todos os direitos reservados. Lucas Januário</p>
     </footer>
- <script>
+
+    <script>
         const terminalOutput = document.getElementById('terminalOutput');
         const inputField = document.getElementById('inputField');
 
@@ -222,8 +239,7 @@
         }
 
         inputField.addEventListener('keydown', handleInput);
-        src="script.js"
-      </script>
+    </script>
 
 </body>
 </html>
