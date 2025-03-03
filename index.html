@@ -520,6 +520,73 @@ const commandFunctions = {
     "unlock user account": () => log("Unlocking user account..."),
     const terminalOutput = document.getElementById('terminalOutput');
 const inputField = document.getElementById('inputField');
+    const terminalOutput = document.getElementById('terminalOutput');
+const inputField = document.getElementById('inputField');
+
+function handleInput(event) {
+    if (event.key === 'Enter') {
+        const userInput = inputField.value;
+        inputField.value = '';
+        processCommand(userInput);
+    }
+}
+
+function processCommand(command) {
+    terminalOutput.innerHTML += `<br><span class='output'>$ ${command}</span>`;
+    terminalOutput.innerHTML += `<br><span class='output'>Processing...</span>`;
+
+    const lowerCommand = command.toLowerCase();
+
+    if (commandFunctions[lowerCommand]) {
+        commandFunctions[lowerCommand]();  
+    } else {
+        terminalOutput.innerHTML += `<br><span class='output'>Unknown command: ${command}</span>`;
+    }
+
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+}
+
+const commandFunctions = {
+    "manage datacenter": () => log("Accessing datacenter management system..."),
+    "monitor server performance": () => log("Monitoring server performance metrics..."),
+    "check server uptime": () => log("Checking server uptime status..."),
+    "view server logs": () => log("Retrieving server logs..."),
+    "clear server logs": () => log("Clearing all server logs..."),
+    "configure server settings": () => log("Configuring server settings..."),
+    "analyze dataset": () => log("Analyzing dataset for insights..."),
+    "run statistical analysis": () => log("Running statistical analysis..."),
+    "generate data summary": () => log("Generating data summary report..."),
+    "visualize data": () => log("Creating data visualizations..."),
+    "detect anomalies": () => log("Detecting anomalies in dataset..."),
+    "train machine learning model": () => log("Training machine learning model..."),
+    "evaluate model performance": () => log("Evaluating machine learning model performance..."),
+    "apply feature engineering": () => log("Applying feature engineering techniques..."),
+    "clean dataset": () => log("Cleaning and preprocessing dataset..."),
+    "split dataset": () => log("Splitting dataset into training and test sets..."),
+    "perform regression analysis": () => log("Performing regression analysis..."),
+    "perform clustering": () => log("Executing clustering algorithm..."),
+    "perform classification": () => log("Running classification model..."),
+    "optimize hyperparameters": () => log("Optimizing model hyperparameters..."),
+    "export dataset": () => log("Exporting dataset in selected format..."),
+    "import dataset": () => log("Importing dataset for analysis..."),
+    "execute bash command": (cmd) => log(`Executing Bash command: ${cmd}...`),
+    "run shell script": (script) => log(`Running shell script: ${script}..."),
+};
+
+function showHelp() {
+    terminalOutput.innerHTML += "<br><span class='output'>Available commands:</span>";
+    Object.keys(commandFunctions).forEach(command => {
+        terminalOutput.innerHTML += `<br><span class='output'>${command}</span>`;
+    });
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+}
+
+function log(message) {
+    terminalOutput.innerHTML += `<br><span class='output'>${message}</span>`;
+}
+
+inputField.addEventListener('keydown', handleInput);
+
 
 function handleInput(event) {
     if (event.key === 'Enter') {
