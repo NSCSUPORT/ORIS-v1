@@ -291,19 +291,19 @@
     function showHelp() {
         terminalOutput.innerHTML += "<br><span class='output'>Available commands:</span>";
 
-        // Load the comandos.js file and execute the script to define the 'comandos' array
+        // Carregar o arquivo 'comandos.js' e executar o script para definir o array 'comandos'
         fetch('comandos.js')
-            .then(response => response.text())  // Get the JavaScript code as text
+            .then(response => response.text())  // Pega o código JavaScript como texto
             .then(data => {
-                // Execute the JavaScript code to make 'comandos' available
+                // Executa o código JavaScript para tornar 'comandos' disponível
                 eval(data);
 
-                // Display each command from the 'comandos' array
+                // Exibe cada comando do array 'comandos'
                 comandos.forEach(command => {
                     terminalOutput.innerHTML += `<br><span class='output'>${command}</span>`;
                 });
 
-                terminalOutput.scrollTop = terminalOutput.scrollHeight;  // Scroll to the bottom
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;  // Desce para o final do terminal
             })
             .catch(error => {
                 terminalOutput.innerHTML += `<br><span class='output'>Error loading commands: ${error.message}</span>`;
