@@ -235,6 +235,7 @@
     <footer>
         <p>© 2025 HoloFi. Todos os direitos reservados. Lucas Januário</p>
     </footer>
+    <script>
 const terminalOutput = document.getElementById('terminalOutput');
 const inputField = document.getElementById('inputField');
 
@@ -701,6 +702,28 @@ function processManualCommand(command) {
     }
     
     terminalOutput.scrollTop = terminalOutput.scrollHeight;
+}// Função para carregar e ler o arquivo quantum-process.js
+async function carregarElerArquivo() {
+    try {
+        // Carregar o arquivo quantum-process.js (é necessário que o arquivo esteja no mesmo diretório ou forneça o caminho correto)
+        const response = await fetch('quantum-process.js');
+        
+        if (!response.ok) {
+            throw new Error('Falha ao carregar o arquivo.');
+        }
+        
+        // Ler o conteúdo do arquivo como texto
+        const conteudo = await response.text();
+        
+        // Exibir o conteúdo no console (ou você pode fazer o que for necessário com ele)
+        console.log(conteudo);
+    } catch (error) {
+        console.error('Erro ao carregar ou ler o arquivo:', error);
+    }
 }
+
+// Chamar a função para carregar e ler o arquivo
+carregarElerArquivo();
+</script>
 </body>
 </html>
