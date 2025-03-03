@@ -195,8 +195,35 @@
     <footer>
         <p>© 2025 HoloFi. Todos os direitos reservados. Lucas Januário</p>
     </footer>
+ <script>
+        const terminalOutput = document.getElementById('terminalOutput');
+        const inputField = document.getElementById('inputField');
 
-    <script src="script.js"></script>
+        function handleInput(event) {
+            if (event.key === 'Enter') {
+                const userInput = inputField.value;
+                inputField.value = '';
+                processCommand(userInput);
+            }
+        }
+
+        async function processCommand(command) {
+            terminalOutput.innerHTML += `<br><span>$ ${command}</span>`;  // Exibe o comando
+
+            if (command === 'run ls') {
+                const response = await fetch('/run-bash');
+                const result = await response.text();
+                terminalOutput.innerHTML += `<br><span>${result}</span>`;
+            } else {
+                terminalOutput.innerHTML += `<br><span>Comando não reconhecido.</span>`;
+            }
+
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;  // Desce para o final do terminal
+        }
+
+        inputField.addEventListener('keydown', handleInput);
+        src="script.js"
+      </script>
 
 </body>
 </html>
