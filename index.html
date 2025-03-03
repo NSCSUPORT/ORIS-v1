@@ -303,13 +303,22 @@
         fetch('comandos.js')
             .then(response => response.text())  // Pega o código JavaScript como texto
             .then(data => {
-                // Executa o código JavaScript para tornar 'comandos' disponível
-                eval(data);
+                try {
+                    // O conteúdo de 'comandos.js' deve ser um array de strings
+                    eval(data); // Executa o conteúdo do arquivo como código JS
 
-                // Exibe cada comando do array 'comandos'
-                comandos.forEach(command => {
-                    terminalOutput.innerHTML += `<br><span class='output'>${command}</span>`;
-                });
+                    if (Array.isArray(comandos)) {
+                        // Exibe cada comando do array 'comandos'
+                        comandos.forEach(command => {
+                            terminalOutput.innerHTML += `<br><span class='output'>${command}</span>`;
+                        });
+                    } else {
+                        terminalOutput.innerHTML += `<br><span class='output'>Error: 'comandos' is not an array</span>`;
+                    }
+
+                } catch (error) {
+                    terminalOutput.innerHTML += `<br><span class='output'>Error loading commands: ${error.message}</span>`;
+                }
 
                 terminalOutput.scrollTop = terminalOutput.scrollHeight;  // Desce para o final do terminal
             })
