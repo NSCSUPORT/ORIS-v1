@@ -422,33 +422,6 @@ const commandFunctions = {
     "update firmware": () => log("Updating firmware..."),
     "rollback firmware": () => log("Rolling back firmware update..."),
     "install patches": () => log("Installing system patches...")
-    const terminalOutput = document.getElementById('terminalOutput');
-const inputField = document.getElementById('inputField');
-
-function handleInput(event) {
-    if (event.key === 'Enter') {
-        const userInput = inputField.value;
-        inputField.value = '';
-        processCommand(userInput);
-    }
-}
-
-function processCommand(command) {
-    terminalOutput.innerHTML += `<br><span class='output'>$ ${command}</span>`;
-    terminalOutput.innerHTML += `<br><span class='output'>Processing...</span>`;
-
-    const lowerCommand = command.toLowerCase();
-
-    if (commandFunctions[lowerCommand]) {
-        commandFunctions[lowerCommand]();  
-    } else {
-        terminalOutput.innerHTML += `<br><span class='output'>Unknown command: ${command}</span>`;
-    }
-
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-}
-
-const commandFunctions = {
     "run docker image": () => log("Running Docker image..."),
     "build docker image": () => log("Building Docker image..."),
     "push docker image": () => log("Pushing Docker image to repository..."),
@@ -512,42 +485,317 @@ const commandFunctions = {
     "check user activity": () => log("Checking user activity logs..."),
     "create user": () => log("Creating new user account..."),
     "delete user": () => log("Deleting user account..."),
+    // Gestao de Data Center
+"configure server settings": () => log("Configuring server settings..."),
+"check server hardware": () => log("Checking server hardware..."),
+"restart server": () => log("Restarting server..."),
+"shutdown server": () => log("Shutting down server..."),
+"check server performance": () => log("Checking server performance..."),
+"scale server resources": () => log("Scaling server resources..."),
+"update server firmware": () => log("Updating server firmware..."),
+"rollback server firmware": () => log("Rolling back server firmware..."),
+"monitor server logs": () => log("Monitoring server logs..."),
+"install server patches": () => log("Installing server patches..."),
+"list server patches": () => log("Listing server patches..."),
+"check patch status server": () => log("Checking server patch status..."),
+"create backup server": () => log("Creating server backup..."),
+"restore server from backup": () => log("Restoring server from backup..."),
+"configure server security": () => log("Configuring server security..."),
+"check server security logs": () => log("Checking server security logs..."),
+"configure firewall rules": () => log("Configuring firewall rules..."),
+"check firewall status": () => log("Checking firewall status..."),
+"update firewall settings": () => log("Updating firewall settings..."),
+"restart firewall": () => log("Restarting firewall..."),
+"check load balancer status": () => log("Checking load balancer status..."),
+"configure load balancer": () => log("Configuring load balancer..."),
+"check virtual machine resources": () => log("Checking virtual machine resources..."),
+"check vm disk usage": () => log("Checking virtual machine disk usage..."),
+"resize virtual machine disk": () => log("Resizing virtual machine disk..."),
+"migrate virtual machine": () => log("Migrating virtual machine..."),
+"check vm network usage": () => log("Checking virtual machine network usage..."),
+"upgrade virtual machine resources": () => log("Upgrading virtual machine resources..."),
+"check virtualization status": () => log("Checking virtualization status..."),
+"update virtualization settings": () => log("Updating virtualization settings..."),
+"configure cloud storage": () => log("Configuring cloud storage..."),
+"check cloud storage usage": () => log("Checking cloud storage usage..."),
+"scale cloud storage": () => log("Scaling cloud storage..."),
+"backup cloud storage": () => log("Backing up cloud storage..."),
+"restore cloud storage backup": () => log("Restoring cloud storage backup..."),
+"monitor data center temperature": () => log("Monitoring data center temperature..."),
+"monitor data center humidity": () => log("Monitoring data center humidity..."),
+"adjust data center cooling": () => log("Adjusting data center cooling..."),
+"check energy consumption": () => log("Checking energy consumption..."),
+"optimize energy usage": () => log("Optimizing energy usage..."),
+"configure data center UPS": () => log("Configuring data center UPS..."),
+"check data center UPS status": () => log("Checking data center UPS status..."),
+"update data center UPS settings": () => log("Updating data center UPS settings..."),
+"monitor data center power": () => log("Monitoring data center power..."),
+"check server availability": () => log("Checking server availability..."),
+"set server availability alerts": () => log("Setting server availability alerts..."),
+"check network latency": () => log("Checking network latency..."),
+"check network bandwidth": () => log("Checking network bandwidth..."),
+"optimize network performance": () => log("Optimizing network performance..."),
+"configure VPN access": () => log("Configuring VPN access..."),
+"check VPN status": () => log("Checking VPN status..."),
+"configure network routing": () => log("Configuring network routing..."),
+"check router status": () => log("Checking router status..."),
+"monitor network traffic": () => log("Monitoring network traffic..."),
+"optimize data center layout": () => log("Optimizing data center layout..."),
+"audit data center operations": () => log("Auditing data center operations..."),
+"check server patch levels": () => log("Checking server patch levels..."),
+"configure server monitoring": () => log("Configuring server monitoring..."),
+"schedule server maintenance": () => log("Scheduling server maintenance..."),
+"perform server diagnostics": () => log("Performing server diagnostics..."),
+"reset server to factory settings": () => log("Resetting server to factory settings..."),
+"list all servers": () => log("Listing all servers..."),
+"show data center map": () => log("Showing data center map..."),
+"manage server racks": () => log("Managing server racks..."),
+"track server warranty": () => log("Tracking server warranty..."),
+"create maintenance schedule": () => log("Creating maintenance schedule..."),
+"check server capacity": () => log("Checking server capacity..."),
+"monitor virtual server performance": () => log("Monitoring virtual server performance..."),
+"check virtual server uptime": () => log("Checking virtual server uptime..."),
+"adjust virtual server allocation": () => log("Adjusting virtual server allocation..."),
+"monitor data center access": () => log("Monitoring data center access..."),
+"configure data center security system": () => log("Configuring data center security system..."),
+"schedule data center shutdown": () => log("Scheduling data center shutdown..."),
+"check energy efficiency": () => log("Checking energy efficiency..."),
+"configure remote data center monitoring": () => log("Configuring remote data center monitoring..."),
+"install temperature sensors": () => log("Installing temperature sensors in data center..."),
+"install humidity sensors": () => log("Installing humidity sensors in data center..."),
+"check sensor status": () => log("Checking sensor status..."),
+"update data center equipment": () => log("Updating data center equipment..."),
+"monitor rack temperature": () => log("Monitoring rack temperature..."),
+"monitor rack humidity": () => log("Monitoring rack humidity..."),
+"perform system update": () => log("Performing system update..."),
+"schedule server reboot": () => log("Scheduling server reboot..."),
+"check data center asset inventory": () => log("Checking data center asset inventory..."),
+"track data center inventory": () => log("Tracking data center inventory..."),
+"set up power redundancy": () => log("Setting up power redundancy..."),
+"configure server failover": () => log("Configuring server failover..."),
+"track server health status": () => log("Tracking server health status..."),
+"perform system backup": () => log("Performing system backup..."),
+"configure system restore": () => log("Configuring system restore..."),
+"restore data center systems": () => log("Restoring data center systems..."),
+"check disaster recovery plan": () => log("Checking disaster recovery plan..."),
+"configure disaster recovery testing": () => log("Configuring disaster recovery testing..."),
+"test disaster recovery process": () => log("Testing disaster recovery process..."),
+"check data center SLA": () => log("Checking data center SLA..."),
+"update data center SLA": () => log("Updating data center SLA..."),
+"check server load": () => log("Checking server load..."),
+"optimize server performance": () => log("Optimizing server performance..."),
+"track server uptime": () => log("Tracking server uptime..."),
+"check server CPU usage": () => log("Checking server CPU usage..."),
+"monitor disk space usage": () => log("Monitoring disk space usage..."),
+"monitor server RAM usage": () => log("Monitoring server RAM usage..."),
+"adjust server network speed": () => log("Adjusting server network speed..."),
+"create network segmentation plan": () => log("Creating network segmentation plan..."),
+"install network monitoring tools": () => log("Installing network monitoring tools..."),
+"check server network interfaces": () => log("Checking server network interfaces..."),
+"track server network performance": () => log("Tracking server network performance..."),
+"update server operating system": () => log("Updating server operating system..."),
+"schedule OS updates": () => log("Scheduling OS updates..."),
+"check OS patch status": () => log("Checking OS patch status..."),
+"track server software versions": () => log("Tracking server software versions..."),
+"configure server time synchronization": () => log("Configuring server time synchronization..."),
+"check NTP status": () => log("Checking NTP status..."),
+"check server firewall configuration": () => log("Checking server firewall configuration..."),
+"update server firewall settings": () => log("Updating server firewall settings..."),
+"track security compliance": () => log("Tracking security compliance..."),
+"check SSL configuration": () => log("Checking SSL configuration..."),
+"update SSL certificates": () => log("Updating SSL certificates..."),
+"perform security audit": () => log("Performing security audit..."),
+"check user access logs": () => log("Checking user access logs..."),
+"enable multi-factor authentication": () => log("Enabling multi-factor authentication..."),
+"disable multi-factor authentication": () => log("Disabling multi-factor authentication..."),
+"monitor login attempts": () => log("Monitoring login attempts..."),
+"configure account lockout policies": () => log("Configuring account lockout policies..."),
+"enable auditing for privileged users": () => log("Enabling auditing for privileged users..."),
+"track user session logs": () => log("Tracking user session logs..."),
+"review audit trails": () => log("Reviewing audit trails..."),
+"manage role-based access": () => log("Managing role-based access..."),
+"check user roles": () => log("Checking user roles..."),
+"assign new user role": () => log("Assigning new user role..."),
+"remove user role": () => log("Removing user role..."),
+"check user permissions": () => log("Checking user permissions..."),
+"configure user authentication": () => log("Configuring user authentication..."),
+"check authentication logs": () => log("Checking authentication logs..."),
+"configure user password policies": () => log("Configuring user password policies..."),
+"enable password expiration": () => log("Enabling password expiration..."),
+"disable password expiration": () => log("Disabling password expiration..."),
+"enable password complexity rules": () => log("Enabling password complexity rules..."),
+"disable password complexity rules": () => log("Disabling password complexity rules..."),
+"check password strength": () => log("Checking password strength..."),
+"set password expiration date": () => log("Setting password expiration date..."),
+"lock user account": () => log("Locking user account..."),
+"unlock user account": () => log("Unlocking user account..."),
+"reset user password": () => log("Resetting user password..."),
+"generate user security key": () => log("Generating user security key..."),
+"manage API keys": () => log("Managing API keys..."),
+"check API usage": () => log("Checking API usage..."),
+"generate API key": () => log("Generating API key..."),
+"delete API key": () => log("Deleting API key..."),
+"configure network VPN": () => log("Configuring network VPN..."),
+"check VPN status": () => log("Checking VPN status..."),
+"list active VPN connections": () => log("Listing active VPN connections..."),
+"configure DNS settings": () => log("Configuring DNS settings..."),
+"check DNS status": () => log("Checking DNS status..."),
+"track domain name registrations": () => log("Tracking domain name registrations..."),
+"manage domain names": () => log("Managing domain names..."),
+"check server time": () => log("Checking server time..."),
+"check NTP synchronization": () => log("Checking NTP synchronization..."),
+"track server load": () => log("Tracking server load..."),
+"optimize system boot time": () => log("Optimizing system boot time..."),
+"check disk I/O performance": () => log("Checking disk I/O performance..."),
+"monitor server resource usage": () => log("Monitoring server resource usage..."),
+"track server uptime": () => log("Tracking server uptime..."),
+"configure alerting for servers": () => log("Configuring alerting for servers..."),
+"check alert status": () => log("Checking alert status..."),
+"create custom alerts": () => log("Creating custom alerts..."),
+"monitor system events": () => log("Monitoring system events..."),
+"track system logs": () => log("Tracking system logs..."),
+"configure system alerts": () => log("Configuring system alerts..."),
+"check system health": () => log("Checking system health..."),
+"perform system diagnostics": () => log("Performing system diagnostics..."),
+"schedule system health check": () => log("Scheduling system health check..."),
+"check disk space": () => log("Checking disk space..."),
+"configure disk alerts": () => log("Configuring disk alerts..."),
+"perform system update": () => log("Performing system update..."),
+"check system uptime": () => log("Checking system uptime..."),
+"track system status": () => log("Tracking system status..."),
+"generate system reports": () => log("Generating system reports..."),
+"check system resource usage": () => log("Checking system resource usage..."),
+"update system configuration": () => log("Updating system configuration..."),
+"reboot system": () => log("Rebooting system..."),
+"shutdown system": () => log("Shutting down system..."),
+"track system alerts": () => log("Tracking system alerts..."),
+"create maintenance report": () => log("Creating maintenance report..."),
+"track user session activity": () => log("Tracking user session activity..."),
+"generate system audit logs": () => log("Generating system audit logs..."),
+"review audit reports": () => log("Reviewing audit reports..."),
+"check backup status": () => log("Checking backup status..."),
+"perform data restore": () => log("Performing data restore..."),
+"backup system configuration": () => log("Backing up system configuration..."),
+"check data integrity": () => log("Checking data integrity..."),
+"schedule data backup": () => log("Scheduling data backup..."),
+"configure backup frequency": () => log("Configuring backup frequency..."),
+"restore data from backup": () => log("Restoring data from backup..."),
+"check cloud storage availability": () => log("Checking cloud storage availability..."),
+"optimize cloud storage": () => log("Optimizing cloud storage..."),
+"track cloud storage usage": () => log("Tracking cloud storage usage..."),
+"create cloud storage report": () => log("Creating cloud storage report..."),
+"check cloud storage health": () => log("Checking cloud storage health..."),
+"configure cloud storage backup": () => log("Configuring cloud storage backup..."),
+"check cloud storage backup status": () => log("Checking cloud storage backup status..."),
+"check cloud storage usage": () => log("Checking cloud storage usage..."),
+"configure cloud storage": () => log("Configuring cloud storage settings..."),
+"list cloud devices": () => log("Listing all cloud-connected devices..."),
+"add cloud device": () => log("Adding a new cloud-connected device..."),
+"remove cloud device": () => log("Removing cloud-connected device..."),
+"update cloud device": () => log("Updating cloud-connected device settings..."),
+"sync cloud device data": () => log("Synchronizing data from cloud device..."),
+"check cloud device status": () => log("Checking cloud device status..."),
+"restart cloud device": () => log("Restarting cloud-connected device..."),
+"check cloud device logs": () => log("Checking cloud device activity logs..."),
+"configure cloud IoT network": () => log("Configuring cloud IoT network..."),
+"enable cloud IoT integration": () => log("Enabling cloud IoT integration..."),
+"disable cloud IoT integration": () => log("Disabling cloud IoT integration..."),
+"monitor cloud IoT traffic": () => log("Monitoring cloud IoT network traffic..."),
+"secure cloud IoT connection": () => log("Securing cloud IoT connections..."),
+"generate cloud IoT device token": () => log("Generating cloud IoT device token..."),
+"validate cloud IoT token": () => log("Validating cloud IoT device token..."),
+"register cloud IoT device": () => log("Registering cloud IoT device..."),
+"unregister cloud IoT device": () => log("Unregistering cloud IoT device..."),
+"configure cloud IoT rules": () => log("Configuring cloud IoT rules..."),
+"set cloud IoT alerts": () => log("Setting cloud IoT alerts..."),
+"check cloud IoT alerts": () => log("Checking cloud IoT alerts..."),
+"update cloud IoT firmware": () => log("Updating cloud IoT firmware..."),
+"rollback cloud IoT firmware": () => log("Rolling back cloud IoT firmware update..."),
+"monitor cloud IoT resource usage": () => log("Monitoring cloud IoT resource usage..."),
+"optimize cloud IoT performance": () => log("Optimizing cloud IoT performance..."),
+"scale cloud IoT infrastructure": () => log("Scaling cloud IoT infrastructure..."),
+"check cloud IoT security settings": () => log("Checking cloud IoT security settings..."),
+"configure cloud IoT security settings": () => log("Configuring cloud IoT security settings..."),
+"audit cloud IoT security logs": () => log("Auditing cloud IoT security logs..."),
+"configure cloud IoT backup": () => log("Configuring cloud IoT backup settings..."),
+"restore cloud IoT backup": () => log("Restoring cloud IoT backup..."),
+"monitor cloud IoT device battery": () => log("Monitoring cloud IoT device battery levels..."),
+"manage cloud IoT billing": () => log("Managing cloud IoT billing..."),
+"check cloud IoT data usage": () => log("Checking cloud IoT data usage..."),
+"configure cloud IoT data plan": () => log("Configuring cloud IoT data plan..."),
+"enable cloud IoT logging": () => log("Enabling cloud IoT logging..."),
+"disable cloud IoT logging": () => log("Disabling cloud IoT logging..."),
+"set cloud IoT data retention policy": () => log("Setting cloud IoT data retention policy..."),
+"monitor cloud IoT API usage": () => log("Monitoring cloud IoT API usage..."),
+"manage cloud IoT access keys": () => log("Managing cloud IoT access keys..."),
+"generate cloud IoT access key": () => log("Generating cloud IoT access key..."),
+"revoke cloud IoT access key": () => log("Revoking cloud IoT access key..."),
+"authenticate cloud IoT user": () => log("Authenticating cloud IoT user..."),
+"authorize cloud IoT user": () => log("Authorizing cloud IoT user..."),
+"check cloud IoT access logs": () => log("Checking cloud IoT access logs..."),
+"configure cloud IoT data encryption": () => log("Configuring cloud IoT data encryption..."),
+"enable cloud IoT data encryption": () => log("Enabling cloud IoT data encryption..."),
+"disable cloud IoT data encryption": () => log("Disabling cloud IoT data encryption..."),
+"set cloud IoT data privacy policy": () => log("Setting cloud IoT data privacy policy..."),
+"monitor cloud IoT device performance": () => log("Monitoring cloud IoT device performance..."),
+"configure cloud IoT device monitoring": () => log("Configuring cloud IoT device monitoring..."),
+"set cloud IoT device health check": () => log("Setting cloud IoT device health check..."),
+"update cloud IoT platform": () => log("Updating cloud IoT platform..."),
+"rollback cloud IoT platform update": () => log("Rolling back cloud IoT platform update..."),
+"configure cloud IoT platform settings": () => log("Configuring cloud IoT platform settings..."),
+"check cloud IoT platform status": () => log("Checking cloud IoT platform status..."),
+"enable cloud IoT notifications": () => log("Enabling cloud IoT notifications..."),
+"disable cloud IoT notifications": () => log("Disabling cloud IoT notifications..."),
+"manage cloud IoT device profiles": () => log("Managing cloud IoT device profiles..."),
+"update cloud IoT device profile": () => log("Updating cloud IoT device profile..."),
+"configure cloud IoT device settings": () => log("Configuring cloud IoT device settings..."),
+"sync cloud IoT device firmware": () => log("Synchronizing cloud IoT device firmware..."),
+"configure cloud IoT network parameters": () => log("Configuring cloud IoT network parameters..."),
+"optimize cloud IoT network": () => log("Optimizing cloud IoT network..."),
+"check cloud IoT network health": () => log("Checking cloud IoT network health..."),
+"monitor cloud IoT device data": () => log("Monitoring cloud IoT device data..."),
+"configure cloud IoT device data": () => log("Configuring cloud IoT device data..."),
+"back up cloud IoT data": () => log("Backing up cloud IoT data..."),
+"restore cloud IoT data": () => log("Restoring cloud IoT data..."),
+"automate cloud IoT tasks": () => log("Automating cloud IoT tasks..."),
+"schedule cloud IoT backups": () => log("Scheduling cloud IoT backups..."),
+"monitor cloud IoT device availability": () => log("Monitoring cloud IoT device availability..."),
+"set cloud IoT maintenance window": () => log("Setting cloud IoT maintenance window..."),
+"update cloud IoT device configuration": () => log("Updating cloud IoT device configuration..."),
+"list cloud IoT device types": () => log("Listing cloud IoT device types..."),
+"check cloud IoT data integrity": () => log("Checking cloud IoT data integrity..."),
+"configure cloud IoT performance metrics": () => log("Configuring cloud IoT performance metrics..."),
+"enable cloud IoT performance tracking": () => log("Enabling cloud IoT performance tracking..."),
+"disable cloud IoT performance tracking": () => log("Disabling cloud IoT performance tracking..."),
+"track cloud IoT usage trends": () => log("Tracking cloud IoT usage trends..."),
+"set cloud IoT billing alerts": () => log("Setting cloud IoT billing alerts..."),
+"configure cloud IoT user roles": () => log("Configuring cloud IoT user roles..."),
+"update cloud IoT device security": () => log("Updating cloud IoT device security..."),
+"check cloud IoT device firmware version": () => log("Checking cloud IoT device firmware version..."),
+"configure cloud IoT device alerts": () => log("Configuring cloud IoT device alerts..."),
+"set cloud IoT event triggers": () => log("Setting cloud IoT event triggers..."),
+"disable cloud IoT device data sync": () => log("Disabling cloud IoT device data synchronization..."),
+"enable cloud IoT device data sync": () => log("Enabling cloud IoT device data synchronization..."),
+"configure cloud IoT access control": () => log("Configuring cloud IoT access control..."),
+"manage cloud IoT user accounts": () => log("Managing cloud IoT user accounts..."),
+"check cloud IoT device connectivity": () => log("Checking cloud IoT device connectivity..."),
+"disconnect cloud IoT device": () => log("Disconnecting cloud IoT device..."),
+"connect cloud IoT device": () => log("Connecting cloud IoT device..."),
+"restart cloud IoT platform": () => log("Restarting cloud IoT platform..."),
+"reset cloud IoT platform": () => log("Resetting cloud IoT platform..."),
+"upgrade cloud IoT platform": () => log("Upgrading cloud IoT platform..."),
+"create cloud IoT network": () => log("Creating cloud IoT network..."),
+"remove cloud IoT network": () => log("Removing cloud IoT network..."),
+"check cloud IoT device usage": () => log("Checking cloud IoT device usage..."),
+"reset cloud IoT device": () => log("Resetting cloud IoT device..."),
+"enable cloud IoT logs": () => log("Enabling cloud IoT logs..."),
+"disable cloud IoT logs": () => log("Disabling cloud IoT logs...")
     "change user password": () => log("Changing user password..."),
     "list users": () => log("Listing all system users..."),
     "assign role to user": () => log("Assigning role to user..."),
     "check user permissions": () => log("Checking user permissions..."),
     "set user permissions": () => log("Setting user permissions..."),
     "lock user account": () => log("Locking user account..."),
-    "unlock user account": () => log("Unlocking user account..."),
-    const terminalOutput = document.getElementById('terminalOutput');
-const inputField = document.getElementById('inputField');
-    const terminalOutput = document.getElementById('terminalOutput');
-const inputField = document.getElementById('inputField');
-
-function handleInput(event) {
-    if (event.key === 'Enter') {
-        const userInput = inputField.value;
-        inputField.value = '';
-        processCommand(userInput);
-    }
-}
-
-function processCommand(command) {
-    terminalOutput.innerHTML += `<br><span class='output'>$ ${command}</span>`;
-    terminalOutput.innerHTML += `<br><span class='output'>Processing...</span>`;
-
-    const lowerCommand = command.toLowerCase();
-
-    if (commandFunctions[lowerCommand]) {
-        commandFunctions[lowerCommand]();  
-    } else {
-        terminalOutput.innerHTML += `<br><span class='output'>Unknown command: ${command}</span>`;
-    }
-
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-}
-
-const commandFunctions = {
     "manage datacenter": () => log("Accessing datacenter management system..."),
     "monitor server performance": () => log("Monitoring server performance metrics..."),
     "check server uptime": () => log("Checking server uptime status..."),
@@ -572,47 +820,6 @@ const commandFunctions = {
     "import dataset": () => log("Importing dataset for analysis..."),
     "execute bash command": (cmd) => log(`Executing Bash command: ${cmd}...`),
     "run shell script": (script) => log(`Running shell script: ${script}..."),
-};
-
-function showHelp() {
-    terminalOutput.innerHTML += "<br><span class='output'>Available commands:</span>";
-    Object.keys(commandFunctions).forEach(command => {
-        terminalOutput.innerHTML += `<br><span class='output'>${command}</span>`;
-    });
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-}
-
-function log(message) {
-    terminalOutput.innerHTML += `<br><span class='output'>${message}</span>`;
-}
-
-inputField.addEventListener('keydown', handleInput);
-
-
-function handleInput(event) {
-    if (event.key === 'Enter') {
-        const userInput = inputField.value;
-        inputField.value = '';
-        processCommand(userInput);
-    }
-}
-
-function processCommand(command) {
-    terminalOutput.innerHTML += `<br><span class='output'>$ ${command}</span>`;
-    terminalOutput.innerHTML += `<br><span class='output'>Processing...</span>`;
-
-    const lowerCommand = command.toLowerCase();
-
-    if (commandFunctions[lowerCommand]) {
-        commandFunctions[lowerCommand]();  
-    } else {
-        terminalOutput.innerHTML += `<br><span class='output'>Unknown command: ${command}</span>`;
-    }
-
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-}
-
-const commandFunctions = {
     "manage datacenter": () => log("Accessing datacenter management system..."),
     "monitor server performance": () => log("Monitoring server performance metrics..."),
     "check server uptime": () => log("Checking server uptime status..."),
@@ -657,26 +864,6 @@ const commandFunctions = {
     "run shell script": (script) => log(`Running shell script: ${script}..."),
 };
 
-function showHelp() {
-    terminalOutput.innerHTML += "<br><span class='output'>Available commands:</span>";
-    Object.keys(commandFunctions).forEach(command => {
-        terminalOutput.innerHTML += `<br><span class='output'>${command}</span>`;
-    });
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-}
-
-function log(message) {
-    terminalOutput.innerHTML += `<br><span class='output'>${message}</span>`;
-}
-
-inputField.addEventListener('keydown', handleInput);
-};
-    "stop service": () => log("Stopping service..."),
-    "restart service": () => log("Restarting service..."),
-    "check service status": () => log("Service is running."),
-    "enable service": () => log("Enabling service..."),
-    "disable service": () => log("Disabling service..."),
-};
 
 function showHelp() {
     terminalOutput.innerHTML += "<br><span class='output'>Available commands:</span>";
@@ -692,17 +879,7 @@ function log(message) {
 
 inputField.addEventListener('keydown', handleInput);
 
-function processManualCommand(command) {
-    terminalOutput.innerHTML += `<br><span class='output'>$ ${command}</span>`;
-    
-    if (manualCommands[command]) {
-        terminalOutput.innerHTML += `<br><span class='output'>${manualCommands[command]}</span>`;
-    } else {
-        terminalOutput.innerHTML += `<br><span class='output'>Unknown manual command: ${command}</span>`;
-    }
-    
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-}// Função para carregar e ler o arquivo quantum-process.js
+// Função para carregar e ler o arquivo quantum-process.js
 async function carregarElerArquivo() {
     try {
         // Carregar o arquivo quantum-process.js (é necessário que o arquivo esteja no mesmo diretório ou forneça o caminho correto)
