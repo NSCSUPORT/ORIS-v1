@@ -4,7 +4,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ORIS OS</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .banner {
+            width: 80%;
+            max-width: 350px;  
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 36px;
+            color: #4CAF50;
+            text-align: center;
+            text-shadow: 0 0 15px #4CAF50, 0 0 30px #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            height: 70vh; 
+            width: 100%;
+            max-width: 480px;
+            padding: 20px;
+            border: 2px solid #4CAF50;
+            border-radius: 12px;
+            background-color: #1e1e1e;
+            box-shadow: 0px 0px 50px rgba(76, 175, 80, 0.7);
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+            margin-bottom: 50px; 
+        }
+
+        .chat-box {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            background-color: #333;
+            border-radius: 10px;
+            padding: 15px;
+            max-height: 60vh;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        .message {
+            padding: 14px;
+            margin: 8px 0;
+            border-radius: 12px;
+            max-width: 75%;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            word-wrap: break-word;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .message.sent {
+            background-color: #4CAF50;
+            align-self: flex-end;
+            color: #000;
+            transform: scale(1);
+        }
+
+        .message.received {
+            background-color: #007BFF;
+            color: #fff;
+            align-self: flex-start;
+            transform: scale(1);
+        }
+
+        .message:hover {
+            background-color: #444;
+            transform: scale(1.05);
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 14px;
+            border: 2px solid #333;
+            border-radius: 30px;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+            background-color: #222;
+        }
+
+        .button {
+            padding: 12px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .send-btn {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        .send-btn:hover {
+            background-color: #45a049;
+        }
+
+        .clear-btn {
+            background-color: #f44336;
+            color: #fff;
+        }
+
+        .clear-btn:hover {
+            background-color: #e53935;
+        }
+
+        .attach-btn {
+            background-color: #FFC107;
+            color: #000;
+        }
+
+        .attach-btn:hover {
+            background-color: #ff8f00;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(45deg, #f0f000, #ff4500);
+            color: #000;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .chat-container:hover {
+            box-shadow: 0px 0px 50px rgba(76, 175, 80, 0.8);
+        }
+
+        .send-btn i, .clear-btn i, .attach-btn i {
+            margin-right: 8px;
+        }
+    </style>
 </head>
 <body>
 
