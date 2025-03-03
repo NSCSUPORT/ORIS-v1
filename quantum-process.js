@@ -1,7 +1,18 @@
 const express = require('express');
 const axios = require('axios');
+const AWS = require('aws-sdk');
 const app = express();
 const port = 3000;
+
+// Configuração da AWS
+AWS.config.update({
+    region: 'us-east-1', // Substitua pela sua região AWS
+    accessKeyId: 'SUA_ACCESS_KEY',
+    secretAccessKey: 'SUA_SECRET_KEY'
+});
+
+const s3 = new AWS.S3();
+const lambda = new AWS.Lambda();
 
 // Simulação de um processo quântico com integração ao Q# e evolução de dados
 app.get('/api/quantum-process', async (req, res) => {
@@ -17,6 +28,22 @@ app.get('/api/quantum-process', async (req, res) => {
         // Combinando os resultados para otimização e evolução do aprendizado
         const combinedData = optimizeData(primaryData, evolutionaryData);
 
+        // Armazenando os dados otimizados no AWS S3 (banco de dados de objetos)
+        const s3Params = {
+            Bucket: 'meu-bucket', // Substitua pelo seu bucket S3
+            Key: 'dados_otimizados.json',
+            Body: JSON.stringify(combinedData),
+            ContentType: 'application/json'
+        };
+        await s3.putObject(s3Params).promise();
+
+        // Chamando uma função Lambda da AWS com os dados otimizados
+        const lambdaParams = {
+            FunctionName: 'MinhaFuncaoLambda', // Substitua pelo nome da sua função Lambda
+            Payload: JSON.stringify(combinedData)
+        };
+        const lambdaResponse = await lambda.invoke(lambdaParams).promise();
+
         // Fazendo uma requisição para o serviço que executa o Q# com dados otimizados
         const response = await axios.post('http://localhost:5000/quantum-process', {
             data: combinedData
@@ -26,7 +53,8 @@ app.get('/api/quantum-process', async (req, res) => {
         res.json({
             message: 'Quantum process executed successfully with evolutionary learning!',
             result: response.data,
-            optimizedData: combinedData
+            optimizedData: combinedData,
+            lambdaResult: JSON.parse(lambdaResponse.Payload)
         });
     } catch (error) {
         console.error('Error executing quantum process:', error);
@@ -36,7 +64,6 @@ app.get('/api/quantum-process', async (req, res) => {
 
 // Função para obter dados de IoT (simulando sensores IoT)
 const getIoTData = async () => {
-    // Simulando coleta de dados em tempo real de dispositivos IoT
     return {
         temperature: 22.5,
         humidity: 60,
@@ -57,7 +84,6 @@ const getUserData = async () => {
 
 // Função de processamento para o Canal Primário (análise inicial)
 const processPrimaryChannel = (data) => {
-    // Processando dados básicos, como agregação e análise inicial
     return {
         aggregatedData: {
             temperature: data.temperature,
@@ -68,7 +94,6 @@ const processPrimaryChannel = (data) => {
 
 // Função de processamento para o Canal Evolutivo (aprendizado e otimização)
 const processEvolutionaryChannel = (data) => {
-    // Processando dados com foco em aprendizado evolutivo e ajustes automáticos
     return {
         adjustedData: {
             userActivity: data.userActivity,
@@ -79,9 +104,8 @@ const processEvolutionaryChannel = (data) => {
 
 // Função para otimizar os dados combinados entre os canais
 const optimizeData = (primaryData, evolutionaryData) => {
-    // Simulando um processo de otimização e evolução dos dados
     return {
-        optimizedTemperature: primaryData.aggregatedData.temperature * 1.1, // Ajuste hipotético
+        optimizedTemperature: primaryData.aggregatedData.temperature * 1.1,
         optimizedActivity: evolutionaryData.adjustedData.userActivity === 'loggedIn' ? 'active' : 'inactive',
         totalTransactionAmount: evolutionaryData.adjustedData.optimizedTransaction
     };
