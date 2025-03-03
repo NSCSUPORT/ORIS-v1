@@ -1,0 +1,66 @@
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #000;
+    color: #FFD700; /* Cor amarela para o texto */
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.terminal {
+    background-color: #000;
+    color: #FFD700;
+    padding: 20px;
+    font-size: 18px;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.input-line {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.input-line span {
+    margin-right: 10px;
+}
+
+#inputField {
+    background-color: #000;
+    color: #FFD700;
+    border: none;
+    font-size: 18px;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+}
+
+#inputField:focus {
+    background-color: #222;
+}
+
+.output {
+    display: inline;
+    color: #FFD700;
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
