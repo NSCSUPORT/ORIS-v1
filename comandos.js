@@ -1,4 +1,4 @@
-const commands = [
+const comandos = [
     "run quantum process",
     "show status",
     "help",
@@ -906,4 +906,3 @@ const commands = [
 ];
 
 
-console.log(commands);
