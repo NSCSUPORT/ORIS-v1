@@ -21,6 +21,10 @@
             overflow: hidden;
         }
 
+        .logo {
+            margin-bottom: 20px; /* Espaçamento entre a imagem e o chat */
+        }
+
         .chat-container {
             display: flex;
             flex-direction: column;
@@ -214,6 +218,10 @@
 </head>
 <body>
 
+    <div class="logo">
+        <img src="a.png" alt="Logo" style="width: 150px; height: auto; display: block; margin: 0 auto;">
+    </div>
+
     <div class="chat-container">
         <div class="chat-box" id="terminal">
             <div id="terminalOutput"> Welcome to ORIS OS </div>
@@ -312,7 +320,6 @@
 
     inputField.addEventListener('keydown', handleInput);
 </script>
-
 
 </body>
 </html>
