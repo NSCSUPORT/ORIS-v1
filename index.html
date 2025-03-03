@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ORIS OS</title>
     <style>
-        /* Estilo para simular fontes de computadores antigos */
         body {
             background-color: #000;
             color: #fff;
-            font-family: 'IBM Plex Mono', 'Courier New', monospace; /* Fontes antigas de computador */
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
             margin: 0;
             padding: 0;
             display: flex;
@@ -22,14 +21,14 @@
         }
 
         .logo {
-            margin-bottom: 20px; /* Espaçamento entre a imagem e o chat */
+            margin-bottom: 20px;
         }
 
         .chat-container {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            height: 70vh; 
+            height: 70vh;
             width: 100%;
             max-width: 480px;
             padding: 20px;
@@ -49,7 +48,6 @@
             border-radius: 10px;
             padding: 15px;
             max-height: 60vh;
-            transition: max-height 0.3s ease-in-out;
             white-space: pre-wrap;
             word-wrap: break-word;
         }
@@ -62,26 +60,18 @@
             display: flex;
             align-items: center;
             font-size: 16px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .message.sent {
             background-color: #4CAF50;
             align-self: flex-end;
             color: #000;
-            transform: scale(1);
         }
 
         .message.received {
             background-color: #007BFF;
             color: #fff;
             align-self: flex-start;
-            transform: scale(1);
-        }
-
-        .message:hover {
-            background-color: #444;
-            transform: scale(1.05);
         }
 
         .input-container {
@@ -101,50 +91,11 @@
             color: #fff;
             font-size: 16px;
             outline: none;
-            transition: all 0.3s ease;
         }
 
         input[type="text"]:focus {
             border-color: #4CAF50;
             background-color: #222;
-        }
-
-        .button {
-            padding: 12px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .send-btn {
-            background-color: #4CAF50;
-            color: #fff;
-        }
-
-        .send-btn:hover {
-            background-color: #45a049;
-        }
-
-        .clear-btn {
-            background-color: #f44336;
-            color: #fff;
-        }
-
-        .clear-btn:hover {
-            background-color: #e53935;
-        }
-
-        .attach-btn {
-            background-color: #FFC107;
-            color: #000;
-        }
-
-        .attach-btn:hover {
-            background-color: #ff8f00;
         }
 
         footer {
@@ -164,55 +115,6 @@
 
         .chat-container:hover {
             box-shadow: 0px 0px 50px rgba(76, 175, 80, 0.8);
-        }
-
-        .send-btn i, .clear-btn i, .attach-btn i {
-            margin-right: 8px;
-        }
-
-        /* Additional animation for terminal output */
-        .terminal {
-            animation: fadeIn 1s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Responsiveness */
-        @media (max-width: 768px) {
-            .chat-container {
-                width: 90%;
-                height: 80vh;
-            }
-
-            .chat-box {
-                max-height: 50vh;
-            }
-
-            footer {
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .chat-container {
-                width: 100%;
-                height: 75vh;
-            }
-
-            .chat-box {
-                max-height: 40vh;
-            }
-
-            footer {
-                font-size: 0.7rem;
-            }
         }
     </style>
 </head>
@@ -235,60 +137,11 @@
     <footer>
         <p>© 2025 HoloFi. Todos os direitos reservados. Lucas Januário</p>
     </footer>
-    <script>
-        <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Interativo</title>
-    <style>
-        body {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: #121212;
-            color: white;
-            margin: 0;
-            padding: 0;
-        }
-
-        #terminalOutput {
-            background-color: #000;
-            padding: 10px;
-            width: 100%;
-            height: 300px;
-            overflow-y: auto;
-            white-space: pre-wrap; /* Para que o conteúdo quebre linhas */
-        }
-
-        #inputField {
-            width: 100%;
-            padding: 10px;
-            background-color: #000;
-            color: white;
-            border: 1px solid #555;
-            font-size: 16px;
-        }
-
-        .output {
-            color: #33cc33; /* Verde para saída */
-        }
-
-        .error {
-            color: #ff0000; /* Vermelho para erros */
-        }
-    </style>
-</head>
-<body>
-
-    <div id="terminalOutput"></div>
-    <input type="text" id="inputField" placeholder="Digite um comando..." autofocus>
 
     <script>
-        // Obtém os elementos
         const terminalOutput = document.getElementById('terminalOutput');
         const inputField = document.getElementById('inputField');
 
-        // Função para processar os comandos
         function handleInput(event) {
             if (event.key === 'Enter') {
                 const userInput = inputField.value.trim();
@@ -297,12 +150,11 @@
             }
         }
 
-        // Função para processar o comando digitado
         function processCommand(command) {
             terminalOutput.innerHTML += `<span class="output">$ ${command}</span><br>`;  // Exibe o comando no terminal
             terminalOutput.innerHTML += "<span class='output'>Processing...</span><br>"; // Mensagem de processamento
 
-            const lowerCommand = command.toLowerCase();  // Converte o comando para minúsculas para facilitar a comparação
+            const lowerCommand = command.toLowerCase();
 
             if (commandFunctions[lowerCommand]) {
                 commandFunctions[lowerCommand]();  // Chama a função associada ao comando
@@ -310,43 +162,33 @@
                 terminalOutput.innerHTML += "<span class='error'>Unknown command: " + command + "</span><br>";
             }
 
-            // Desce para a última linha do terminal
             terminalOutput.scrollTop = terminalOutput.scrollHeight;
         }
 
-        // Função para simular a execução do "Quantum Process"
         function runQuantumProcess() {
             terminalOutput.innerHTML += "<span class='output'>Initializing Quantum Process...</span><br>";
             setTimeout(() => {
                 terminalOutput.innerHTML += "<span class='output'>Quantum Process Completed: Qubit measured: 1</span><br>";
                 terminalOutput.scrollTop = terminalOutput.scrollHeight;
-            }, 2000); // Simula um delay de 2 segundos para o processo
+            }, 2000);
         }
 
-        // Função para exibir os comandos disponíveis
         function showHelp() {
             terminalOutput.innerHTML += "<span class='output'>Available commands:</span><br>";
             terminalOutput.innerHTML += "<span class='output'>$ run quantum process</span> - Run a quantum process<br>";
             terminalOutput.innerHTML += "<span class='output'>$ help</span> - Show available commands<br>";
-            terminalOutput.innerHTML += "<span class='output'>$ dataalias apply cross-validation</span> - Apply cross-validation<br>";
-            terminalOutput.innerHTML += "<span class='output'>$ run diagnostic</span> - Run diagnostic<br>";
-            terminalOutput.innerHTML += "<span class='output'>$ check system health</span> - Check system health<br>";
             terminalOutput.scrollTop = terminalOutput.scrollHeight;
         }
 
-        // Funções para os novos comandos
-        const commandFunctions = {
-            "run quantum process": runQuantumProcess,
-            "help": showHelp,
-            "dataalias apply cross-validation": () => log("Applying cross-validation..."),
-            "run diagnostic": () => log("Running diagnostic..."),
-            "check system health": () => log("System health: OK"),
-            "clear": () => terminalOutput.innerHTML = "",
+const commandFunctions = {
   "run quantum process": runQuantumProcess,
-    "show status": () => log("System status: All systems operational."),
-    "help": showHelp,
-    "clear": () => terminalOutput.innerHTML = "",
-    "exit": () => log("Exiting terminal..."),
+  "help": showHelp,
+  "clear": () => terminalOutput.innerHTML = "", // Limpa o terminal
+  "dataalias apply cross-validation": () => log("Applying cross-validation..."),
+  "run diagnostic": () => log("Running diagnostic..."),
+  "check system health": () => log("System health: OK"),
+  "show status": () => log("System status: All systems operational."),
+  "exit": () => log("Exiting terminal..."),
     "dataalias apply cross-validation": () => log("Applying cross-validation..."),
     "run diagnostic": () => log("Running diagnostic..."),
     "check system health": () => log("System health: OK"),
@@ -494,8 +336,7 @@
     "check user activity": () => log("Checking user activity logs..."),
     "create user": () => log("Creating new user account..."),
     "delete user": () => log("Deleting user account..."),
-    // Gestao de Data Center
-"configure server settings": () => log("Configuring server settings..."),
+ "configure server settings": () => log("Configuring server settings..."),
 "check server hardware": () => log("Checking server hardware..."),
 "restart server": () => log("Restarting server..."),
 "shutdown server": () => log("Shutting down server..."),
@@ -869,61 +710,9 @@
     "shutdown server": () => log("Initiating server shutdown process..."),
     "reboot server": () => log("Rebooting server..."),
     "restart server services": () => log("Restarting all critical server services..."),
- // Função para simular a execução de "Quantum Process"
-        async function runQuantumProcess() {
-            try {
-                terminalOutput.innerHTML += "<br><span class='output'>Initializing Quantum Process...</span>";
 
-                const qsharpCode = "H(qubit); M(qubit);";
-                terminalOutput.innerHTML += `<br><span class="output">Executing Q# Command: ${qsharpCode}</span>`;
-
-                const result = await executeQSharpSimulation(qsharpCode);
-                terminalOutput.innerHTML += `<br><span class="output">Quantum Process Completed: ${result}</span>`;
-            } catch (error) {
-                terminalOutput.innerHTML += "<br><span class='output'>Error: " + error.message + "</span>";
-            }
-        }
-
-        // Função para simular a execução de código QSharp
-        async function executeQSharpSimulation(qsharpCode) {
-            return new Promise((resolve, reject) => {
-                try {
-                    if (qsharpCode.includes("H(qubit)")) {
-                        let qubit = Math.random() > 0.5 ? '0' : '1';
-                        if (qsharpCode.includes("M(qubit)")) {
-                            resolve(`Qubit measured: ${qubit}`);
-                        }
-                    }
-                    resolve("Unknown Q# operation.");
-                } catch (error) {
-                    reject(error);
-                }
-            });
-        }
-
-        // Função para exibir comandos disponíveis
-        function showHelp() {
-            terminalOutput.innerHTML += "<br><span class='output'>Available commands:</span>";
-            terminalOutput.innerHTML += "<br><span class='output'>$ run quantum process</span> - Run a quantum process";
-            terminalOutput.innerHTML += "<br><span class='output'>$ help</span> - Show available commands";
-            terminalOutput.innerHTML += "<br><span class='output'>$ dataalias apply cross-validation</span> - Apply cross-validation";
-            terminalOutput.innerHTML += "<br><span class='output'>$ run diagnostic</span> - Run diagnostic";
-            terminalOutput.innerHTML += "<br><span class='output'>$ check system health</span> - Check system health";
-            terminalOutput.scrollTop = terminalOutput.scrollHeight;
-        }
-
-        // Adiciona o evento de 'Enter' para capturar o comando
+        // Adiciona o evento de pressionar tecla
         inputField.addEventListener('keydown', handleInput);
-
-        // Função fictícia para carregar um arquivo de comandos, como exemplo
-        function carregarElerArquivo() {
-            terminalOutput.innerHTML += "<br><span class='output'>Loading commands...</span>";
-            terminalOutput.scrollTop = terminalOutput.scrollHeight;
-        }
-
-        // Chama a função para carregar o arquivo e ler os comandos
-        carregarElerArquivo();
     </script>
-
 </body>
 </html>
