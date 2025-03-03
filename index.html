@@ -245,6 +245,8 @@
 
             if (command.toLowerCase() === "run quantum process") {
                 runQuantumProcess();
+            } else if (command.toLowerCase() === "help") {
+                showHelp();
             } else {
                 terminalOutput.innerHTML += "<br><span class='output'>Unknown command: " + command + "</span>";
             }
@@ -254,11 +256,9 @@
 
         async function runQuantumProcess() {
             try {
-                // Simula a execução de um processo quântico
                 terminalOutput.innerHTML += "<br><span class='output'>Initializing Quantum Process...</span>";
 
-                // Exemplo de encoder de um comando Q#
-                const qsharpCode = "H(qubit); M(qubit);";  // Exemplo de código Q#
+                const qsharpCode = "H(qubit); M(qubit);";
 
                 terminalOutput.innerHTML += `<br><span class="output">Executing Q# Command: ${qsharpCode}</span>`;
 
@@ -269,19 +269,15 @@
                 terminalOutput.innerHTML += "<br><span class='output'>Error: " + error.message + "</span>";
             }
 
-            terminalOutput.scrollTop = terminalOutput.scrollHeight;  // Desce para o final do terminal
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
         }
 
-        // Função simulada para executar o comando Q#
         async function executeQSharpSimulation(qsharpCode) {
             return new Promise((resolve, reject) => {
                 try {
-                    // Simulação de Q# -> JSQ (Processamento básico)
                     if (qsharpCode.includes("H(qubit)")) {
-                        // Simula uma porta Hadamard (H) que coloca o qubit em superposição
                         let qubit = Math.random() > 0.5 ? '0' : '1';
                         if (qsharpCode.includes("M(qubit)")) {
-                            // Simula a medição do qubit (colapsando a superposição)
                             resolve(`Qubit measured: ${qubit}`);
                         }
                     }
@@ -290,6 +286,12 @@
                     reject(error);
                 }
             });
+        }
+
+        function showHelp() {
+            terminalOutput.innerHTML += "<br><span class='output'>Available commands:</span>";
+            terminalOutput.innerHTML += "<br><span class='output'>$ run quantum process - Executes a quantum process simulation</span>";
+            terminalOutput.innerHTML += "<br><span class='output'>$ help - Displays available commands</span>";
         }
 
         inputField.addEventListener('keydown', handleInput);
