@@ -291,16 +291,20 @@
 
     function showHelp() {
         terminalOutput.innerHTML += "<br><span class='output'>Available commands:</span>";
-        
-        // Carregar os comandos do arquivo comandos.js
+
+        // Load the comandos.js file and execute the script to define the 'comandos' array
         fetch('comandos.js')
-            .then(response => response.text())
+            .then(response => response.text())  // Get the JavaScript code as text
             .then(data => {
-                const comandos = JSON.parse(data);
+                // Execute the JavaScript code to make 'comandos' available
+                eval(data);
+
+                // Display each command from the 'comandos' array
                 comandos.forEach(command => {
                     terminalOutput.innerHTML += `<br><span class='output'>${command}</span>`;
                 });
-                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;  // Scroll to the bottom
             })
             .catch(error => {
                 terminalOutput.innerHTML += `<br><span class='output'>Error loading commands: ${error.message}</span>`;
@@ -309,6 +313,7 @@
 
     inputField.addEventListener('keydown', handleInput);
 </script>
+
 
 </body>
 </html>
