@@ -235,8 +235,7 @@
     <footer>
         <p>© 2025 HoloFi. Todos os direitos reservados. Lucas Januário</p>
     </footer>
-<script>
-    const terminalOutput = document.getElementById('terminalOutput');
+const terminalOutput = document.getElementById('terminalOutput');
 const inputField = document.getElementById('inputField');
 
 function handleInput(event) {
@@ -298,18 +297,13 @@ async function executeQSharpSimulation(qsharpCode) {
 
 function showHelp() {
     terminalOutput.innerHTML += "<br><span class='output'>Available commands:</span>";
-
-    // Carregar e executar comandos de forma segura
+    
     fetch('comandos.js')
-        .then(response => response.text())  // Pega o código JavaScript como texto
+        .then(response => response.text())
         .then(data => {
             try {
-                // Transformar o conteúdo em um código executável no contexto atual
-                const comandosArray = parseCommands(data);  // Aqui estamos tentando parsear a lista de comandos
-
-                // Verifique se 'comandos' existe e é um array
+                const comandosArray = parseCommands(data);
                 if (Array.isArray(comandosArray)) {
-                    // Exibe cada comando do array 'comandos'
                     comandosArray.forEach(command => {
                         terminalOutput.innerHTML += `<br><span class='output'>${command}</span>`;
                     });
@@ -319,8 +313,7 @@ function showHelp() {
             } catch (error) {
                 terminalOutput.innerHTML += `<br><span class='output'>Error parsing commands: ${error.message}</span>`;
             }
-
-            terminalOutput.scrollTop = terminalOutput.scrollHeight;  // Desce para o final do terminal
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
         })
         .catch(error => {
             terminalOutput.innerHTML += `<br><span class='output'>Error loading commands: ${error.message}</span>`;
@@ -328,9 +321,8 @@ function showHelp() {
 }
 
 function parseCommands(data) {
-    // Tente analisar e executar os dados do arquivo
     try {
-        return JSON.parse(data);  // Parseia como um array JSON
+        return JSON.parse(data);
     } catch (error) {
         throw new Error('Invalid commands format');
     }
@@ -338,7 +330,23 @@ function parseCommands(data) {
 
 inputField.addEventListener('keydown', handleInput);
 
-</script>
+// Sessão manual para adicionar comandos
+const manualCommands = {
+    "list": "Lists all available commands.",
+    "clear": "Clears the terminal output.",
+    "exit": "Exits the terminal session."
+};
 
+function processManualCommand(command) {
+    terminalOutput.innerHTML += `<br><span class='output'>$ ${command}</span>`;
+    
+    if (manualCommands[command]) {
+        terminalOutput.innerHTML += `<br><span class='output'>${manualCommands[command]}</span>`;
+    } else {
+        terminalOutput.innerHTML += `<br><span class='output'>Unknown manual command: ${command}</span>`;
+    }
+    
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+}
 </body>
 </html>
