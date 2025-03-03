@@ -130,6 +130,7 @@
             <div class="input-line">
                 <span>$</span>
                 <input type="text" id="inputField" placeholder="Enter command..." autofocus />
+                <button id="sendButton">Enviar</button> <!-- Adicionando o botão Enviar -->
             </div>
         </div>
     </div>
@@ -141,13 +142,18 @@
     <script>
         const terminalOutput = document.getElementById('terminalOutput');
         const inputField = document.getElementById('inputField');
+        const sendButton = document.getElementById('sendButton'); // Pegando o botão Enviar
 
         function handleInput(event) {
             if (event.key === 'Enter') {
-                const userInput = inputField.value.trim();
-                inputField.value = '';  // Limpa o campo de entrada
-                processCommand(userInput); // Processa o comando
+                processUserInput();
             }
+        }
+
+        function processUserInput() {
+            const userInput = inputField.value.trim();
+            inputField.value = '';  // Limpa o campo de entrada
+            processCommand(userInput); // Processa o comando
         }
 
         function processCommand(command) {
@@ -184,6 +190,29 @@
         const commandFunctions = {
             "run quantum process": runQuantumProcess,
             "help": showHelp,
+            "clear": () => terminalOutput.innerHTML = "", // Limpa o terminal
+            "exit": () => log("Exiting terminal..."),
+            "dataalias apply cross-validation": () => log("Applying cross-validation..."),
+            "run diagnostic": () => log("Running diagnostic..."),
+            "check system health": () => log("System health: OK"),
+            "show status": () => log("System status: All systems operational."),
+            "start process": () => log("Starting process..."),
+            "stop process": () => log("Stopping process..."),
+            "restart system": () => log("Restarting system..."),
+            "check memory": () => log("Memory usage: 45% used, 55% free."),
+            "check disk usage": () => log("Disk usage: 70% used, 30% free."),
+            "check network": () => log("Network status: Connected, 100Mbps speed."),
+            "show logs": () => log("Displaying system logs..."),
+            "show processes": () => log("Showing all running processes..."),
+            "kill process": () => log("Killing process..."),
+            "list running processes": () => log("Listing running processes..."),
+            "open file": () => log("Opening file..."),
+            "close file": () => log("Closing file..."),
+            "create file": () => log("Creating file..."),
+            "delete file": () => log("Deleting file..."),
+            "rename file": () => log("Renaming file..."),
+            "copy file": () => log("Copying file..."),
+            "move file": () => log("Moving file...")
             "clear": () => terminalOutput.innerHTML = "", // Limpa o terminal
             "exit": () => log("Exiting terminal..."),
             "dataalias apply cross-validation": () => log("Applying cross-validation..."),
@@ -709,8 +738,13 @@
             terminalOutput.scrollTop = terminalOutput.scrollHeight;
         }
 
-        // Event listener for input
+        // Event listener for the Enter key
         inputField.addEventListener('keydown', handleInput);
+
+        // Event listener for the "Enviar" button
+        sendButton.addEventListener('click', processUserInput);
+
+  
     </script>
 </body>
 </html>
