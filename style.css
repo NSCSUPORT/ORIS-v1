@@ -22,6 +22,28 @@ body {
     justify-content: flex-start;
 }
 
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(45deg, #f0f000, #ff4500);
+    color: #000;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.chat-container:hover {
+    box-shadow: 0px 0px 50px rgba(76, 175, 80, 0.8);
+}
+
+.send-btn i, .clear-btn i, .attach-btn i {
+    margin-right: 8px;
+}
 .input-line {
     display: flex;
     align-items: center;
