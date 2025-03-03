@@ -3,128 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORIS OS Quantum Terminal</title>
-    <style>
-        body {
-            font-family: 'Courier New', monospace;
-            background-color: #000;
-            color: #FFD700; /* Cor amarelo para o texto */
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-        }
-
-        .terminal {
-            background-color: #000;
-            color: #FFD700;
-            padding: 20px;
-            font-size: 18px;
-            height: 100%;
-            width: 100%;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            border: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
-
-        .input-line {
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .input-line span {
-            margin-right: 10px;
-        }
-
-        #inputField {
-            background-color: #000;
-            color: #FFD700;
-            border: none;
-            font-size: 18px;
-            width: 100%;
-            padding: 10px;
-            outline: none;
-        }
-
-        #inputField:focus {
-            background-color: #222;
-        }
-
-        .output {
-            display: inline;
-            color: #FFD700;
-        }
-
-        /* Scrollbar customization */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: #888;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background-color: #555;
-        }
-    </style>
+    <title>ORIS OS - Quantum Terminal</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="terminal" id="terminal">
-        <div id="terminalOutput">Starting AKILES V6 Quantum Processing...</div>
+        <div id="terminalOutput">Welcome to ORIS OS Quantum Terminal...</div>
         <div class="input-line">
             <span>$</span>
             <input type="text" id="inputField" placeholder="Enter command..." autofocus />
         </div>
     </div>
 
-    <script>
-        const terminalOutput = document.getElementById('terminalOutput');
-        const inputField = document.getElementById('inputField');
-        
-        function handleInput(event) {
-            if (event.key === 'Enter') {
-                const userInput = inputField.value;
-                inputField.value = '';
-                processCommand(userInput);
-            }
-        }
-
-        function processCommand(command) {
-            terminalOutput.innerHTML += "<br><span class='output'>$ " + command + "</span>";  // Show the command typed
-            terminalOutput.innerHTML += "<br><span class='output'>Processing...</span>";
-
-            if (command.toLowerCase() === "run quantum process") {
-                runQuantumProcess();
-            } else {
-                terminalOutput.innerHTML += "<br><span class='output'>Unknown command: " + command + "</span>";
-            }
-
-            terminalOutput.scrollTop = terminalOutput.scrollHeight;  // Scroll to the bottom
-        }
-
-        async function runQuantumProcess() {
-            const response = await fetch('/api/quantum-process', {
-                method: 'GET'
-            });
-
-            if (response.ok) {
-                const result = await response.json();
-                terminalOutput.innerHTML += `<br><span class="output">Quantum Process Completed: ${result.message}</span>`;
-            } else {
-                terminalOutput.innerHTML += "<br><span class='output'>Error processing quantum data.</span>";
-            }
-
-            terminalOutput.scrollTop = terminalOutput.scrollHeight;  // Scroll to the bottom
-        }
-
-        inputField.addEventListener('keydown', handleInput);
-    </script>
+    <script src="script.js"></script>
 
 </body>
 </html>
