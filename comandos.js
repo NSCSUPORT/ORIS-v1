@@ -170,7 +170,6 @@ const commands = [
     "update database record",
     "delete database record",
     "show database schema"
-const akilesV6Commands = [
     "akiles start",
     "akiles stop",
     "akiles restart",
@@ -196,7 +195,6 @@ const akilesV6Commands = [
     "akiles enable service",
     "akiles disable service",
     "akiles show logs",
-    const dataAnalysisCommands = [
     "analyze data", 
     "start data analysis", 
     "stop data analysis", 
@@ -330,7 +328,7 @@ const akilesV6Commands = [
     "schedule backup snapshot", 
     "restore from backup snapshot", 
     "list scheduled backups", 
-    "check backup snapshot status"const dataCenterManagementCommands = [
+    "check backup snapshot status"
     "start server",
     "stop server",
     "restart server",
@@ -485,7 +483,6 @@ const akilesV6Commands = [
     "configure generator settings",
     "schedule generator maintenance",
     "test backup generator",
-    const iotManagementCommands = [
     "start device",
     "stop device",
     "restart device",
@@ -751,10 +748,6 @@ const akilesV6Commands = [
     "akiles install update",
     "akiles remove update",
     "akiles show security status"
-];
-  
-console.log(akilesV6Commands);
-const dataAliasingCommands = [
     "dataAlias create table",
     "dataAlias rename column",
     "dataAlias drop column",
@@ -911,8 +904,6 @@ const dataAliasingCommands = [
     "dataAlias apply cross-validation",
     "dataAlias validate assumptions"
 ];
-
-console.log(dataAliasingCommands);
 
 
 console.log(commands);
