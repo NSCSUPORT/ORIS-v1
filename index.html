@@ -236,11 +236,113 @@
         <p>© 2025 HoloFi. Todos os direitos reservados. Lucas Januário</p>
     </footer>
     <script>
-const terminalOutput = document.getElementById('terminalOutput');
-const inputField = document.getElementById('inputField');
+        <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Interativo</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
 
-const commandFunctions = {
-    "run quantum process": runQuantumProcess,
+        #terminalOutput {
+            background-color: #000;
+            padding: 10px;
+            width: 100%;
+            height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap; /* Para que o conteúdo quebre linhas */
+        }
+
+        #inputField {
+            width: 100%;
+            padding: 10px;
+            background-color: #000;
+            color: white;
+            border: 1px solid #555;
+            font-size: 16px;
+        }
+
+        .output {
+            color: #33cc33; /* Verde para saída */
+        }
+
+        .error {
+            color: #ff0000; /* Vermelho para erros */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="terminalOutput"></div>
+    <input type="text" id="inputField" placeholder="Digite um comando..." autofocus>
+
+    <script>
+        // Obtém os elementos
+        const terminalOutput = document.getElementById('terminalOutput');
+        const inputField = document.getElementById('inputField');
+
+        // Função para processar os comandos
+        function handleInput(event) {
+            if (event.key === 'Enter') {
+                const userInput = inputField.value.trim();
+                inputField.value = '';  // Limpa o campo de entrada
+                processCommand(userInput); // Processa o comando
+            }
+        }
+
+        // Função para processar o comando digitado
+        function processCommand(command) {
+            terminalOutput.innerHTML += `<span class="output">$ ${command}</span><br>`;  // Exibe o comando no terminal
+            terminalOutput.innerHTML += "<span class='output'>Processing...</span><br>"; // Mensagem de processamento
+
+            const lowerCommand = command.toLowerCase();  // Converte o comando para minúsculas para facilitar a comparação
+
+            if (commandFunctions[lowerCommand]) {
+                commandFunctions[lowerCommand]();  // Chama a função associada ao comando
+            } else {
+                terminalOutput.innerHTML += "<span class='error'>Unknown command: " + command + "</span><br>";
+            }
+
+            // Desce para a última linha do terminal
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+
+        // Função para simular a execução do "Quantum Process"
+        function runQuantumProcess() {
+            terminalOutput.innerHTML += "<span class='output'>Initializing Quantum Process...</span><br>";
+            setTimeout(() => {
+                terminalOutput.innerHTML += "<span class='output'>Quantum Process Completed: Qubit measured: 1</span><br>";
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            }, 2000); // Simula um delay de 2 segundos para o processo
+        }
+
+        // Função para exibir os comandos disponíveis
+        function showHelp() {
+            terminalOutput.innerHTML += "<span class='output'>Available commands:</span><br>";
+            terminalOutput.innerHTML += "<span class='output'>$ run quantum process</span> - Run a quantum process<br>";
+            terminalOutput.innerHTML += "<span class='output'>$ help</span> - Show available commands<br>";
+            terminalOutput.innerHTML += "<span class='output'>$ dataalias apply cross-validation</span> - Apply cross-validation<br>";
+            terminalOutput.innerHTML += "<span class='output'>$ run diagnostic</span> - Run diagnostic<br>";
+            terminalOutput.innerHTML += "<span class='output'>$ check system health</span> - Check system health<br>";
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+
+        // Funções para os novos comandos
+        const commandFunctions = {
+            "run quantum process": runQuantumProcess,
+            "help": showHelp,
+            "dataalias apply cross-validation": () => log("Applying cross-validation..."),
+            "run diagnostic": () => log("Running diagnostic..."),
+            "check system health": () => log("System health: OK"),
+            "clear": () => terminalOutput.innerHTML = "",
+  "run quantum process": runQuantumProcess,
     "show status": () => log("System status: All systems operational."),
     "help": showHelp,
     "clear": () => terminalOutput.innerHTML = "",
@@ -767,104 +869,61 @@ const commandFunctions = {
     "shutdown server": () => log("Initiating server shutdown process..."),
     "reboot server": () => log("Rebooting server..."),
     "restart server services": () => log("Restarting all critical server services..."),
-    "execute bash command": (cmd) => log(`Executing Bash command: ${cmd}...`),
-    "run shell script": (script) => log(`Running shell script: ${script}..."),
-};
-
-inputField.addEventListener('keydown', handleInput);
-
-function handleInput(event) {
-    if (event.key === 'Enter') {
-        const userInput = inputField.value;
-        inputField.value = '';
-        processCommand(userInput);
-    }
-}
-
-function processCommand(command) {
-    terminalOutput.innerHTML += `<br><span class='output'>$ ${command}</span>`;  // Display command
-    terminalOutput.innerHTML += "<br><span class='output'>Processing...</span>";
-
-    const lowerCommand = command.toLowerCase();
-
-    if (commandFunctions[lowerCommand]) {
-        commandFunctions[lowerCommand]();  // Execute corresponding function
-    } else {
-        terminalOutput.innerHTML += `<br><span class='output'>Unknown command: ${command}</span>`;
-    }
-
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;  // Scroll to bottom
-}
-
-function log(message) {
-    terminalOutput.innerHTML += `<br><span class='output'>${message}</span>`;
-}
-
-async function runQuantumProcess() {
-    try {
-        terminalOutput.innerHTML += "<br><span class='output'>Initializing Quantum Process...</span>";
-
-        const qsharpCode = "H(qubit); M(qubit);";
-        terminalOutput.innerHTML += `<br><span class="output">Executing Q# Command: ${qsharpCode}</span>`;
-
-        const result = await executeQSharpSimulation(qsharpCode);
-        terminalOutput.innerHTML += `<br><span class="output">Quantum Process Completed: ${result}</span>`;
-    } catch (error) {
-        terminalOutput.innerHTML += "<br><span class='output'>Error: " + error.message + "</span>";
-    }
-}
-
-async function executeQSharpSimulation(qsharpCode) {
-    return new Promise((resolve, reject) => {
-        try {
-            if (qsharpCode.includes("H(qubit)")) {
-                let qubit = Math.random() > 0.5 ? '0' : '1';
-                if (qsharpCode.includes("M(qubit)")) {
-                    resolve(`Qubit measured: ${qubit}`);
-                }
-            }
-            resolve("Unknown Q# operation.");
-        } catch (error) {
-            reject(error);
-        }
-    });
-}
-
-function showHelp() {
-    terminalOutput.innerHTML += "<br><span class='output'>Available commands:</span>";
-
-    fetch('comandos.js')
-        .then(response => response.text())
-        .then(data => {
+ // Função para simular a execução de "Quantum Process"
+        async function runQuantumProcess() {
             try {
-                const comandosArray = parseCommands(data);
-                if (Array.isArray(comandosArray)) {
-                    comandosArray.forEach(command => {
-                        terminalOutput.innerHTML += `<br><span class='output'>${command}</span>`;
-                    });
-                } else {
-                    terminalOutput.innerHTML += `<br><span class='output'>Error: 'comandos' is not an array</span>`;
-                }
+                terminalOutput.innerHTML += "<br><span class='output'>Initializing Quantum Process...</span>";
+
+                const qsharpCode = "H(qubit); M(qubit);";
+                terminalOutput.innerHTML += `<br><span class="output">Executing Q# Command: ${qsharpCode}</span>`;
+
+                const result = await executeQSharpSimulation(qsharpCode);
+                terminalOutput.innerHTML += `<br><span class="output">Quantum Process Completed: ${result}</span>`;
             } catch (error) {
-                terminalOutput.innerHTML += `<br><span class='output'>Error parsing commands: ${error.message}</span>`;
+                terminalOutput.innerHTML += "<br><span class='output'>Error: " + error.message + "</span>";
             }
+        }
+
+        // Função para simular a execução de código QSharp
+        async function executeQSharpSimulation(qsharpCode) {
+            return new Promise((resolve, reject) => {
+                try {
+                    if (qsharpCode.includes("H(qubit)")) {
+                        let qubit = Math.random() > 0.5 ? '0' : '1';
+                        if (qsharpCode.includes("M(qubit)")) {
+                            resolve(`Qubit measured: ${qubit}`);
+                        }
+                    }
+                    resolve("Unknown Q# operation.");
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        }
+
+        // Função para exibir comandos disponíveis
+        function showHelp() {
+            terminalOutput.innerHTML += "<br><span class='output'>Available commands:</span>";
+            terminalOutput.innerHTML += "<br><span class='output'>$ run quantum process</span> - Run a quantum process";
+            terminalOutput.innerHTML += "<br><span class='output'>$ help</span> - Show available commands";
+            terminalOutput.innerHTML += "<br><span class='output'>$ dataalias apply cross-validation</span> - Apply cross-validation";
+            terminalOutput.innerHTML += "<br><span class='output'>$ run diagnostic</span> - Run diagnostic";
+            terminalOutput.innerHTML += "<br><span class='output'>$ check system health</span> - Check system health";
             terminalOutput.scrollTop = terminalOutput.scrollHeight;
-        })
-        .catch(error => {
-            terminalOutput.innerHTML += `<br><span class='output'>Error loading commands: ${error.message}</span>`;
-        });
-}
+        }
 
-function parseCommands(data) {
-    try {
-        return JSON.parse(data);
-    } catch (error) {
-        throw new Error('Invalid commands format');
-    }
-}
+        // Adiciona o evento de 'Enter' para capturar o comando
+        inputField.addEventListener('keydown', handleInput);
 
-// Chamar a função para carregar e ler o arquivo
-carregarElerArquivo();
-</script>
+        // Função fictícia para carregar um arquivo de comandos, como exemplo
+        function carregarElerArquivo() {
+            terminalOutput.innerHTML += "<br><span class='output'>Loading commands...</span>";
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+
+        // Chama a função para carregar o arquivo e ler os comandos
+        carregarElerArquivo();
+    </script>
+
 </body>
 </html>
