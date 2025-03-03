@@ -108,3 +108,70 @@ async function executeQSharpSimulation(qsharpCode) {
 
 inputField.addEventListener('keydown', handleInput);
 
+const { exec } = require('child_process');
+
+// Função para rodar um comando Bash
+function runBashCommand(command) {
+    exec(command, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Erro: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.error(`stderr: ${stderr}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+    });
+}
+
+// Exemplo de comando Bash
+runBashCommand('ls -l');
+const terminalOutput = document.getElementById('terminalOutput');
+const inputField = document.getElementById('inputField');
+
+function handleInput(event) {
+    if (event.key === 'Enter') {
+        const userInput = inputField.value;
+        inputField.value = '';
+        processCommand(userInput);
+    }
+}
+
+function processCommand(command) {
+    terminalOutput.innerHTML += "<br><span class='output'>$ " + command + "</span>";  // Exibe o comando
+    terminalOutput.innerHTML += "<br><span class='output'>Processing...</span>";
+
+    // Simulação de comandos Bash
+    if (command === 'ls') {
+        terminalOutput.innerHTML += "<br><span class='output'>Documents  Downloads  Music  Pictures</span>";
+    } else if (command === 'pwd') {
+        terminalOutput.innerHTML += "<br><span class='output'>/home/user</span>";
+    } else {
+        terminalOutput.innerHTML += "<br><span class='output'>command not found: " + command + "</span>";
+    }
+
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;  // Desce para o final do terminal
+}
+
+inputField.addEventListener('keydown', handleInput);
+const express = require('express');
+const { exec } = require('child_process');
+const app = express();
+const port = 3000;
+
+app.get('/run-bash', (req, res) => {
+    exec('ls -l', (error, stdout, stderr) => {
+        if (error) {
+            return res.status(500).send(`Erro: ${error.message}`);
+        }
+        if (stderr) {
+            return res.status(500).send(`stderr: ${stderr}`);
+        }
+        res.send(stdout);
+    });
+});
+
+app.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`);
+});
