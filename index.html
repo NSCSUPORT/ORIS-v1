@@ -14,7 +14,7 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-end; /* Mudança para alinhar o conteúdo na parte inferior */
             height: 100vh;
             flex-direction: column;
             overflow: hidden;
@@ -26,20 +26,11 @@
             margin-bottom: 20px;
         }
 
-        h1 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 36px;
-            color: #4CAF50;
-            text-align: center;
-            text-shadow: 0 0 15px #4CAF50, 0 0 30px #4CAF50;
-            margin-bottom: 20px;
-        }
-
         .chat-container {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            height: 70vh; 
+            height: 70vh;
             width: 100%;
             max-width: 480px;
             padding: 20px;
@@ -198,12 +189,14 @@
 </head>
 <body>
 
-    <div class="chat-box">
-        <div class="terminal" id="terminal">
-            <div id="terminalOutput">Welcome to ORIS OS Quantum Terminal...</div>
-            <div class="input-line">
-                <span>$</span>
-                <input type="text" id="inputField" placeholder="Enter command..." autofocus />
+    <div class="chat-container">
+        <div class="chat-box" id="chatBox">
+            <div class="terminal" id="terminal">
+                <div id="terminalOutput">Welcome to ORIS OS Quantum Terminal...</div>
+                <div class="input-line">
+                    <span>$</span>
+                    <input type="text" id="inputField" placeholder="Enter command..." autofocus />
+                </div>
             </div>
         </div>
     </div>
