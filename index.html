@@ -126,7 +126,7 @@
 
     <div class="chat-container">
         <div class="chat-box" id="terminal">
-            <div id="terminalOutput"> Welcome to ORIS OS </div>
+            <div id="terminalOutput">Welcome to ORIS OS</div>
             <div class="input-line">
                 <span>$</span>
                 <input type="text" id="inputField" placeholder="Enter command..." autofocus />
@@ -180,40 +180,32 @@
             terminalOutput.scrollTop = terminalOutput.scrollHeight;
         }
 
-const commandFunctions = {
-  "run quantum process": runQuantumProcess,
-  "help": showHelp,
-  "clear": () => terminalOutput.innerHTML = "", // Limpa o terminal
-  "dataalias apply cross-validation": () => log("Applying cross-validation..."),
-  "run diagnostic": () => log("Running diagnostic..."),
-  "check system health": () => log("System health: OK"),
-  "show status": () => log("System status: All systems operational."),
-  "exit": () => log("Exiting terminal..."),
-    "dataalias apply cross-validation": () => log("Applying cross-validation..."),
-    "run diagnostic": () => log("Running diagnostic..."),
-    "check system health": () => log("System health: OK"),
-    "start process": () => log("Starting process..."),
-    "stop process": () => log("Stopping process..."),
-    "restart system": () => log("Restarting system..."),
-    "check memory": () => log("Memory usage: 45% used, 55% free."),
-    "check disk usage": () => log("Disk usage: 70% used, 30% free."),
-    "check network": () => log("Network status: Connected, 100Mbps speed."),
-    "show logs": () => log("Displaying system logs..."),
-    "show processes": () => log("Showing all running processes..."),
-    "kill process": () => log("Killing process..."),
-    "list running processes": () => log("Listing running processes..."),
-    "open file": () => log("Opening file..."),
-    "close file": () => log("Closing file..."),
-    "create file": () => log("Creating file..."),
-    "delete file": () => log("Deleting file..."),
-    "rename file": () => log("Renaming file..."),
-    "copy file": () => log("Copying file..."),
-    "move file": () => log("Moving file..."),
-    "run quantum process": () => log("Running quantum process..."),
-    "show status": () => log("System status: All systems operational."),
-    "help": showHelp,
-    "clear": () => terminalOutput.innerHTML = "",
-    "exit": () => log("Exiting terminal..."),
+        // Command Functions
+        const commandFunctions = {
+            "run quantum process": runQuantumProcess,
+            "help": showHelp,
+            "clear": () => terminalOutput.innerHTML = "", // Limpa o terminal
+            "exit": () => log("Exiting terminal..."),
+            "dataalias apply cross-validation": () => log("Applying cross-validation..."),
+            "run diagnostic": () => log("Running diagnostic..."),
+            "check system health": () => log("System health: OK"),
+            "show status": () => log("System status: All systems operational."),
+            "start process": () => log("Starting process..."),
+            "stop process": () => log("Stopping process..."),
+            "restart system": () => log("Restarting system..."),
+            "check memory": () => log("Memory usage: 45% used, 55% free."),
+            "check disk usage": () => log("Disk usage: 70% used, 30% free."),
+            "check network": () => log("Network status: Connected, 100Mbps speed."),
+            "show logs": () => log("Displaying system logs..."),
+            "show processes": () => log("Showing all running processes..."),
+            "kill process": () => log("Killing process..."),
+            "list running processes": () => log("Listing running processes..."),
+            "open file": () => log("Opening file..."),
+            "close file": () => log("Closing file..."),
+            "create file": () => log("Creating file..."),
+            "delete file": () => log("Deleting file..."),
+            "rename file": () => log("Renaming file..."),
+            "copy file": () => log("Copying file..."),
     "dataalias apply cross-validation": () => log("Applying cross-validation..."),
     "run diagnostic": () => log("Running diagnostic..."),
     "check system health": () => log("System health: OK"),
@@ -711,7 +703,13 @@ const commandFunctions = {
     "reboot server": () => log("Rebooting server..."),
     "restart server services": () => log("Restarting all critical server services..."),
 
-        // Adiciona o evento de pressionar tecla
+        // Function to log messages to the terminal
+        function log(message) {
+            terminalOutput.innerHTML += `<span class="output">${message}</span><br>`;
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+
+        // Event listener for input
         inputField.addEventListener('keydown', handleInput);
     </script>
 </body>
