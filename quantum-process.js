@@ -188,6 +188,34 @@ const optimizeData = (primaryData, evolutionaryData) => {
         totalTransactionAmount: evolutionaryData.adjustedData.optimizedTransaction
     };
 };
+function processConnectionData(awsKey, azureKey, wanpId, service) {
+    console.log("Processando os dados de conexão...");
+
+    // Exemplo de processamento das informações
+    switch (service) {
+        case "aws":
+            console.log("Conectando à AWS com a chave: " + awsKey);
+            // Adicione o código para conexão com AWS aqui
+            alert("Conectado à AWS!");
+            break;
+
+        case "azure":
+            console.log("Conectando ao Azure com a chave: " + azureKey);
+            // Adicione o código para conexão com Azure aqui
+            alert("Conectado ao Azure!");
+            break;
+
+        case "wanp":
+            console.log("Conectando ao WANP com o ID: " + wanpId);
+            // Adicione o código para conexão com WANP aqui
+            alert("Conectado ao WANP!");
+            break;
+
+        default:
+            console.log("Serviço inválido.");
+            break;
+    }
+}
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
