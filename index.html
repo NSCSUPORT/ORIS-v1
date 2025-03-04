@@ -210,6 +210,24 @@
                 font-size: 0.7rem;
             }
         }
+
+        /* Additional styling for the 'Conect' button */
+        .connect-btn {
+            padding: 12px 20px;
+            background-color: #E91E63; /* Pink color */
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-left: 10px; /* Space between the input and the button */
+        }
+
+        .connect-btn:hover {
+            background-color: #d81b60; /* Darker pink on hover */
+        }
+
     </style>
 </head>
 <body>
@@ -224,6 +242,9 @@
             <div class="input-line">
                 <span>$</span>
                 <input type="text" id="inputField" placeholder="Enter command..." autofocus />
+                <a href="https://nscsuport.github.io/ORIS-v1/dashboard.html target="_blank"> <!-- Link do botão -->
+                    <button class="connect-btn">Conect</button>
+                </a>
             </div>
         </div>
     </div>
@@ -260,32 +281,6 @@
                 terminalOutput.innerHTML += `<br>Command not found: ${command}`;
             }
         }
-        const express = require('express');
-const comandos = require('./comandos'); // Importando o arquivo comandos.js
-const app = express();
-const port = 3000;
-
-// Middleware para analisar o corpo da requisição como JSON
-app.use(express.json());
-
-// Definindo o endpoint que executa os comandos
-app.post('/execute-command', (req, res) => {
-    const { command } = req.body; // O comando a ser executado
-
-    if (comandos[command]) {
-        // Se o comando existe, executa o comando
-        comandos[command]();
-        res.status(200).json({ message: `Comando "${command}" executado com sucesso!` });
-    } else {
-        // Se o comando não existir
-        res.status(400).json({ message: `Comando "${command}" não encontrado!` });
-    }
-});
-
-// Iniciando o servidor Express
-app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
-});
 
     </script>
 
