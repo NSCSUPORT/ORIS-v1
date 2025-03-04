@@ -115,6 +115,34 @@
         background-color: #45a049;
         color: #000;
     }
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(45deg, #f0f000, #ff4500);
+            color: #000;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                width: 90%;
+                height: 80vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                width: 100%;
+                height: 75vh;
+            }
+        }
 </style>
 </head>
 <body>
