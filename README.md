@@ -1,56 +1,101 @@
-ORIS OS 🚀
-ORIS OS é uma interface de terminal inspirada em sistemas operacionais antigos, projetada para simular um ambiente de linha de comando onde os usuários podem interagir com um sistema fictício. Ele suporta a execução de comandos como simulações de processos quânticos e exibe informações detalhadas sobre os processos realizados. A interface é altamente estilizada com o tema visual de um terminal clássico, com fontes antigas de computador e efeitos visuais modernos.
+# ORIS OS 🚀
 
-Funcionalidades 🔧
-Interação com Comandos: Permite ao usuário digitar comandos no terminal e receber respostas em tempo real. 🖥️
-Simulação de Processos Quânticos: Oferece uma simulação de processos quânticos, incluindo a execução de comandos Q# (como a simulação de operações de qubits). ⚡
-Ajuda: Exibe um comando de ajuda para mostrar os comandos disponíveis. ❓
-Design Responsivo: O layout se adapta a diferentes tamanhos de tela, incluindo dispositivos móveis e desktops, oferecendo uma experiência agradável para o usuário. 📱💻
-Comandos Disponíveis 📝
-run quantum process: Executa uma simulação de processo quântico. 💫
-help: Exibe a lista de comandos disponíveis. ℹ️
-Como Usar ⚙️
-Clone ou faça o download do repositório:
+ORIS OS é uma interface de terminal inspirada em sistemas operacionais clássicos, projetada para simular um ambiente de linha de comando interativo. Ele suporta a execução de diversos comandos, incluindo simulações de processos quânticos e análise de dados. Com um design estilizado, ORIS OS traz uma experiência única ao usuário, combinando a estética dos terminais antigos com tecnologias modernas.
 
-bash
-Copiar
-Editar
-git clone https://github.com/NSCSUPORT/ORIS-v1.git
-Abra o arquivo index.html em um navegador de sua escolha.
+---
 
-Digite o comando desejado na linha de comando (por exemplo, run quantum process ou help).
+## 🔧 Funcionalidades
 
-Visualize a saída no terminal e interaja com os processos. 🎮
+✅ **Interação com Comandos**: Permite ao usuário inserir comandos no terminal e receber respostas em tempo real. 🖥️  
+✅ **Simulação de Processos Quânticos**: Executa simulações de operações quânticas em Q#. ⚛️  
+✅ **Sistema de Ajuda**: Exibe a lista de comandos disponíveis para facilitar a navegação. ℹ️  
+✅ **Monitoramento de Sistema**: Inclui verificações de saúde do sistema, logs e status de processos. 🔍  
+✅ **Design Responsivo**: Adaptável a diferentes tamanhos de tela, proporcionando uma experiência fluida em desktops e dispositivos móveis. 📱💻
 
-Exemplo de Uso 🖱️
-Ao abrir o sistema, você verá a mensagem de boas-vindas: Welcome to ORIS OS.
-Você pode digitar o comando run quantum process para simular a execução de um processo quântico. O terminal exibirá a simulação do processo com uma saída como:
-css
-Copiar
-Editar
+---
+
+## 📝 Comandos Disponíveis
+
+Aqui estão alguns dos principais comandos suportados pelo ORIS OS:
+
+| Comando                         | Descrição |
+|----------------------------------|-----------|
+| `run quantum process`           | Executa uma simulação de processo quântico. 💫 |
+| `help`                           | Exibe a lista de comandos disponíveis. ℹ️ |
+| `clear`                          | Limpa a tela do terminal. 🧹 |
+| `exit`                           | Encerra a sessão do terminal. 🚪 |
+| `run diagnostic`                 | Executa diagnósticos do sistema. 🛠️ |
+| `check system health`            | Mostra o status geral do sistema. ✅ |
+| `show status`                    | Exibe o status operacional do sistema. 📊 |
+| `start process` / `stop process`  | Inicia ou interrompe um processo. ▶️⏹️ |
+| `restart system`                 | Reinicia o sistema. 🔄 |
+| `show logs`                      | Exibe os logs do sistema. 📜 |
+| `monitor traffic`                | Monitora tráfego de dados. 📶 |
+| `analyze data`                   | Realiza uma análise de dados. 📈 |
+
+---
+
+## ⚙️ Como Usar
+
+1. **Clone ou faça o download do repositório:**
+   ```bash
+   git clone https://github.com/NSCSUPORT/ORIS-v1.git
+   ```
+2. **Abra o arquivo `index.html` em um navegador.**
+3. **Digite comandos na linha de comando** para executar as funcionalidades disponíveis.
+4. **Interaja com os processos** e visualize a saída no terminal. 🎮
+
+---
+
+## 🖱️ Exemplo de Uso
+
+Ao iniciar o ORIS OS, você verá a mensagem de boas-vindas:
+```
+Welcome to ORIS OS.
+```
+Digite um comando como:
+```bash
+run quantum process
+```
+Saída esperada:
+```
 Initializing Quantum Process...
 Executing Q# Command: H(qubit); M(qubit);
 Quantum Process Completed: Qubit measured: 1
-Caso precise de ajuda, digite help para ver os comandos disponíveis.
-Tecnologias Usadas 🛠️
-HTML5: Estruturação do conteúdo.
-CSS3: Estilização da interface com design responsivo e efeitos visuais.
-JavaScript: Lógica para processar os comandos do terminal e executar a simulação de processos quânticos.
-Contribuindo 🤝
-Faça um fork do repositório.
-Crie uma nova branch para suas alterações (git checkout -b minha-feature).
-Faça as suas alterações.
-Envie um pull request para o repositório original.
-Licença 📜
-Este projeto está licenciado sob a Licença Apache 2.0.
+```
+Para obter ajuda, basta digitar:
+```bash
+help
+```
 
-🎉 Acesse o projeto no GitHub: ORIS OS - GitHub 🎉
+---
 
+## 🛠️ Tecnologias Utilizadas
 
+🔹 **HTML5** – Estruturação do conteúdo.  
+🔹 **CSS3** – Estilização com design responsivo e efeitos visuais.  
+🔹 **JavaScript** – Processamento de comandos e simulações quânticas.  
 
+---
 
+## 🤝 Contribuindo
 
+Quer contribuir com o ORIS OS? Siga estas etapas:
 
+1. Faça um **fork** do repositório.
+2. Crie uma **nova branch** para suas alterações:
+   ```bash
+   git checkout -b minha-feature
+   ```
+3. Realize as alterações e envie um **pull request**.
 
+---
 
+## 📜 Licença
+
+Este projeto está licenciado sob a **Apache License 2.0**.
+
+---
+
+📌 **Acesse o projeto no GitHub:** [ORIS OS - GitHub](https://github.com/NSCSUPORT/ORIS-v1)
 
