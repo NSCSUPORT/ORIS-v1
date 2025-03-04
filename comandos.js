@@ -598,4 +598,4 @@
         "rename file": () => log("Renaming file..."),
         "copy file": () => log("Copying file..."),
         "move file": () => log("Moving file...")
-    }; 
+    }
