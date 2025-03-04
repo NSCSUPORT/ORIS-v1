@@ -1,73 +1,70 @@
-// Método para armazenar o investimento no AWS S3
-const storeInvestmentInS3 = async (investment) => {
-    const s3Params = {
-        Bucket: 'meu-bucket',  // Substitua pelo seu bucket S3
-        Key: `investimentos/${investment.planName}.json`,
-        Body: JSON.stringify(investment),
-        ContentType: 'application/json'
-    };
-    try {
-        await s3.putObject(s3Params).promise();
-        console.log(`Investimento de ${investment.amount} armazenado no S3!`);
-    } catch (error) {
-        console.error('Erro ao armazenar investimento no S3:', error);
-    }
-};
-
-// Método para processar um modelo de rede neural com Lambda
-const processNeuralNetworkWithLambda = async (modelData) => {
-    const lambdaParams = {
-        FunctionName: 'MinhaFuncaoLambda',  // Nome da sua função Lambda
-        Payload: JSON.stringify(modelData)
-    };
-
-    try {
-        const lambdaResponse = await lambda.invoke(lambdaParams).promise();
-        console.log('Modelo de rede neural processado com Lambda:', lambdaResponse);
-        return JSON.parse(lambdaResponse.Payload);
-    } catch (error) {
-        console.error('Erro ao processar modelo com Lambda:', error);
-    }
-};
-
-// Exemplo de uso na função DarkHoloFiEngine
+// Definindo a classe principal para o kernel
 class DarkHoloFiEngine {
-    constructor(authenticationContractAddress) {
-        this.authenticationContractAddress = authenticationContractAddress;
-        this.neuralNetworkModels = [];  // Modelos de rede neural
-        this.publicDictionaries = [];  // Dicionários públicos
+    constructor(authAddress) {
+        this.authAddress = authAddress;
+        this.investments = [];
+        this.plans = [];
     }
 
-    async investAndStore(planName, amount, investorAddress) {
-        const investment = new NeuralNetworkInvestment(planName, amount, investorAddress);
-        investment.encryptData();
-        await storeInvestmentInS3(investment);  // Armazenar no S3
-        console.log(`Investimento de ${amount} realizado no plano '${planName}'!`);
+    // Adiciona um novo plano de investimento
+    addPlan(planName, planType, investmentAmount, processingPower, duration) {
+        const plan = new NeuralNetworkPlan(planName, planType, investmentAmount, processingPower, duration);
+        this.plans.push(plan);
+        console.log(`Plano ${planName} adicionado com sucesso.`);
     }
 
-    async processNeuralNetwork(modelData) {
-        console.log(`Processando rede neural com os dados: ${JSON.stringify(modelData)}`);
-        const result = await processNeuralNetworkWithLambda(modelData);  // Processa com Lambda
-        this.neuralNetworkModels.push(result);
-        console.log("Modelo de rede neural processado com sucesso!");
+    // Realiza um investimento em um plano
+    invest(planName, amount, investorAddress) {
+        const plan = this.plans.find(p => p.name === planName);
+        if (plan) {
+            const investment = new NeuralNetworkInvestment(plan, amount, investorAddress);
+            this.investments.push(investment);
+            console.log(`Investimento de ${amount} realizado no plano ${planName}`);
+        } else {
+            console.log('Plano não encontrado.');
+        }
+    }
+
+    // Processa um modelo de rede neural
+    processNeuralNetwork(modelData) {
+        console.log(`Processando modelo: ${modelData.modelName}`);
+        // Aqui você pode adicionar lógica de processamento real, como o uso de bibliotecas de ML
     }
 }
 
-// Teste de integração
-async function main() {
-    const engine = new DarkHoloFiEngine("someAuthenticationAddress");
-
-    // Realiza investimentos e processa modelos
-    await engine.investAndStore("Plano CNN", 500, "Investor1Address");
-    await engine.processNeuralNetwork({
-        modelName: "Modelo de Reconhecimento de Imagem",
-        type: "CNN",
-        epochs: 50,
-        layers: 5
-    });
-
-    // Exibe o status atual
-    engine.displayStatus();
+// Classe para definir um plano de rede neural
+class NeuralNetworkPlan {
+    constructor(name, type, investmentAmount, processingPower, duration) {
+        this.name = name;
+        this.type = type;
+        this.investmentAmount = investmentAmount;
+        this.processingPower = processingPower;
+        this.duration = duration;
+    }
 }
 
-main();
+// Classe para definir o investimento em um plano
+class NeuralNetworkInvestment {
+    constructor(plan, amount, investorAddress) {
+        this.plan = plan;
+        this.amount = amount;
+        this.investorAddress = investorAddress;
+    }
+}
+
+// Exemplo de inicialização e uso do kernel
+const engine = new DarkHoloFiEngine("enderecoDeAutenticacao");
+
+// Adicionar um plano
+engine.addPlan("Plano de Investimento em Rede Neural", "CNN", 1000, "16 GFLOPS", 5);
+
+// Investir no plano
+engine.invest("Plano de Investimento em Rede Neural", 500, "EnderecoDoInvestidor");
+
+// Processar um modelo de rede neural
+engine.processNeuralNetwork({
+    modelName: "Modelo de Reconhecimento de Imagem",
+    type: "CNN",
+    epochs: 50,
+    layers: 5
+});
