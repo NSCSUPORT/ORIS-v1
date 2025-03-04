@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const AWS = require('aws-sdk');
 const { DarkHoloFiEngine } = require('./kernel'); // Importando o kernel.js
+const { Client } = require('pg'); // PostgreSQL client
 const app = express();
 const port = 3000;
 
@@ -17,6 +18,75 @@ const lambda = new AWS.Lambda();
 
 // Inicializando o kernel com o endereço de autenticação
 const engine = new DarkHoloFiEngine('enderecoDeAutenticacao'); // Passando o endereço de autenticação para o kernel
+
+// Função para conectar ao PostgreSQL e criar as tabelas usando ddl.js
+const createDatabaseTables = async () => {
+    const client = new Client({
+        user: 'yourUsername',
+        host: 'localhost',
+        database: 'yourDatabase',
+        password: 'yourPassword',
+        port: 5432,
+    });
+
+    await client.connect();
+
+    const query = `
+        -- Tabela de Usuários
+        CREATE TABLE IF NOT EXISTS users (
+            id SERIAL PRIMARY KEY,
+            username VARCHAR(100) NOT NULL UNIQUE,
+            password VARCHAR(255) NOT NULL,
+            email VARCHAR(255) UNIQUE NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        -- Tabela de Transações
+        CREATE TABLE IF NOT EXISTS transactions (
+            id SERIAL PRIMARY KEY,
+            user_id INT REFERENCES users(id) ON DELETE CASCADE,
+            amount DECIMAL(10, 2) NOT NULL,
+            type VARCHAR(50) NOT NULL CHECK (type IN ('deposit', 'withdrawal')),
+            status VARCHAR(50) NOT NULL CHECK (status IN ('pending', 'completed', 'failed')),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        -- Tabela de Investimentos
+        CREATE TABLE IF NOT EXISTS investments (
+            id SERIAL PRIMARY KEY,
+            user_id INT REFERENCES users(id) ON DELETE CASCADE,
+            plan_name VARCHAR(255) NOT NULL,
+            amount DECIMAL(10, 2) NOT NULL,
+            start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            end_date TIMESTAMP,
+            status VARCHAR(50) NOT NULL CHECK (status IN ('active', 'completed', 'canceled')),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        
+        -- Tabela de Logs de Sistema
+        CREATE TABLE IF NOT EXISTS system_logs (
+            id SERIAL PRIMARY KEY,
+            event_type VARCHAR(100) NOT NULL,
+            description TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+    `;
+
+    try {
+        await client.query(query);
+        console.log('Tabelas criadas com sucesso!');
+    } catch (err) {
+        console.error('Erro ao criar as tabelas:', err.stack);
+    } finally {
+        client.end();
+    }
+};
+
+// Chama a função para criar as tabelas no banco de dados ao iniciar o servidor
+createDatabaseTables();
 
 // Simulação de um processo quântico com integração ao Q# e evolução de dados
 app.get('/api/quantum-process', async (req, res) => {
