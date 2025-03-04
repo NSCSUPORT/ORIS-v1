@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
- <link rel="icon" href="logo.ico">
+    <link rel="icon" href="logo.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - HoloFi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -103,6 +103,58 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Benchmark Widget 1 -->
+            <div class="widget">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Desempenho do Servidor</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="chart" style="width: 100px; height: 100px;">
+                            <canvas id="serverPerformanceChart" width="100" height="100"></canvas>
+                        </div>
+                        <ul class="list-inline widget_tally">
+                            <li>
+                                <p><span class="month">Uso da CPU</span><span class="count">70%</span></p>
+                            </li>
+                            <li>
+                                <p><span class="month">Uso de Memória</span><span class="count">60%</span></p>
+                            </li>
+                            <li>
+                                <p><span class="month">Uso de Disco</span><span class="count">50%</span></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benchmark Widget 2 -->
+            <div class="widget">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Benchmark de Latência</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="chart" style="width: 100px; height: 100px;">
+                            <canvas id="latencyBenchmarkChart" width="100" height="100"></canvas>
+                        </div>
+                        <ul class="list-inline widget_tally">
+                            <li>
+                                <p><span class="month">Latência Mínima</span><span class="count">15ms</span></p>
+                            </li>
+                            <li>
+                                <p><span class="month">Latência Máxima</span><span class="count">50ms</span></p>
+                            </li>
+                            <li>
+                                <p><span class="month">Latência Média</span><span class="count">30ms</span></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -112,7 +164,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
     <script>
-        var lineChart; // Define global variable for the line chart
+        var lineChart;
+        var serverPerformanceChart;
+        var latencyBenchmarkChart;
 
         // Função para inicializar o gráfico de linha
         function initLineChart() {
@@ -167,10 +221,54 @@
             lineChart.update();
         }
 
-        // Inicializar o gráfico quando a página carregar
+        // Inicializar os gráficos
         window.onload = function() {
             initLineChart();
+            initServerPerformanceChart();
+            initLatencyBenchmarkChart();
         };
+
+        // Função para inicializar o gráfico de desempenho do servidor
+        function initServerPerformanceChart() {
+            var ctx = document.getElementById('serverPerformanceChart').getContext('2d');
+            serverPerformanceChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['CPU', 'Memória', 'Disco'],
+                    datasets: [{
+                        data: [70, 60, 50],
+                        backgroundColor: ['#4CAF50', '#FFC107', '#F44336'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutoutPercentage: 80
+                }
+            });
+        }
+
+        // Função para inicializar o gráfico de benchmark de latência
+        function initLatencyBenchmarkChart() {
+            var ctx = document.getElementById('latencyBenchmarkChart').getContext('2d');
+            latencyBenchmarkChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Mínima', 'Máxima', 'Média'],
+                    datasets: [{
+                        data: [15, 50, 30],
+                        backgroundColor: ['#4CAF50', '#FFC107', '#2196F3'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutoutPercentage: 80
+                }
+            });
+        }
     </script>
 </body>
 </html>
