@@ -10,7 +10,7 @@
         body {
             background-color: #000;
             color: #fff;
-            font-family: 'IBM Plex Mono', 'Courier New', monospace; /* Fontes antigas de computador */
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
             margin: 0;
             padding: 0;
             display: flex;
@@ -25,7 +25,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            height: 70vh; 
+            height: 70vh;
             width: 100%;
             max-width: 480px;
             padding: 20px;
@@ -78,7 +78,13 @@
             background-color: #222;
         }
 
-        .button {
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .send-btn {
             padding: 12px;
             border-radius: 25px;
             cursor: pointer;
@@ -87,9 +93,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .send-btn {
             background-color: #4CAF50;
             color: #fff;
         }
@@ -139,7 +142,6 @@
             margin-right: 8px;
         }
 
-        /* Additional animation for terminal output */
         .terminal {
             animation: fadeIn 1s ease-out;
         }
@@ -184,21 +186,20 @@
             }
         }
 
-        /* Additional styling for the 'Conect' button */
         .connect-btn {
             padding: 12px 20px;
-            background-color: #E91E63; /* Pink color */
+            background-color: #E91E63;
             color: #fff;
             font-size: 16px;
             border: none;
             border-radius: 25px;
             cursor: pointer;
             transition: all 0.2s ease;
-            width: 100%; /* Make the button fill the bottom part */
+            width: 100%;
         }
 
         .connect-btn:hover {
-            background-color: #d81b60; /* Darker pink on hover */
+            background-color: #d81b60;
         }
 
     </style>
@@ -212,14 +213,15 @@
     <div class="chat-container">
         <div class="chat-box" id="terminal">
             <div id="terminalOutput"> Welcome to ORIS OS </div>
-            <div class="input-container">
-                <span>$</span>
-                <input type="text" id="inputField" placeholder="Enter command..." autofocus />
-                <a href="https://nscsuport.github.io/ORIS-v1/dashboard.html">
-  <button class="connect-btn">Conect</button>
-</a>
-
-            </div>
+        </div>
+        <div class="input-container">
+            <span>$</span>
+            <input type="text" id="inputField" placeholder="Enter command..." autofocus />
+        </div>
+        <div class="button-container">
+            <a href="https://nscsuport.github.io/ORIS-v1/dashboard.html">
+                <button class="connect-btn">Conect</button>
+            </a>
         </div>
     </div>
 
@@ -227,9 +229,7 @@
         <p>© 2025 HoloFi. Todos os direitos reservados. Lucas Januário</p>
     </footer>
 
-    <!-- Link to the external JavaScript file -->
     <script>
-        // Handle user input and display the response
         const inputField = document.getElementById('inputField');
         const terminalOutput = document.getElementById('terminalOutput');
 
@@ -255,7 +255,6 @@
                 terminalOutput.innerHTML += `<br>Command not found: ${command}`;
             }
         }
-
     </script>
 
 </body>
