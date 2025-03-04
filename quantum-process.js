@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const AWS = require('aws-sdk');
+const { DarkHoloFiEngine } = require('./kernel'); // Importando o kernel.js
 const app = express();
 const port = 3000;
 
@@ -13,6 +14,9 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 const lambda = new AWS.Lambda();
+
+// Inicializando o kernel com o endereço de autenticação
+const engine = new DarkHoloFiEngine('enderecoDeAutenticacao'); // Passando o endereço de autenticação para o kernel
 
 // Simulação de um processo quântico com integração ao Q# e evolução de dados
 app.get('/api/quantum-process', async (req, res) => {
@@ -27,6 +31,10 @@ app.get('/api/quantum-process', async (req, res) => {
 
         // Combinando os resultados para otimização e evolução do aprendizado
         const combinedData = optimizeData(primaryData, evolutionaryData);
+
+        // Adicionando dados de otimização ao Kernel para investimento
+        engine.addPlan("Plano de Investimento em Rede Neural", "CNN", 1000, "16 GFLOPS", 5);
+        engine.invest("Plano de Investimento em Rede Neural", 500, "EnderecoDoInvestidor");
 
         // Armazenando os dados otimizados no AWS S3 (banco de dados de objetos)
         const s3Params = {
