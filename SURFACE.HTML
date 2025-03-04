@@ -8,137 +8,142 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Global Styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #121212; /* Fundo escuro */
-            color: #fff; /* Cor do texto branco */
-        }
+   /* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* Fundo preto */
+    color: #fff; /* Texto branco */
+}
 
-        /* Sidebar Styles */
-        .sidebar {
-            background-color: #2a3f54; /* Fundo da sidebar */
-            padding-top: 20px;
-            height: 100%;
-        }
+/* Sidebar Styles */
+.sidebar {
+    background-color: #37474F; /* Cinza azulado */
+    padding-top: 20px;
+    height: 100%;
+}
 
-        .profile {
-            text-align: center;
-            color: #fff;
-        }
+.profile {
+    text-align: center;
+    color: #fff;
+}
 
-        .profile_pic {
-            margin-bottom: 10px;
-        }
+.profile_pic {
+    margin-bottom: 10px;
+}
 
-        .profile_img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-        }
+.profile_img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
 
-        .profile_info h2 {
-            margin: 0;
-            font-size: 18px;
-        }
+.profile_info h2 {
+    margin: 0;
+    font-size: 18px;
+}
 
-        /* Sidebar Menu */
-        .main_menu_side {
-            padding: 0;
-        }
+/* Sidebar Menu */
+.main_menu_side {
+    padding: 0;
+}
 
-        .menu_section h3 {
-            color: #fff;
-            margin-bottom: 15px;
-        }
+.menu_section h3 {
+    color: #fff;
+    margin-bottom: 15px;
+}
 
-        .side-menu li {
-            padding: 10px;
-        }
+.side-menu li {
+    padding: 10px;
+}
 
-        .side-menu li a {
-            color: #b8c7ce;
-            font-size: 14px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
+.side-menu li a {
+    color: #d1d1d1;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
 
-        .side-menu li a:hover {
-            background-color: #1f2d3d;
-        }
+.side-menu li a:hover {
+    background-color: #455A64;
+}
 
-        .side-menu li a i {
-            margin-right: 10px;
-        }
+.side-menu li a i {
+    margin-right: 10px;
+}
 
-        /* Footer Icons */
-        .sidebar-footer a {
-            color: #b8c7ce;
-            padding: 10px;
-            font-size: 18px;
-        }
+/* Footer Icons */
+.sidebar-footer a {
+    color: #d1d1d1;
+    padding: 10px;
+    font-size: 18px;
+}
 
-        .sidebar-footer a:hover {
-            background-color: #1f2d3d;
-        }
+.sidebar-footer a:hover {
+    background-color: #455A64;
+}
 
-        /* Page Content */
-        .widget {
-            background-color: #1e1e1e; /* Fundo escuro */
-            margin-bottom: 20px;
-        }
+/* Page Content */
+.widget {
+    background-color: #1e1e1e; /* Fundo escuro */
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+}
 
-        .x_panel {
-            padding: 20px;
-            background-color: #fafafa;
-        }
+.x_panel {
+    padding: 20px;
+    background-color: #212121; /* Fundo escuro */
+    border-radius: 8px;
+}
 
-        .x_title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #fff; /* Título branco */
-        }
+.x_title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #fff; /* Título branco */
+}
 
-        .x_content {
-            padding-top: 10px;
-        }
+.x_content {
+    padding-top: 10px;
+}
 
-        /* Chart and Button Styles */
-        .chart {
-            display: inline-block;
-            width: 130px;
-            height: 130px;
-            line-height: 130px;
-            background-color: #f4f4f4;
-            border-radius: 50%;
-            font-size: 20px;
-            color: #333;
-        }
+/* Chart and Button Styles */
+.chart {
+    display: inline-block;
+    width: 130px;
+    height: 130px;
+    line-height: 130px;
+    background-color: #37474F; /* Fundo escuro */
+    border-radius: 50%;
+    font-size: 20px;
+    color: #fff;
+}
 
-        .chart .percent {
-            font-size: 16px;
-        }
+.chart .percent {
+    font-size: 16px;
+}
 
-        /* Button Styles */
-        .btn-group .btn {
-            background-color: #4CAF50;
-            color: white;
-        }
+/* Button Styles */
+.btn-group .btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
 
-        .btn-group .btn:hover {
-            background-color: #45a049;
-        }
+.btn-group .btn:hover {
+    background-color: #388E3C;
+}
 
-        .btn-group .btn-sm {
-            font-size: 14px;
-            padding: 5px 10px;
-        }
-    </style>
+.btn-group .btn-sm {
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
 </head>
 <body>
 
