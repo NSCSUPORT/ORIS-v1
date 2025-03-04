@@ -77,10 +77,10 @@
                         </div>
                         <div style="text-align: center;">
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default btn-sm">1 D</button>
-                                <button type="button" class="btn btn-default btn-sm">1 W</button>
-                                <button type="button" class="btn btn-default btn-sm">1 M</button>
-                                <button type="button" class="btn btn-default btn-sm">1 Y</button>
+                                <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1D')">1 D</button>
+                                <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1W')">1 W</button>
+                                <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1M')">1 M</button>
+                                <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1Y')">1 Y</button>
                             </div>
                         </div>
                         <div style="text-align: center; overflow: hidden; margin: 10px 5px 3px;">
@@ -105,9 +105,71 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+    <script>
+        var lineChart; // Define global variable for the line chart
+
+        // Função para inicializar o gráfico de linha
+        function initLineChart() {
+            var ctx = document.getElementById('canvas_line4').getContext('2d');
+            lineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
+                    datasets: [{
+                        label: 'Exemplo de Dados',
+                        data: [500, 550, 600, 650, 700],
+                        borderColor: '#4CAF50',
+                        backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+
+        // Função para atualizar o gráfico com base no período selecionado
+        function updateChart(period) {
+            var newData = [];
+            var newLabels = [];
+
+            if (period === '1D') {
+                newData = [500, 450, 475, 480, 510];
+                newLabels = ['08:00', '09:00', '10:00', '11:00', '12:00'];
+            } else if (period === '1W') {
+                newData = [500, 550, 600, 620, 700, 800, 850];
+                newLabels = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
+            } else if (period === '1M') {
+                newData = [500, 520, 550, 580, 610, 650, 700];
+                newLabels = ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5'];
+            } else if (period === '1Y') {
+                newData = [500, 600, 700, 800, 900];
+                newLabels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'];
+            }
+
+            lineChart.data.labels = newLabels;
+            lineChart.data.datasets[0].data = newData;
+            lineChart.update();
+        }
+
+        // Inicializar o gráfico quando a página carregar
+        window.onload = function() {
+            initLineChart();
+        };
+    </script>
 </body>
 </html>
