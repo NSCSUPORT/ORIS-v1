@@ -16,9 +16,8 @@
    <title>Dashboard - HoloFi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
     <style>
-      /* Global Styles */
+/* Global Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -52,6 +51,7 @@ body {
 .profile_info h2 {
     margin: 0;
     font-size: 18px;
+    color: #fff; /* Garantindo texto branco */
 }
 
 /* Sidebar Menu */
@@ -60,7 +60,7 @@ body {
 }
 
 .menu_section h3 {
-    color: #fff;
+    color: #fff; /* Título branco */
     margin-bottom: 15px;
 }
 
@@ -69,7 +69,7 @@ body {
 }
 
 .side-menu li a {
-    color: #d1d1d1;
+    color: #d1d1d1; /* Texto em cinza claro */
     font-size: 14px;
     text-decoration: none;
     display: flex;
@@ -118,6 +118,7 @@ body {
 
 .x_content {
     padding-top: 10px;
+    color: #fff; /* Texto branco */
 }
 
 /* Chart and Button Styles */
@@ -302,6 +303,47 @@ body {
                     </div>
                 </div>
             </div>
+
+            <!-- New Widget 1: Server Load Analysis -->
+            <div class="widget">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Análise de Carga do Servidor</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="chart" style="width: 100px; height: 100px;">
+                            <canvas id="serverLoadChart" width="100" height="100"></canvas>
+                        </div>
+                        <ul class="list-inline widget_tally">
+                            <li>
+                                <p><span class="month">Carga do Servidor</span><span class="count">85%</span></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Widget 2: Database Performance -->
+            <div class="widget">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Desempenho do Banco de Dados</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="chart" style="width: 100px; height: 100px;">
+                            <canvas id="databasePerformanceChart" width="100" height="100"></canvas>
+                        </div>
+                        <ul class="list-inline widget_tally">
+                            <li>
+                                <p><span class="month">Uso de Banco de Dados</span><span class="count">55%</span></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -314,8 +356,10 @@ body {
         var lineChart;
         var serverPerformanceChart;
         var latencyBenchmarkChart;
+        var serverLoadChart;
+        var databasePerformanceChart;
 
-        // Função para inicializar o gráfico de linha
+        // Função para inicializar os gráficos de linha
         function initLineChart() {
             var ctx = document.getElementById('canvas_line4').getContext('2d');
             lineChart = new Chart(ctx, {
@@ -344,37 +388,6 @@ body {
             });
         }
 
-        // Função para atualizar o gráfico com base no período selecionado
-        function updateChart(period) {
-            var newData = [];
-            var newLabels = [];
-
-            if (period === '1D') {
-                newData = [500, 450, 475, 480, 510];
-                newLabels = ['08:00', '09:00', '10:00', '11:00', '12:00'];
-            } else if (period === '1W') {
-                newData = [500, 550, 600, 620, 700, 800, 850];
-                newLabels = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
-            } else if (period === '1M') {
-                newData = [500, 520, 550, 580, 610, 650, 700];
-                newLabels = ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5'];
-            } else if (period === '1Y') {
-                newData = [500, 600, 700, 800, 900];
-                newLabels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'];
-            }
-
-            lineChart.data.labels = newLabels;
-            lineChart.data.datasets[0].data = newData;
-            lineChart.update();
-        }
-
-        // Inicializar os gráficos
-        window.onload = function() {
-            initLineChart();
-            initServerPerformanceChart();
-            initLatencyBenchmarkChart();
-        };
-
         // Função para inicializar o gráfico de desempenho do servidor
         function initServerPerformanceChart() {
             var ctx = document.getElementById('serverPerformanceChart').getContext('2d');
@@ -402,10 +415,10 @@ body {
             latencyBenchmarkChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Mínima', 'Máxima', 'Média'],
+                    labels: ['Latência Mínima', 'Latência Máxima', 'Latência Média'],
                     datasets: [{
                         data: [15, 50, 30],
-                        backgroundColor: ['#4CAF50', '#FFC107', '#2196F3'],
+                        backgroundColor: ['#4CAF50', '#FFC107', '#F44336'],
                         borderWidth: 1
                     }]
                 },
@@ -416,149 +429,56 @@ body {
                 }
             });
         }
+
+        // Função para inicializar o gráfico de análise de carga do servidor
+        function initServerLoadChart() {
+            var ctx = document.getElementById('serverLoadChart').getContext('2d');
+            serverLoadChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Serviço 1', 'Serviço 2', 'Serviço 3'],
+                    datasets: [{
+                        data: [40, 40, 20],
+                        backgroundColor: ['#F44336', '#4CAF50', '#FFC107']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+
+        // Função para inicializar o gráfico de desempenho do banco de dados
+        function initDatabasePerformanceChart() {
+            var ctx = document.getElementById('databasePerformanceChart').getContext('2d');
+            databasePerformanceChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Leitura', 'Escrita', 'Cache'],
+                    datasets: [{
+                        data: [60, 30, 10],
+                        backgroundColor: ['#4CAF50', '#FFC107', '#F44336'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutoutPercentage: 80
+                }
+            });
+        }
+
+        // Inicializa todos os gráficos
+        initLineChart();
+        initServerPerformanceChart();
+        initLatencyBenchmarkChart();
+        initServerLoadChart();
+        initDatabasePerformanceChart();
     </script>
+
 </body>
-</html>
-
-<style>
-   /* Global Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #000; /* Fundo preto */
-    color: #fff; /* Texto branco */
-}
-
-/* Sidebar Styles */
-.sidebar {
-    background-color: #37474F; /* Cinza azulado */
-    padding-top: 20px;
-    height: 100%;
-}
-
-.profile {
-    text-align: center;
-    color: #fff;
-}
-
-.profile_pic {
-    margin-bottom: 10px;
-}
-
-.profile_img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-}
-
-.profile_info h2 {
-    margin: 0;
-    font-size: 18px;
-}
-
-/* Sidebar Menu */
-.main_menu_side {
-    padding: 0;
-}
-
-.menu_section h3 {
-    color: #fff;
-    margin-bottom: 15px;
-}
-
-.side-menu li {
-    padding: 10px;
-}
-
-.side-menu li a {
-    color: #d1d1d1;
-    font-size: 14px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-
-.side-menu li a:hover {
-    background-color: #455A64;
-}
-
-.side-menu li a i {
-    margin-right: 10px;
-}
-
-/* Footer Icons */
-.sidebar-footer a {
-    color: #d1d1d1;
-    padding: 10px;
-    font-size: 18px;
-}
-
-.sidebar-footer a:hover {
-    background-color: #455A64;
-}
-
-/* Page Content */
-.widget {
-    background-color: #1e1e1e; /* Fundo escuro */
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 8px;
-}
-
-.x_panel {
-    padding: 20px;
-    background-color: #212121; /* Fundo escuro */
-    border-radius: 8px;
-}
-
-.x_title {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 15px;
-    color: #fff; /* Título branco */
-}
-
-.x_content {
-    padding-top: 10px;
-}
-
-/* Chart and Button Styles */
-.chart {
-    display: inline-block;
-    width: 130px;
-    height: 130px;
-    line-height: 130px;
-    background-color: #37474F; /* Fundo escuro */
-    border-radius: 50%;
-    font-size: 20px;
-    color: #fff;
-}
-
-.chart .percent {
-    font-size: 16px;
-}
-
-/* Button Styles */
-.btn-group .btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-}
-
-.btn-group .btn:hover {
-    background-color: #388E3C;
-}
-
-.btn-group .btn-sm {
-    font-size: 14px;
-    padding: 5px 10px;
-}
-
-</head>
-<body>
 
     <div class="container-fluid">
         <!-- Sidebar -->
