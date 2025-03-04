@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ORIS OS</title>
    <style>
-    /* Estilo para simular fontes de computadores antigos */
     body {
         background-color: #121212;
         color: #fff;
@@ -84,108 +83,6 @@
         gap: 10px;
     }
 
-    .send-btn {
-        padding: 12px;
-        border-radius: 25px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.2s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #4CAF50; /* Verde */
-        color: #000; /* Fonte preta */
-    }
-
-    .send-btn:hover {
-        background-color: #45a049;
-    }
-
-    .clear-btn {
-        background-color: #f44336;
-        color: #fff;
-    }
-
-    .clear-btn:hover {
-        background-color: #e53935;
-    }
-
-    .attach-btn {
-        background-color: #FFC107;
-        color: #000;
-    }
-
-    .attach-btn:hover {
-        background-color: #ff8f00;
-    }
-
-    footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        padding: 10px;
-        background: linear-gradient(45deg, #f0f000, #ff4500);
-        color: #000;
-        text-align: center;
-        font-size: 0.9rem;
-        font-weight: bold;
-        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
-    }
-
-    .chat-container:hover {
-        box-shadow: 0px 0px 50px rgba(76, 175, 80, 0.8);
-    }
-
-    .send-btn i, .clear-btn i, .attach-btn i {
-        margin-right: 8px;
-    }
-
-    .terminal {
-        animation: fadeIn 1s ease-out;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-
-    /* Responsiveness */
-    @media (max-width: 768px) {
-        .chat-container {
-            width: 90%;
-            height: 80vh;
-        }
-
-        .chat-box {
-            max-height: 50vh;
-        }
-
-        footer {
-            font-size: 0.8rem;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .chat-container {
-            width: 100%;
-            height: 75vh;
-        }
-
-        .chat-box {
-            max-height: 40vh;
-        }
-
-        footer {
-            font-size: 0.7rem;
-        }
-    }
-
     .connect-btn {
         padding: 12px 20px;
         background-color: #E91E63;
@@ -202,11 +99,10 @@
         background-color: #d81b60;
     }
 
-    /* Novo botão azul verde com fonte preta */
     .nav-btn {
         padding: 12px 20px;
-        background-color: #4CAF50; /* Verde */
-        color: #000; /* Fonte preta */
+        background-color: #4CAF50;
+        color: #000;
         font-size: 16px;
         border: none;
         border-radius: 25px;
@@ -216,14 +112,12 @@
     }
 
     .nav-btn:hover {
-        background-color: #45a049; /* Verde mais escuro */
-        color: #000; /* Fonte preta */
+        background-color: #45a049;
+        color: #000;
     }
 </style>
-
 </head>
 <body>
-
     <div class="logo">
         <img src="a.png" alt="Logo" style="width: 150px; height: auto; display: block; margin: 0 auto;">
     </div>
@@ -235,12 +129,14 @@
         <div class="input-container">
             <span>$</span>
             <input type="text" id="inputField" placeholder="Enter command..." autofocus />
+            <a href="https://nscsuport.github.io/NOISEAI/" target="_blank">
+                <img src="b.png" alt="NOISE AI" style="width: 40px; height: 40px; margin-left: 10px; cursor: pointer; border-radius: 50%;">
+            </a>
         </div>
         <div class="button-container">
             <a href="https://nscsuport.github.io/ORIS-v1/dashboard.html">
                 <button class="connect-btn">Conect</button>
             </a>
-            <!-- Novo botão azul marinho e laranja -->
             <a href="https://nscsuport.github.io/ORIS-v1/SURFACE.HTML">
                 <button class="nav-btn">CELERON</button>
             </a>
@@ -278,6 +174,5 @@
             }
         }
     </script>
-
 </body>
 </html>
