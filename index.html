@@ -50,42 +50,15 @@
             word-wrap: break-word;
         }
 
-        .message {
-            padding: 14px;
-            margin: 8px 0;
-            border-radius: 12px;
-            max-width: 75%;
-            display: flex;
-            align-items: center;
-            font-size: 16px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .message.sent {
-            background-color: #4CAF50;
-            align-self: flex-end;
-            color: #000;
-            transform: scale(1);
-        }
-
-        .message.received {
-            background-color: #007BFF;
-            color: #fff;
-            align-self: flex-start;
-            transform: scale(1);
-        }
-
-        .message:hover {
-            background-color: #444;
-            transform: scale(1.05);
-        }
-
         .input-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 10px;
             width: 100%;
+            margin-top: 10px;
+            background-color: #333;
+            border-radius: 30px;
+            padding: 12px;
         }
 
         input[type="text"] {
@@ -221,7 +194,7 @@
             border-radius: 25px;
             cursor: pointer;
             transition: all 0.2s ease;
-            margin-left: 10px; /* Space between the input and the button */
+            width: 100%; /* Make the button fill the bottom part */
         }
 
         .connect-btn:hover {
@@ -239,12 +212,10 @@
     <div class="chat-container">
         <div class="chat-box" id="terminal">
             <div id="terminalOutput"> Welcome to ORIS OS </div>
-            <div class="input-line">
+            <div class="input-container">
                 <span>$</span>
                 <input type="text" id="inputField" placeholder="Enter command..." autofocus />
-                <a href="https://nscsuport.github.io/ORIS-v1/dashboard.html" target="_blank"> <!-- Link do botão -->
-                    <button class="connect-btn">Conect</button>
-                </a>
+                <button class="connect-btn">Conect</button>
             </div>
         </div>
     </div>
