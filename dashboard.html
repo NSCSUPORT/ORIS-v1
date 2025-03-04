@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Controle Bosco Celeron</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Estilos CSS -->
+    <script src="script.js"></script> <!-- Scripts JS -->
+</head>
+<body>
+    <header>
+        <h1>Dashboard de Controle de Datacenter</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Voltar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="realtime-data">
+        <h2>Dados em Tempo Real</h2>
+        <div id="data-container">
+            <p>Aguarde enquanto carregamos os dados do servidor...</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>Para mais informações, entre em contato através de <a href="mailto:contato@bosco.com">contato@bosco.com</a>.</p>
+    </footer>
+
+    <script>
+        // Função para buscar dados do backend (API)
+        const fetchRealtimeData = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/api/quantum-process'); // Alterar para a URL real da API
+                const data = await response.json();
+                
+                // Atualiza o DOM com os dados do servidor
+                const dataContainer = document.getElementById('data-container');
+                dataContainer.innerHTML = `
+                    <h3>Resultado do Processo Quântico</h3>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                console.error('Erro ao obter dados:', error);
+                const dataContainer = document.getElementById('data-container');
+                dataContainer.innerHTML = `<p>Erro ao carregar os dados.</p>`;
+            }
+        };
+
+        // Chama a função para buscar dados ao carregar a página
+        window.onload = fetchRealtimeData;
+    </script>
+</body>
+</html>
