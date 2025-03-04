@@ -7,7 +7,7 @@
    <title>Dashboard - HoloFi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- <style>
+<style>
 /* Global Styles */
 body {
     font-family: Arial, sans-serif;
@@ -15,9 +15,12 @@ body {
     padding: 0;
     background-color: #000; /* Fundo preto */
     color: #fff; /* Texto branco */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura total da tela */
+    flex-direction: column;
 }
-
-/* Removido Sidebar */
 
 /* Page Content */
 .widget {
@@ -25,12 +28,18 @@ body {
     margin-bottom: 20px;
     padding: 15px;
     border-radius: 8px;
+    width: 90%;
+    max-width: 600px; /* Limita a largura máxima */
+    box-sizing: border-box; /* Para garantir o padding dentro da largura */
 }
 
 .x_panel {
     padding: 20px;
     background-color: #546E7A; /* Fundo cinza mais escuro para contraste */
     border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    box-sizing: border-box;
 }
 
 .x_title {
@@ -38,11 +47,13 @@ body {
     font-weight: 600;
     margin-bottom: 15px;
     color: #fff; /* Título branco */
+    text-align: center; /* Centraliza o título */
 }
 
 .x_content {
     padding-top: 10px;
     color: #fff; /* Texto branco */
+    text-align: center; /* Centraliza o conteúdo */
 }
 
 /* Chart and Button Styles */
@@ -55,6 +66,7 @@ body {
     border-radius: 50%;
     font-size: 20px;
     color: #fff;
+    margin: 0 auto; /* Centraliza o gráfico */
 }
 
 .chart .percent {
@@ -62,12 +74,19 @@ body {
 }
 
 /* Button Styles */
+.btn-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 .btn-group .btn {
     background-color: #4CAF50;
     color: white;
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
+    margin: 5px;
 }
 
 .btn-group .btn:hover {
@@ -79,6 +98,7 @@ body {
     padding: 5px 10px;
 }
 </style>
+
 
 </head>
 <body>
