@@ -574,6 +574,36 @@ function startTerminal() {
     const inputField = document.getElementById('inputField');
     inputField.addEventListener('keypress', handleUserInput);
 }
+const log = (message) => {
+    console.log(message); // Função simples para simular log
+};
+
+const comandos = {
+    "clear": () => log("Limpeza do terminal..."),
+    "exit": () => log("Saindo do terminal..."),
+    "dataalias apply cross-validation": () => log("Aplicando validação cruzada..."),
+    "run diagnostic": () => log("Executando diagnóstico..."),
+    "check system health": () => log("Estado do sistema: OK"),
+    "show status": () => log("Status do sistema: Todos os sistemas operacionais."),
+    "start process": () => log("Iniciando processo..."),
+    "stop process": () => log("Parando processo..."),
+    "restart system": () => log("Reiniciando sistema..."),
+    "check memory": () => log("Uso de memória: 45% usado, 55% livre."),
+    "check disk usage": () => log("Uso de disco: 70% usado, 30% livre."),
+    "check network": () => log("Status da rede: Conectado, velocidade de 100Mbps."),
+    "show logs": () => log("Exibindo logs do sistema..."),
+    "show processes": () => log("Exibindo todos os processos em execução..."),
+    "kill process": () => log("Matando processo..."),
+    "list running processes": () => log("Listando processos em execução..."),
+    "open file": () => log("Abrindo arquivo..."),
+    "close file": () => log("Fechando arquivo..."),
+    "create file": () => log("Criando arquivo..."),
+    "delete file": () => log("Deletando arquivo..."),
+    "rename file": () => log("Renomeando arquivo..."),
+    "copy file": () => log("Copiando arquivo..."),
+};
+
+module.exports = comandos; // Exporta os comandos para o index.js
 
 // Iniciar o terminal assim que o conteúdo da página for carregado
 window.addEventListener('DOMContentLoaded', startTerminal);
