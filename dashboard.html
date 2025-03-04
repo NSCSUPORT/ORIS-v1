@@ -2,22 +2,28 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="logo.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conectar AWS, Azure e WANP</title>
     <style>
+        /* Estilo para simular fontes de computadores antigos */
         body {
             background-color: #000;
             color: #fff;
             font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             flex-direction: column;
+            overflow: hidden;
         }
 
         .form-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
             width: 100%;
             max-width: 480px;
             padding: 20px;
@@ -34,17 +40,25 @@
             flex-direction: column;
         }
 
-        input[type="text"], select {
+        .input-field label {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        select {
             padding: 14px;
             border: 2px solid #333;
             border-radius: 30px;
             background-color: #333;
             color: #fff;
             font-size: 16px;
+            outline: none;
             transition: all 0.3s ease;
         }
 
-        input:focus {
+        input[type="text"]:focus,
+        select:focus {
             border-color: #4CAF50;
             background-color: #222;
         }
@@ -56,35 +70,41 @@
             border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
-            text-align: center;
             transition: all 0.2s ease;
+            text-align: center;
         }
 
-        .submit-btn:disabled {
-            background-color: #777;
-            cursor: not-allowed;
-        }
-
-        .submit-btn.loading {
-            background-color: #ffa500;
-            cursor: wait;
-        }
-
-        .error-message {
-            color: red;
-            font-size: 12px;
-            display: none;
+        .submit-btn:hover {
+            background-color: #45a049;
         }
 
         footer {
             position: fixed;
             bottom: 0;
+            left: 0;
+            right: 0;
             width: 100%;
-            text-align: center;
             padding: 10px;
             background: linear-gradient(45deg, #f0f000, #ff4500);
             color: #000;
+            text-align: center;
+            font-size: 0.9rem;
             font-weight: bold;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                width: 90%;
+                height: 80vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                width: 100%;
+                height: 75vh;
+            }
         }
     </style>
 </head>
@@ -94,68 +114,52 @@
         <form id="connection-form">
             <div class="input-field">
                 <label for="aws-key">Chave AWS</label>
-                <input type="text" id="aws-key" name="aws-key">
-                <span class="error-message" id="aws-error">Informe a chave AWS.</span>
+                <input type="text" id="aws-key" name="aws-key" placeholder="Digite sua chave AWS">
             </div>
             <div class="input-field">
                 <label for="azure-key">Chave Azure</label>
-                <input type="text" id="azure-key" name="azure-key">
-                <span class="error-message" id="azure-error">Informe a chave Azure.</span>
+                <input type="text" id="azure-key" name="azure-key" placeholder="Digite sua chave Azure">
             </div>
             <div class="input-field">
                 <label for="wanp-id">ID WANP</label>
-                <input type="text" id="wanp-id" name="wanp-id">
-                <span class="error-message" id="wanp-error">Informe o ID WANP.</span>
+                <input type="text" id="wanp-id" name="wanp-id" placeholder="Digite o ID WANP">
             </div>
             <div class="input-field">
                 <label for="service">Escolha o Serviço</label>
                 <select id="service" name="service">
-                    <option value="">Selecione</option>
                     <option value="aws">AWS</option>
                     <option value="azure">Azure</option>
                     <option value="wanp">WANP</option>
                 </select>
-                <span class="error-message" id="service-error">Selecione um serviço.</span>
             </div>
-            <button type="submit" class="submit-btn" id="connect-btn">Conectar</button>
+            <button type="submit" class="submit-btn">Conectar</button>
         </form>
     </div>
-    <footer>bosco celeron m1</footer>
-    
-    <script>
-        document.getElementById("connection-form").addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            const awsKey = document.getElementById("aws-key").value.trim();
-            const azureKey = document.getElementById("azure-key").value.trim();
-            const wanpId = document.getElementById("wanp-id").value.trim();
-            const service = document.getElementById("service").value;
-            const connectBtn = document.getElementById("connect-btn");
+    <footer>
+        <p>bosco celeron m1 </p>
+    </footer>
 
-            let hasError = false;
-            
-            function showError(id, condition) {
-                document.getElementById(id).style.display = condition ? "block" : "none";
-                if (condition) hasError = true;
+    <script src="quantum-process.js"></script>
+    <script>
+        document.getElementById("connection-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const awsKey = document.getElementById("aws-key").value;
+            const azureKey = document.getElementById("azure-key").value;
+            const wanpId = document.getElementById("wanp-id").value;
+            const service = document.getElementById("service").value;
+
+            if (!awsKey && !azureKey && !wanpId) {
+                alert("Erro: Nenhuma chave de servidor foi inserida!");
+                return;
             }
 
-            showError("aws-error", service === "aws" && !awsKey);
-            showError("azure-error", service === "azure" && !azureKey);
-            showError("wanp-error", service === "wanp" && !wanpId);
-            showError("service-error", !service);
-
-            if (hasError) return;
-            
-            connectBtn.textContent = "Conectando...";
-            connectBtn.classList.add("loading");
-            connectBtn.disabled = true;
-            
-            setTimeout(() => {
-                alert("Conexão estabelecida com " + service.toUpperCase());
-                connectBtn.textContent = "Conectar";
-                connectBtn.classList.remove("loading");
-                connectBtn.disabled = false;
-            }, 2000);
+            if (typeof processConnectionData === "function") {
+                processConnectionData(awsKey, azureKey, wanpId, service);
+                alert("Conectado com sucesso ao serviço: " + service.toUpperCase());
+            } else {
+                alert("Erro: O arquivo quantum-process.js não foi carregado corretamente!");
+            }
         });
     </script>
 </body>
