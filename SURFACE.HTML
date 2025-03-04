@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - HoloFi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container-fluid">
+        <!-- Sidebar -->
+        <div class="col-md-3 sidebar">
+            <div class="profile clearfix">
+                <div class="profile_pic">
+                    <img src="images/img.jpg" alt="Profile" class="img-circle profile_img">
+                </div>
+                <div class="profile_info">
+                    <span>Bem-vindo,</span>
+                    <h2>John Doe</h2>
+                </div>
+            </div>
+
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                <div class="menu_section">
+                    <h3>Geral</h3>
+                    <ul class="nav side-menu">
+                        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                        <li><a href="#"><i class="fa fa-edit"></i> Formulários</a></li>
+                        <li><a href="#"><i class="fa fa-desktop"></i> UI Elements</a></li>
+                        <li><a href="#"><i class="fa fa-table"></i> Tabelas</a></li>
+                    </ul>
+                </div>
+                <div class="menu_section">
+                    <h3>Extras</h3>
+                    <ul class="nav side-menu">
+                        <li><a href="#"><i class="fa fa-bug"></i> Páginas adicionais</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sidebar-footer hidden-small">
+                <a href="#" data-toggle="tooltip" title="Configurações">
+                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                </a>
+                <a href="#" data-toggle="tooltip" title="Tela Cheia">
+                    <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                </a>
+                <a href="#" data-toggle="tooltip" title="Desconectar">
+                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div class="col-md-9">
+            <div class="widget">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Tally Design4</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div style="text-align: center; margin-bottom: 17px">
+                            <span class="chart" data-percent="86">
+                                <span class="percent"></span>
+                            </span>
+                        </div>
+                        <div class="pie_bg" style="text-align: center; display: none; margin-bottom: 17px">
+                            <canvas id="canvas_doughnut4" height="130"></canvas>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default btn-sm">1 D</button>
+                                <button type="button" class="btn btn-default btn-sm">1 W</button>
+                                <button type="button" class="btn btn-default btn-sm">1 M</button>
+                                <button type="button" class="btn btn-default btn-sm">1 Y</button>
+                            </div>
+                        </div>
+                        <div style="text-align: center; overflow: hidden; margin: 10px 5px 3px;">
+                            <canvas id="canvas_line4" height="190"></canvas>
+                        </div>
+                        <div>
+                            <ul class="list-inline widget_tally">
+                                <li>
+                                    <p><span class="month">12 Dezembro 2014</span><span class="count">+12%</span></p>
+                                </li>
+                                <li>
+                                    <p><span class="month">29 Dezembro 2014</span><span class="count">+12%</span></p>
+                                </li>
+                                <li>
+                                    <p><span class="month">16 Janeiro 2015</span><span class="count">+12%</span></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+</body>
+</html>
