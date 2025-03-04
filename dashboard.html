@@ -3,53 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Controle Bosco Celeron</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Estilos CSS -->
-    <script src="script.js"></script> <!-- Scripts JS -->
+    <title>Conectar AWS, Azure e WANP</title>
+    <style>
+        /* Estilo para simular fontes de computadores antigos */
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'IBM Plex Mono', 'Courier New', monospace; /* Fontes antigas de computador */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            width: 100%;
+            max-width: 480px;
+            padding: 20px;
+            border: 2px solid #4CAF50;
+            border-radius: 12px;
+            background-color: #1e1e1e;
+            box-shadow: 0px 0px 50px rgba(76, 175, 80, 0.7);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .input-field {
+            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-field label {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        select {
+            padding: 14px;
+            border: 2px solid #333;
+            border-radius: 30px;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #4CAF50;
+            background-color: #222;
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 12px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(45deg, #f0f000, #ff4500);
+            color: #000;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .form-container {
+                width: 90%;
+                height: 80vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                width: 100%;
+                height: 75vh;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Dashboard de Controle de Datacenter</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Voltar</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="realtime-data">
-        <h2>Dados em Tempo Real</h2>
-        <div id="data-container">
-            <p>Aguarde enquanto carregamos os dados do servidor...</p>
-        </div>
-    </section>
-
+    <div class="form-container">
+        <h2>Configurações de Conexão</h2>
+        <form id="connection-form">
+            <div class="input-field">
+                <label for="aws-key">Chave AWS</label>
+                <input type="text" id="aws-key" name="aws-key" placeholder="Digite sua chave AWS">
+            </div>
+            <div class="input-field">
+                <label for="azure-key">Chave Azure</label>
+                <input type="text" id="azure-key" name="azure-key" placeholder="Digite sua chave Azure">
+            </div>
+            <div class="input-field">
+                <label for="wanp-id">ID WANP</label>
+                <input type="text" id="wanp-id" name="wanp-id" placeholder="Digite o ID WANP">
+            </div>
+            <div class="input-field">
+                <label for="service">Escolha o Serviço</label>
+                <select id="service" name="service">
+                    <option value="aws">AWS</option>
+                    <option value="azure">Azure</option>
+                    <option value="wanp">WANP</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn">Conectar</button>
+        </form>
+    </div>
     <footer>
-        <p>Para mais informações, entre em contato através de <a href="mailto:contato@bosco.com">contato@bosco.com</a>.</p>
+        <p>Conexões com AWS, Azure e WANP</p>
     </footer>
 
+    <script src="quantum-process.js"></script>
     <script>
-        // Função para buscar dados do backend (API)
-        const fetchRealtimeData = async () => {
-            try {
-                const response = await fetch('http://localhost:3000/api/quantum-process'); // Alterar para a URL real da API
-                const data = await response.json();
-                
-                // Atualiza o DOM com os dados do servidor
-                const dataContainer = document.getElementById('data-container');
-                dataContainer.innerHTML = `
-                    <h3>Resultado do Processo Quântico</h3>
-                    <pre>${JSON.stringify(data, null, 2)}</pre>
-                `;
-            } catch (error) {
-                console.error('Erro ao obter dados:', error);
-                const dataContainer = document.getElementById('data-container');
-                dataContainer.innerHTML = `<p>Erro ao carregar os dados.</p>`;
-            }
-        };
+        document.getElementById("connection-form").addEventListener("submit", function (event) {
+            event.preventDefault();
 
-        // Chama a função para buscar dados ao carregar a página
-        window.onload = fetchRealtimeData;
+            // Coleta os dados do formulário
+            const awsKey = document.getElementById("aws-key").value;
+            const azureKey = document.getElementById("azure-key").value;
+            const wanpId = document.getElementById("wanp-id").value;
+            const service = document.getElementById("service").value;
+
+            // Processa os dados no arquivo quantum-process.js
+            processConnectionData(awsKey, azureKey, wanpId, service);
+        });
     </script>
 </body>
 </html>
