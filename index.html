@@ -256,6 +256,33 @@
                 terminalOutput.innerHTML += `<br>Command not found: ${command}`;
             }
         }
+        const express = require('express');
+const comandos = require('./comandos'); // Importando o arquivo comandos.js
+const app = express();
+const port = 3000;
+
+// Middleware para analisar o corpo da requisição como JSON
+app.use(express.json());
+
+// Definindo o endpoint que executa os comandos
+app.post('/execute-command', (req, res) => {
+    const { command } = req.body; // O comando a ser executado
+
+    if (comandos[command]) {
+        // Se o comando existe, executa o comando
+        comandos[command]();
+        res.status(200).json({ message: `Comando "${command}" executado com sucesso!` });
+    } else {
+        // Se o comando não existir
+        res.status(400).json({ message: `Comando "${command}" não encontrado!` });
+    }
+});
+
+// Iniciando o servidor Express
+app.listen(port, () => {
+    console.log(`Servidor rodando em http://localhost:${port}`);
+});
+
     </script>
 
 </body>
