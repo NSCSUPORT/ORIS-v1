@@ -535,67 +535,45 @@
     "import dataset": () => log("Importing dataset for analysis..."),
     "execute bash command": (cmd) => log(`Executing Bash command: ${cmd}...`),
     "run shell script": (script) => log(`Running shell script: ${script}..."),
-    "manage datacenter": () => log("Accessing datacenter management system..."),
-    "monitor server performance": () => log("Monitoring server performance metrics..."),
-    "check server uptime": () => log("Checking server uptime status..."),
-    "view server logs": () => log("Retrieving server logs..."),
-    "clear server logs": () => log("Clearing all server logs..."),
-    "configure server settings": () => log("Configuring server settings..."),
-    "update server firmware": () => log("Updating server firmware..."),
-    "rollback server firmware": () => log("Rolling back server firmware update..."),
-    "install server patch": () => log("Installing server patch..."),
-    "list available patches": () => log("Listing all available patches..."),
-    "check patch status": () => log("Checking patch installation status..."),
-    "manage server hardware": () => log("Managing server hardware components..."),
-    "show server temperature": () => log("Displaying server temperature..."),
-    "check server CPU usage": () => log("Checking CPU usage on server..."),
-    "check server memory usage": () => log("Checking memory usage on server..."),
-    "check server disk usage": () => log("Checking disk space on server..."),
-    "check server network usage": () => log("Checking network activity on server..."),
-    "monitor server power usage": () => log("Monitoring power consumption on server..."),
-    "check server fan status": () => log("Checking server cooling fan status..."),
-    "check server power supply": () => log("Checking power supply status..."),
-    "show server IP address": () => log("Displaying server IP address..."),
-    "assign static IP to server": () => log("Assigning static IP address to server..."),
-    "configure server network settings": () => log("Configuring network settings for server..."),
-    "check server hardware status": () => log("Checking overall hardware health of server..."),
-    "show hardware inventory": () => log("Displaying hardware inventory list..."),
-    "configure RAID array": () => log("Configuring RAID storage array..."),
-    "monitor RAID health": () => log("Monitoring RAID health status..."),
-    "check RAID status": () => log("Checking current RAID status..."),
-    "replace RAID disk": () => log("Replacing a failed RAID disk..."),
-    "check disk space on server": () => log("Checking available disk space on server..."),
-    "optimize server disk space": () => log("Optimizing server disk storage..."),
-    "check disk health": () => log("Running disk health diagnostics..."),
-    "defragment server disk": () => log("Defragmenting server disk for better performance..."),
-    "check disk I/O performance": () => log("Checking server disk read/write speeds..."),
-    "backup server data": () => log("Creating a backup of server data..."),
-    "restore server data": () => log("Restoring server data from backup..."),
-    "run server diagnostic": () => log("Running full server diagnostics..."),
-    "shutdown server": () => log("Initiating server shutdown process..."),
-     "run quantum process": runQuantumProcess,
-        "help": showHelp,
-        "clear": () => terminalOutput.innerHTML = "", // Limpa o terminal
-        "exit": () => log("Exiting terminal..."),
-        "dataalias apply cross-validation": () => log("Applying cross-validation..."),
-        "run diagnostic": () => log("Running diagnostic..."),
-        "check system health": () => log("System health: OK"),
-        "show status": () => log("System status: All systems operational."),
-        "start process": () => log("Starting process..."),
-        "stop process": () => log("Stopping process..."),
-        "restart system": () => log("Restarting system..."),
-        "check memory": () => log("Memory usage: 45% used, 55% free."),
-        "check disk usage": () => log("Disk usage: 70% used, 30% free."),
-        "check network": () => log("Network status: Connected, 100Mbps speed."),
-        "show logs": () => log("Displaying system logs..."),
-        "show processes": () => log("Showing all running processes..."),
-        "kill process": () => log("Killing process..."),
-        "list running processes": () => log("Listing running processes..."),
-        "open file": () => log("Opening file..."),
-        "close file": () => log("Closing file..."),
-        "create file": () => log("Creating file..."),
-        "delete file": () => log("Deleting file..."),
-        "rename file": () => log("Renaming file..."),
-        "copy file": () => log("Copying file..."),
-        "move file": () => log("Moving file...")
+// Comando default para quando não for encontrado
+    "default": (command) => {
+        log(`Command not found: ${command}`);
     }
+};
+
+// Função para manipular o input do usuário
+function handleUserInput(event) {
+    const inputField = document.getElementById('inputField');
+    const terminalOutput = document.getElementById('terminalOutput');
+    
+    if (event.key === 'Enter') {
+        const userInput = inputField.value.trim();
+        if (userInput) {
+            // Exibe o comando digitado
+            terminalOutput.innerHTML += `<br><span>$</span> ${userInput}`;
+            inputField.value = '';
+            
+            // Executa o comando correspondente ou o comando default
+            if (comandos[userInput]) {
+                comandos[userInput]();
+            } else {
+                comandos["default"](userInput);  // Se o comando não for encontrado
+            }
+        }
+    }
+}
+
+// Função para exibir logs
+function log(message) {
+    const terminalOutput = document.getElementById('terminalOutput');
+    terminalOutput.innerHTML += `<br>${message}`;
+}
+
+// Função para iniciar o terminal
+function startTerminal() {
+    const inputField = document.getElementById('inputField');
+    inputField.addEventListener('keypress', handleUserInput);
+}
+
+// Iniciar o terminal assim que o conteúdo da página for carregado
+window.addEventListener('DOMContentLoaded', startTerminal);
