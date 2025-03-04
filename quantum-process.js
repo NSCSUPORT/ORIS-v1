@@ -191,4 +191,55 @@ const optimizeData = (primaryData, evolutionaryData) => {
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
+    app.get('/api/quantum-process', async (req, res) => {
+    try {
+        // Coletando dados de diferentes fontes para evolução do sistema
+        const dataFromIoT = await getIoTData();
+        const dataFromUser = await getUserData();
+        
+        // Processando os dados de forma paralela, usando canais distintos (simulando canais de processamento)
+        const primaryData = processPrimaryChannel(dataFromIoT);
+        const evolutionaryData = processEvolutionaryChannel(dataFromUser);
+
+        // Combinando os resultados para otimização e evolução do aprendizado
+        const combinedData = optimizeData(primaryData, evolutionaryData);
+
+        // Adicionando dados de otimização ao Kernel para investimento
+        engine.addPlan("Plano de Investimento em Rede Neural", "CNN", 1000, "16 GFLOPS", 5);
+        engine.invest("Plano de Investimento em Rede Neural", 500, "EnderecoDoInvestidor");
+
+        // Armazenando os dados otimizados no AWS S3 (banco de dados de objetos)
+        const s3Params = {
+            Bucket: 'meu-bucket', // Substitua pelo seu bucket S3
+            Key: 'dados_otimizados.json',
+            Body: JSON.stringify(combinedData),
+            ContentType: 'application/json'
+        };
+        await s3.putObject(s3Params).promise();
+
+        // Chamando uma função Lambda da AWS com os dados otimizados
+        const lambdaParams = {
+            FunctionName: 'MinhaFuncaoLambda', // Substitua pelo nome da sua função Lambda
+            Payload: JSON.stringify(combinedData)
+        };
+        const lambdaResponse = await lambda.invoke(lambdaParams).promise();
+
+        // Fazendo uma requisição para o serviço que executa o Q# com dados otimizados
+        const response = await axios.post('http://localhost:5000/quantum-process', {
+            data: combinedData
+        });
+
+        // Devolvendo o resultado do processo quântico com aprendizado evolutivo
+        res.json({
+            message: 'Quantum process executed successfully with evolutionary learning!',
+            result: response.data,
+            optimizedData: combinedData,
+            lambdaResult: JSON.parse(lambdaResponse.Payload)
+        });
+    } catch (error) {
+        console.error('Error executing quantum process:', error);
+        res.status(500).json({ message: 'Error executing quantum process', error: error.message });
+    }
+});
+
 });
