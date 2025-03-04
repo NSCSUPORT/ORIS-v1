@@ -20,6 +20,7 @@ body {
     align-items: center;
     height: 100vh; /* Altura total da tela */
     flex-direction: column;
+    overflow: hidden; /* Evitar rolagem */
 }
 
 /* Page Content */
@@ -31,6 +32,7 @@ body {
     width: 90%;
     max-width: 600px; /* Limita a largura máxima */
     box-sizing: border-box; /* Para garantir o padding dentro da largura */
+    text-align: center; /* Centraliza o conteúdo */
 }
 
 .x_panel {
@@ -40,6 +42,7 @@ body {
     width: 90%;
     max-width: 600px;
     box-sizing: border-box;
+    text-align: center; /* Centraliza o conteúdo */
 }
 
 .x_title {
@@ -53,22 +56,22 @@ body {
 .x_content {
     padding-top: 10px;
     color: #fff; /* Texto branco */
-    text-align: center; /* Centraliza o conteúdo */
 }
 
-/* Chart and Button Styles */
+/* Chart Styles */
 .chart {
     display: inline-block;
-    width: 130px;
-    height: 130px;
-    line-height: 130px;
+    width: 50vw; /* Largura proporcional à largura da tela (50% da largura da tela) */
+    height: 50vw; /* Altura proporcional à largura da tela (mantém a proporção quadrada) */
+    line-height: 50vw;
     background-color: #37474F; /* Fundo escuro para o gráfico */
     border-radius: 50%;
     font-size: 20px;
     color: #fff;
-    margin: 0 auto; /* Centraliza o gráfico */
+    margin: 20px 0;
 }
 
+/* Percent inside the chart */
 .chart .percent {
     font-size: 16px;
 }
