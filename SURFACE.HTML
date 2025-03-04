@@ -17,7 +17,7 @@ body {
     color: #fff; /* Texto branco */
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Alinhamento no topo */
+    align-items: center; /* Centraliza verticalmente */
     height: 100vh;
     flex-direction: column;
     padding: 30px; /* Adiciona espaçamento ao redor */
@@ -87,6 +87,7 @@ body {
     color: #fff;
     margin-bottom: 15px;
     line-height: 45vw;
+    text-align: center; /* Centraliza o texto dentro do gráfico */
 }
 
 /* Percent dentro do gráfico */
@@ -122,6 +123,25 @@ body {
     border-radius: 50%;
     border: 2px solid #4CAF50; /* Borda verde para destacá-los */
 }
+
+/* Responsividade para centralizar ainda mais em telas menores */
+@media (max-width: 768px) {
+    body {
+        padding: 15px; /* Reduz o padding em telas pequenas */
+    }
+
+    .widget {
+        width: 100%; /* Garante que a largura ocupe 100% em telas pequenas */
+    }
+
+    .chart {
+        width: 40vw;
+        height: 40vw;
+        max-width: 200px;
+        max-height: 200px;
+    }
+}
+
 </style>
 
 </head>
@@ -129,12 +149,10 @@ body {
 
     <!-- Page Content -->
     <div class="col-md-9">
-        <!-- Widget de Tally Design -->
         <div class="widget">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Tally Design4</h2>
-                    <ul class="nav navbar-right panel_toolbox">
+                    <h2>BRNC INC </h2>
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                         <li><a class="close-link"><i class="fa fa-close"></i></a></li>
                     </ul>
