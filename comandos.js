@@ -811,8 +811,7 @@ const comandos = {
 "validate predictive model": () => log("Validating predictive model..."),
 "ensure data consistency": () => log("Ensuring data consistency during analysis..."),
 "track data quality": () => log("Tracking data quality throughout analysis...")
-
-        "akiles stop": () => log("Stopping Akiles V6 system..."),
+ "akiles stop": () => log("Stopping Akiles V6 system..."),
         "akiles restart": () => log("Restarting Akiles V6 system..."),
         "akiles status": () => log("Checking Akiles V6 system status..."),
         "akiles check system health": () => log("Running system health check on Akiles V6..."),
@@ -1284,50 +1283,6 @@ const comandos = {
     "import dataset": () => log("Importing dataset for analysis..."),
     "execute bash command": (cmd) => log(`Executing Bash command: ${cmd}...`),
     "run shell script": (script) => log(`Running shell script: ${script}..."),
-// Comando default para quando não for encontrado
-    "default": (command) => {
-        log(`Command not found: ${command}`);
-    }
-};
-
-// Função para manipular o input do usuário
-function handleUserInput(event) {
-    const inputField = document.getElementById('inputField');
-    const terminalOutput = document.getElementById('terminalOutput');
-    
-    if (event.key === 'Enter') {
-        const userInput = inputField.value.trim();
-        if (userInput) {
-            // Exibe o comando digitado
-            terminalOutput.innerHTML += `<br><span>$</span> ${userInput}`;
-            inputField.value = '';
-            
-            // Executa o comando correspondente ou o comando default
-            if (comandos[userInput]) {
-                comandos[userInput]();
-            } else {
-                comandos["default"](userInput);  // Se o comando não for encontrado
-            }
-        }
-    }
-}
-
-// Função para exibir logs
-function log(message) {
-    const terminalOutput = document.getElementById('terminalOutput');
-    terminalOutput.innerHTML += `<br>${message}`;
-}
-
-// Função para iniciar o terminal
-function startTerminal() {
-    const inputField = document.getElementById('inputField');
-    inputField.addEventListener('keypress', handleUserInput);
-}
-const log = (message) => {
-    console.log(message); // Função simples para simular log
-};
-
-const comandos = {
     "clear": () => log("Limpeza do terminal..."),
     "exit": () => log("Saindo do terminal..."),
     "dataalias apply cross-validation": () => log("Aplicando validação cruzada..."),
