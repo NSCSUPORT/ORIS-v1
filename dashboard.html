@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="logo.ico">
@@ -79,6 +80,27 @@
             background-color: #45a049;
         }
 
+        /* Novo botão BJX com fundo rosa e texto preto */
+        .bjx-btn {
+            background-color: #ff1493; /* Rosa neon */
+            color: #000; /* Texto preto */
+            padding: 12px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .bjx-btn:hover {
+            background-color: #e5007d; /* Rosa mais escuro ao passar o mouse */
+            transform: translateY(-3px);
+        }
+
         footer {
             position: fixed;
             bottom: 0;
@@ -109,6 +131,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="form-container">
         <h2>Configurações de Conexão</h2>
@@ -135,10 +158,15 @@
             </div>
             <button type="submit" class="submit-btn">Conectar</button>
         </form>
+
+        <!-- Novo botão BJX -->
+        <button class="bjx-btn" onclick="window.location.href='https://nscsuport.github.io/ORIS-v1/ox.html'">BJX</button>
     </div>
+
     <footer>
         <p>bosco celeron m1</p>
     </footer>
     <script src="main.js"></script>
 </body>
+
 </html>
