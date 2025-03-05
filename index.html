@@ -6,132 +6,161 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ORIS OS</title>
    <style>
-        body {
-            background-color: #121212;
-            color: #fff;
-            font-family: 'IBM Plex Mono', 'Courier New', monospace;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        .chat-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            height: 70vh;
-            width: 100%;
-            max-width: 480px;
-            padding: 20px;
-            border: 2px solid #4CAF50;
-            border-radius: 12px;
-            background-color: #1e1e1e;
-            box-shadow: 0px 0px 50px rgba(76, 175, 80, 0.7);
-            overflow: hidden;
-            transition: all 0.3s ease-in-out;
-        }
-        .chat-box {
-            flex-grow: 1;
-            overflow-y: auto;
-            margin-bottom: 15px;
-            background-color: #333;
-            border-radius: 10px;
-            padding: 15px;
-            max-height: 60vh;
-            transition: max-height 0.3s ease-in-out;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-        .input-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            margin-top: 10px;
-            background-color: #333;
-            border-radius: 30px;
-            padding: 12px;
-        }
-        input[type="text"] {
-            flex-grow: 1;
-            padding: 14px;
-            border: 2px solid #333;
-            border-radius: 30px;
-            background-color: #333;
-            color: #fff;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-        input[type="text"]:focus {
-            border-color: #4CAF50;
-            background-color: #222;
-        }
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .connect-btn {
-            padding: 12px 20px;
-            background-color: #E91E63;
-            color: #fff;
-            font-size: 16px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            width: 100%;
-        }
-        .connect-btn:hover {
-            background-color: #d81b60;
-        }
-        .nav-btn {
-            padding: 12px 20px;
-            background-color: #4CAF50;
-            color: #000;
-            font-size: 16px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            width: 100%;
-        }
-        .nav-btn:hover {
-            background-color: #45a049;
-            color: #000;
-        }
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            padding: 10px;
-            background: linear-gradient(45deg, #f0f000, #ff4500);
-            color: #000;
-            text-align: center;
-            font-size: 0.9rem;
-            font-weight: bold;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
-        }
-        @media (max-width: 768px) {
-            .form-container {
-                width: 90%;
-                height: 80vh;
-            }
-        }
-        @media (max-width: 480px) {
-            .form-container {
-                width: 100%;
-                height: 75vh;
-            }
-        }
-    </style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .logo img {
+      width: 150px;
+      display: block;
+      margin: 0 auto 20px;
+    }
+
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      width: 100%;
+      max-width: 480px;
+      height: 70vh;
+      padding: 20px;
+      background-color: #1e1e1e;
+      border: 2px solid #4CAF50;
+      border-radius: 12px;
+      box-shadow: 0 0 50px rgba(76, 175, 80, 0.7);
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .chat-box {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 15px;
+      background-color: #333;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      transition: all 0.3s ease-in-out;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .input-container {
+      display: flex;
+      align-items: center;
+      background-color: #333;
+      border-radius: 30px;
+      padding: 12px;
+      margin-bottom: 15px;
+      transition: background-color 0.3s ease;
+    }
+
+    .input-container:hover {
+      background-color: #444;
+    }
+
+    .input-container span {
+      margin-right: 8px;
+      font-size: 18px;
+    }
+
+    input[type="text"] {
+      flex-grow: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 30px;
+      background-color: #222;
+      color: #fff;
+      font-size: 16px;
+      outline: none;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      background-color: #333;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .button-container a {
+      text-decoration: none;
+    }
+
+    .connect-btn, .nav-btn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.2s ease;
+      width: 100%;
+    }
+
+    .connect-btn {
+      background-color: #E91E63;
+      color: #fff;
+    }
+
+    .connect-btn:hover {
+      background-color: #d81b60;
+    }
+
+    .nav-btn {
+      background-color: #4CAF50;
+      color: #000;
+    }
+
+    .nav-btn:hover {
+      background-color: #45a049;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px;
+      background: linear-gradient(45deg, #f0f000, #ff4500);
+      color: #000;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: bold;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 768px) {
+      .chat-container {
+        width: 90%;
+        height: 80vh;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .chat-container {
+        width: 100%;
+        height: 75vh;
+      }
+    }
+  </style>
 </head>
 <body>
     <div class="logo">
