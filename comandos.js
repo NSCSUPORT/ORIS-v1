@@ -1,4 +1,9 @@
-   const comandos = {
+// Função para exibir saída no terminal
+function log(message) {
+    terminalOutput.innerHTML += `<br>${message}`;
+}
+
+const comandos = {
         "clear": () => terminalOutput.innerHTML = "", // Limpa o terminal
         "exit": () => log("Exiting terminal..."),
         "dataalias apply cross-validation": () => log("Applying cross-validation..."),
