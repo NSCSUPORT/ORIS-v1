@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="logo.ico">
+    <title>BJX CELEOR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilo específico para o corpo da página */
+        body {
+            background: #000; /* Fundo preto sólido */
+            color: #00b5e2; /* Azul neon */
+            font-family: 'Press Start 2P', sans-serif; /* Fonte tipo Minecraft */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Estilo para o contêiner principal */
+        .login-container {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ff00ff; /* Borda rosa neon */
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(255, 0, 255, 0.5);
+        }
+
+        /* Estilo para o título */
+        .login-container h1 {
+            color: #ff00ff; /* Rosa neon */
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+
+        .login-container p {
+            color: #00b5e2; /* Azul neon */
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        /* Estilo para o formulário de login */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .login-form button {
+            padding: 15px;
+            background-color: #000; /* Fundo preto */
+            color: #00b5e2; /* Azul neon */
+            border: 1px solid #00b5e2;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+            text-shadow: 0 0 5px #00b5e2;
+        }
+
+        .login-form button:hover {
+            background-color: #00b5e2; /* Azul neon */
+            color: #000; /* Texto preto */
+            transform: translateY(-2px);
+        }
+
+        /* Estilo para o rodapé */
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ff00ff; /* Rosa neon */
+        }
+
+        /* Indicador de carregamento */
+        .loader {
+            border: 4px solid #000;
+            border-top: 4px solid #00b5e2;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Animação para o contêiner */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-container {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Media Query para dispositivos menores */
+        @media only screen and (max-width: 600px) {
+            .login-container {
+                padding: 20px;
+            }
+
+            .login-container h1 {
+                font-size: 2rem;
+            }
+
+            .login-container p {
+                font-size: 1rem;
+            }
+
+            .login-form button {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h1>BJX CELEOR</h1>
+        <p>FX</p>
+        <div class="login-form">
+            <button onclick="loginWithGitHub()">Login with GitHub</button>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <div class="footer">
+        &copy; 2024 BJX CELEOR. All rights reserved.
+    </div>
+
+    <script>
+        // Função para iniciar o login com GitHub
+        function loginWithGitHub() {
+            const clientId = 'Ov23li3CRRggboPJpWrO'; // Substitua pelo seu Client ID do GitHub
+            const redirectUri = 'http://nscsuport.github.io/boscojones/market.html'; // Alterado para redirecionar para main.html
+            const githubLoginUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=user:email`;
+            window.location.href = githubLoginUrl;
+        }
+    </script>
+</body>
+
+</html>
