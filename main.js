@@ -264,7 +264,7 @@ class NeuralNetworkInvestment {
     }
 }
 
-// Iniciando o servidor Express
+// Iniciando o servidor
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
