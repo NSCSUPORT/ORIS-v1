@@ -1,301 +1,182 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="logo.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - HoloFi</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=0.75">
+    <title>Dashboard de Desempenho</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Global Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #121212; /* Fundo escuro */
-            color: #fff; /* Texto branco */
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            height: 100vh;
-            flex-direction: column;
+            background-color: #121212;
+            color: white;
+            font-size: 14px;
+        }
+        /* Navbar no topo */
+        .navbar {
+            background-color: #1c1c1c;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        /* Barra lateral de navegação */
+        .sidebar {
+            position: fixed;
+            top: 50px;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #2a2a2a;
             padding: 20px;
             overflow-y: auto;
+            z-index: 999;
         }
-
-        /* Page Container */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        /* Widget Styles */
-        .widget {
-            background-color: #263238;
-            margin-bottom: 30px;
-            padding: 20px;
-            border-radius: 10px;
-            box-sizing: border-box;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            width: 100%; /* Ajustado para 100% em telas menores */
-            max-width: 48%; /* Max-width para duas colunas em telas maiores */
-        }
-
-        .widget:hover {
-            transform: translateY(-10px);
-        }
-
-        /* Title */
-        .x_title h2 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        /* Buttons */
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .btn-group .btn {
-            background-color: #4CAF50;
+        .sidebar a {
             color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-size: 14px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin: 10px 0;
+            text-decoration: none;
+            display: block;
         }
-
-        .btn-group .btn:hover {
-            background-color: #388E3C;
-            transform: scale(1.05);
+        .sidebar a:hover {
+            background-color: #444;
+            padding-left: 10px;
         }
-
-        .btn-group .btn-sm {
-            font-size: 12px;
-            padding: 8px 12px;
+        /* Conteúdo principal */
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+            margin-top: 60px;
+            overflow-x: auto;
         }
-
-        /* Chart Styles */
-        .chart canvas {
-            border-radius: 50%;
-            border: 2px solid #4CAF50;
-            margin-top: 20px;
-            width: 100%; /* Ajusta o gráfico para caber no espaço */
+        /* Gráficos */
+        canvas {
+            max-width: 100%;
         }
-
-        .chart .percent {
-            font-size: 18px;
-            font-weight: bold;
+        /* Cartões */
+        .card {
+            background-color: #333;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-
-        /* Data Listing */
-        .widget_tally {
-            display: flex;
-            justify-content: space-between;
+        .card h3 {
+            margin-top: 0;
+        }
+        /* Footer */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
             padding: 10px;
-            list-style: none;
-        }
-
-        .widget_tally li p {
-            font-size: 14px;
-            color: #fff;
-        }
-
-        .widget_tally .month {
+            background: linear-gradient(45deg, #f0f000, #ff4500);
+            color: #000;
+            text-align: center;
+            font-size: 0.9rem;
             font-weight: bold;
-            margin-right: 10px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
         }
-
-        .widget_tally .count {
-            color: #4CAF50;
+        footer p {
+            margin: 0;
         }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .widget {
-                max-width: 48%; /* 2 widgets por linha em telas médias */
-            }
-        }
-
+        /* Responsividade */
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            .widget {
-                max-width: 100%; /* Widgets ocupam toda a largura em telas pequenas */
-            }
-
-            .btn-group {
-                flex-direction: column; /* Botões empilhados em telas pequenas */
-            }
-
-            .btn-group .btn {
-                padding: 8px 12px;
-                font-size: 12px;
-            }
-
-            .x_title h2 {
-                font-size: 18px;
+            .chat-container {
+                width: 90%;
+                height: 80vh;
             }
         }
-
         @media (max-width: 480px) {
-            .widget_tally {
-                flex-direction: column; /* Itens da lista empilhados em telas muito pequenas */
-            }
-
-            .widget_tally li {
-                margin-bottom: 10px;
-            }
-
-            .widget_tally .count {
-                font-size: 12px;
-            }
-
-            .chart .percent {
-                font-size: 16px; /* Ajuste no tamanho da porcentagem */
+            .chat-container {
+                width: 100%;
+                height: 75vh;
             }
         }
     </style>
 </head>
 <body>
-
-    <div class="container">
-
-        <!-- BRNC INC Widget -->
-        <div class="widget">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>BRNC INC</h2>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <div class="chart" style="text-align: center;">
-                        <span class="chart" data-percent="86">
-                            <span class="percent">86%</span>
-                        </span>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1D')">1 D</button>
-                        <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1W')">1 W</button>
-                        <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1M')">1 M</button>
-                        <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1Y')">1 Y</button>
-                    </div>
-                    <div style="margin: 10px 5px;">
-                        <canvas id="canvas_line4" height="190"></canvas>
-                    </div>
-                    <ul class="list-inline widget_tally">
-                        <li><p><span class="month">12 Dezembro 2020</span><span class="count">+12%</span></p></li>
-                        <li><p><span class="month">29 Dezembro 2023</span><span class="count">+12%</span></p></li>
-                        <li><p><span class="month">16 Janeiro 2025</span><span class="count">+12%</span></p></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Server Performance Widget -->
-        <div class="widget">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Desempenho do Servidor</h2>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <div class="chart">
-                        <canvas id="serverPerformanceChart" width="100" height="100"></canvas>
-                    </div>
-                    <ul class="list-inline widget_tally">
-                        <li><p><span class="month">Uso da CPU</span><span class="count">70%</span></p></li>
-                        <li><p><span class="month">Uso de Memória</span><span class="count">60%</span></p></li>
-                        <li><p><span class="month">Uso de Disco</span><span class="count">50%</span></p></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Latency Benchmark Widget -->
-        <div class="widget">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Benchmark de Latência</h2>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <div class="chart">
-                        <canvas id="latencyBenchmarkChart" width="100" height="100"></canvas>
-                    </div>
-                    <ul class="list-inline widget_tally">
-                        <li><p><span class="month">Latência Mínima</span><span class="count">15ms</span></p></li>
-                        <li><p><span class="month">Latência Máxima</span><span class="count">50ms</span></p></li>
-                        <li><p><span class="month">Latência Média</span><span class="count">30ms</span></p></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Additional Widget (Server Load Analysis) -->
-        <div class="widget">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Análise de Carga do Servidor</h2>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <div class="chart">
-                        <canvas id="serverLoadChart" width="100" height="100"></canvas>
-                    </div>
-                    <ul class="list-inline widget_tally">
-                        <li><p><span class="month">Serviço 1</span><span class="count">40%</span></p></li>
-                        <li><p><span class="month">Serviço 2</span><span class="count">40%</span></p></li>
-                        <li><p><span class="month">Serviço 3</span><span class="count">20%</span></p></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
+    <!-- Barra de Navegação -->
+    <div class="navbar">
+        <a href="#">Dashboard</a>
+        <a href="#informacoes">Informações</a>
+        <a href="#contatos">Contatos</a>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Barra Lateral de Navegação -->
+    <div class="sidebar">
+        <a href="#">Início</a>
+        <a href="#">Relatórios</a>
+        <a href="#">Desempenho</a>
+        <a href="#">Configurações</a>
+        <a href="#">Suporte</a>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="content">
+        <h1>Dashboard de Desempenho</h1>
+        
+        <!-- Gráfico de Desempenho -->
+        <div class="card">
+            <h3>Desempenho do Sistema</h3>
+            <canvas id="performanceChart"></canvas>
+        </div>
+        
+        <!-- Gráfico de Latência -->
+        <div class="card">
+            <h3>Latência do Sistema</h3>
+            <canvas id="latencyBenchmarkChart"></canvas>
+        </div>
+
+        <!-- Gráfico de Carga do Servidor -->
+        <div class="card">
+            <h3>Carga do Servidor</h3>
+            <canvas id="serverLoadChart"></canvas>
+        </div>
+
+        <!-- Botões de Intervalo -->
+        <div>
+            <button>1D</button>
+            <button>1W</button>
+            <button>1M</button>
+            <button>1Y</button>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>© 2025 HoloFi. Todos os direitos reservados. Lucas Januário</p>
+    </footer>
 
     <script>
-        // Função para atualizar os gráficos com base no filtro selecionado
-        function updateChart(timePeriod) {
-            console.log("Atualizando gráfico para o período: " + timePeriod);
-            // Aqui você pode adicionar a lógica para atualizar os gráficos
-        }
-
-        // Exemplo de inicialização dos gráficos
-        var ctx = document.getElementById('canvas_line4').getContext('2d');
-        var serverPerformanceChart = new Chart(ctx, {
+        // Gráfico de Desempenho
+        var performanceChart = new Chart(document.getElementById('performanceChart').getContext('2d'), {
             type: 'line',
             data: {
                 labels: ['Jan', 'Fev', 'Mar', 'Abr'],
                 datasets: [{
-                    label: 'Desempenho do Servidor',
-                    data: [65, 59, 80, 81],
+                    label: 'Desempenho',
+                    data: [85, 90, 92, 88],
                     borderColor: '#4CAF50',
                     fill: false,
                 }]
             }
         });
 
+        // Gráfico de Latência
         var latencyBenchmarkChart = new Chart(document.getElementById('latencyBenchmarkChart').getContext('2d'), {
             type: 'line',
             data: {
@@ -309,6 +190,7 @@
             }
         });
 
+        // Gráfico de Carga do Servidor
         var serverLoadChart = new Chart(document.getElementById('serverLoadChart').getContext('2d'), {
             type: 'pie',
             data: {
