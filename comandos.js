@@ -1,11 +1,22 @@
-// Função para exibir saída no terminal
+// comandos.js
+
+// Função auxiliar para exibir a saída no terminal
+// Essa função utiliza a função global "appendOutput" definida no script principal.
+// Se "appendOutput" não estiver definida, a saída será enviada para o console.
 function log(message) {
-    terminalOutput.innerHTML += `<br>${message}`;
+    if (typeof appendOutput === "function") {
+        appendOutput(message);
+    } else {
+        console.log(message);
+    }
 }
 
 const comandos = {
-        "clear": () => terminalOutput.innerHTML = "", // Limpa o terminal
-        "exit": () => log("Exiting terminal..."),
+    "clear": () => {
+        if (typeof terminalOutput !== "undefined") {
+            terminalOutput.innerHTML = "";
+        }
+    },
         "dataalias apply cross-validation": () => log("Applying cross-validation..."),
         "run diagnostic": () => log("Running diagnostic..."),
       "backup data": () => log("Backing up data..."),
