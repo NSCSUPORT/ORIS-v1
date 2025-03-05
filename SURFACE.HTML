@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.75">
+    <meta name="viewport" content="width=device-width, initial-scale=1.5">
     <title>Dashboard de Desempenho</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -16,7 +16,7 @@
         }
         /* Navbar no topo */
         .navbar {
-            background-color: #1c1c1c;
+            background-color: #000;
             padding: 10px 20px;
             position: fixed;
             width: 100%;
@@ -25,41 +25,21 @@
             z-index: 1000;
         }
         .navbar a {
-            color: white;
+            color: #4CAF50;
             margin: 0 15px;
             text-decoration: none;
         }
         .navbar a:hover {
             text-decoration: underline;
         }
-        /* Barra lateral de navegação */
-        .sidebar {
-            position: fixed;
-            top: 50px;
-            left: 0;
-            height: 100%;
-            width: 250px;
-            background-color: #2a2a2a;
-            padding: 20px;
-            overflow-y: auto;
-            z-index: 999;
-        }
-        .sidebar a {
-            color: white;
-            margin: 10px 0;
-            text-decoration: none;
-            display: block;
-        }
-        .sidebar a:hover {
-            background-color: #444;
-            padding-left: 10px;
-        }
-        /* Conteúdo principal */
+        /* Conteúdo Principal */
         .content {
-            margin-left: 270px;
+            margin-left: 0;
             padding: 20px;
             margin-top: 60px;
-            overflow-x: auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
         /* Gráficos */
         canvas {
@@ -93,19 +73,6 @@
         footer p {
             margin: 0;
         }
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .chat-container {
-                width: 90%;
-                height: 80vh;
-            }
-        }
-        @media (max-width: 480px) {
-            .chat-container {
-                width: 100%;
-                height: 75vh;
-            }
-        }
     </style>
 </head>
 <body>
@@ -116,43 +83,46 @@
         <a href="#contatos">Contatos</a>
     </div>
 
-    <!-- Barra Lateral de Navegação -->
-    <div class="sidebar">
-        <a href="#">Início</a>
-        <a href="#">Relatórios</a>
-        <a href="#">Desempenho</a>
-        <a href="#">Configurações</a>
-        <a href="#">Suporte</a>
-    </div>
-
     <!-- Conteúdo Principal -->
     <div class="content">
-        <h1>Dashboard de Desempenho</h1>
-        
-        <!-- Gráfico de Desempenho -->
         <div class="card">
             <h3>Desempenho do Sistema</h3>
             <canvas id="performanceChart"></canvas>
         </div>
-        
-        <!-- Gráfico de Latência -->
+
         <div class="card">
             <h3>Latência do Sistema</h3>
             <canvas id="latencyBenchmarkChart"></canvas>
         </div>
 
-        <!-- Gráfico de Carga do Servidor -->
         <div class="card">
             <h3>Carga do Servidor</h3>
             <canvas id="serverLoadChart"></canvas>
         </div>
 
-        <!-- Botões de Intervalo -->
-        <div>
-            <button>1D</button>
-            <button>1W</button>
-            <button>1M</button>
-            <button>1Y</button>
+        <div class="card">
+            <h3>Tráfego de Rede</h3>
+            <canvas id="networkTrafficChart"></canvas>
+        </div>
+
+        <div class="card">
+            <h3>Temperatura do Servidor</h3>
+            <canvas id="serverTemperatureChart"></canvas>
+        </div>
+
+        <div class="card">
+            <h3>Memória Utilizada</h3>
+            <canvas id="memoryUsageChart"></canvas>
+        </div>
+
+        <div class="card">
+            <h3>Espaço em Disco</h3>
+            <canvas id="diskSpaceChart"></canvas>
+        </div>
+
+        <div class="card">
+            <h3>Utilização de CPU</h3>
+            <canvas id="cpuUsageChart"></canvas>
         </div>
     </div>
 
@@ -199,6 +169,74 @@
                     label: 'Carga do Servidor',
                     data: [40, 40, 20],
                     backgroundColor: ['#FF9800', '#9C27B0', '#4CAF50'],
+                }]
+            }
+        });
+
+        // Gráfico de Tráfego de Rede
+        var networkTrafficChart = new Chart(document.getElementById('networkTrafficChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr'],
+                datasets: [{
+                    label: 'Tráfego de Rede (GB)',
+                    data: [10, 15, 18, 25],
+                    backgroundColor: '#2196F3',
+                }]
+            }
+        });
+
+        // Gráfico de Temperatura do Servidor
+        var serverTemperatureChart = new Chart(document.getElementById('serverTemperatureChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr'],
+                datasets: [{
+                    label: 'Temperatura (°C)',
+                    data: [55, 60, 58, 62],
+                    borderColor: '#FF9800',
+                    fill: false,
+                }]
+            }
+        });
+
+        // Gráfico de Memória Utilizada
+        var memoryUsageChart = new Chart(document.getElementById('memoryUsageChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr'],
+                datasets: [{
+                    label: 'Memória Utilizada (GB)',
+                    data: [32, 35, 38, 40],
+                    borderColor: '#9C27B0',
+                    fill: false,
+                }]
+            }
+        });
+
+        // Gráfico de Espaço em Disco
+        var diskSpaceChart = new Chart(document.getElementById('diskSpaceChart').getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: ['Disco 1', 'Disco 2', 'Disco 3'],
+                datasets: [{
+                    label: 'Espaço em Disco',
+                    data: [60, 30, 10],
+                    backgroundColor: ['#4CAF50', '#FFC107', '#FF5722'],
+                }]
+            }
+        });
+
+        // Gráfico de Utilização de CPU
+        var cpuUsageChart = new Chart(document.getElementById('cpuUsageChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr'],
+                datasets: [{
+                    label: 'Utilização de CPU (%)',
+                    data: [50, 60, 70, 80],
+                    borderColor: '#F44336',
+                    fill: false,
                 }]
             }
         });
