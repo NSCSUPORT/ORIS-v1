@@ -2,9 +2,9 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-     <link rel="icon" href="logo.ico">
+    <link rel="icon" href="logo.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bosco celeron m1 </title>
+    <title>bosco celeron m1</title>
     <style>
         /* Estilo para simular fontes de computadores antigos */
         body {
@@ -137,7 +137,7 @@
         </form>
     </div>
     <footer>
-        <p>bosco celeron m1 </p>
+        <p>bosco celeron m1</p>
     </footer>
 
     <script src="quantum-process.js"></script>
@@ -151,17 +151,32 @@
             const service = document.getElementById("service").value;
 
             if (!awsKey && !azureKey && !wanpId) {
-                alert("Erro: Nenhuma chave de servidor foi inserida!");
+                alert("Erro: Nenhuma chave de servidor foi inserida! Pelo menos um campo deve ser preenchido.");
                 return;
             }
 
+            // Chamar a função do arquivo quantum-process.js
             if (typeof processConnectionData === "function") {
                 processConnectionData(awsKey, azureKey, wanpId, service);
                 alert("Conectado com sucesso ao serviço: " + service.toUpperCase());
+                enableMultipleServers(); // Ativar conexão com múltiplos servidores
             } else {
                 alert("Erro: O arquivo quantum-process.js não foi carregado corretamente!");
             }
         });
+
+        function enableMultipleServers() {
+            const serviceDropdown = document.getElementById("service");
+            const connectButton = document.querySelector(".submit-btn");
+            // Adicionando uma opção para múltiplos servidores
+            const multipleServerOption = document.createElement("option");
+            multipleServerOption.value = "multi";
+            multipleServerOption.text = "Conectar a múltiplos servidores";
+            serviceDropdown.appendChild(multipleServerOption);
+            connectButton.textContent = "Conectar a múltiplos servidores";
+        }
     </script>
+    <script src="comandos.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
