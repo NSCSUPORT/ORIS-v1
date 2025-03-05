@@ -170,7 +170,7 @@
             </a>
         </div>
     </div>
-
+    <script src="comandos.js"></script>
     <footer>
         <p>© 2025 HoloFi. Todos os direitos reservados. Lucas Januário</p>
     </footer>
@@ -189,17 +189,14 @@
                 }
             }
         });
+function processCommand(command) {
+    if (comandos[command]) {
+        comandos[command](); // Executa o comando se existir no objeto comandos
+    } else {
+        terminalOutput.innerHTML += `<br>Command not found: ${command}`;
+    }
+}
 
-        function processCommand(command) {
-            if (command === 'help') {
-                terminalOutput.innerHTML += `<br>Available commands: help, about, exit`;
-            } else if (command === 'about') {
-                terminalOutput.innerHTML += `<br>ORIS OS - A simulation of old-school computer terminals.`;
-            } else if (command === 'exit') {
-                terminalOutput.innerHTML += `<br>Goodbye!`;
-            } else {
-                terminalOutput.innerHTML += `<br>Command not found: ${command}`;
-            }
         }
     </script>
 </body>
