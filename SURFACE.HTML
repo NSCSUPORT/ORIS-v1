@@ -17,11 +17,11 @@
             color: #fff; /* Texto branco */
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Ajuste o alinhamento para flex-start */
+            align-items: flex-start;
             height: 100vh;
             flex-direction: column;
-            padding: 30px; /* Adiciona espaçamento ao redor */
-            overflow-y: auto; /* Permite rolagem */
+            padding: 20px;
+            overflow-y: auto;
         }
 
         /* Page Container */
@@ -35,15 +35,16 @@
 
         /* Widget Styles */
         .widget {
-            background-color: #263238; /* Fundo cinza escuro para contraste */
+            background-color: #263238;
             margin-bottom: 30px;
             padding: 20px;
             border-radius: 10px;
-            width: 48%;
             box-sizing: border-box;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra suave para destacar */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
+            width: 100%; /* Ajustado para 100% em telas menores */
+            max-width: 48%; /* Max-width para duas colunas em telas maiores */
         }
 
         .widget:hover {
@@ -52,18 +53,17 @@
 
         /* Title */
         .x_title h2 {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 600;
             margin-bottom: 20px;
             color: #fff;
-            text-align: center;
         }
 
         /* Buttons */
         .btn-group {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 10px;
             margin-top: 15px;
         }
 
@@ -71,9 +71,9 @@
             background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 10px 15px;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 14px;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
@@ -83,32 +83,33 @@
         }
 
         .btn-group .btn-sm {
-            font-size: 14px;
-            padding: 10px 15px;
+            font-size: 12px;
+            padding: 8px 12px;
         }
 
         /* Chart Styles */
         .chart canvas {
             border-radius: 50%;
-            border: 2px solid #4CAF50; /* Borda verde para destacá-los */
+            border: 2px solid #4CAF50;
             margin-top: 20px;
+            width: 100%; /* Ajusta o gráfico para caber no espaço */
         }
 
         .chart .percent {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: bold;
         }
 
         /* Data Listing */
         .widget_tally {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             padding: 10px;
             list-style: none;
         }
 
         .widget_tally li p {
-            font-size: 16px;
+            font-size: 14px;
             color: #fff;
         }
 
@@ -118,22 +119,54 @@
         }
 
         .widget_tally .count {
-            color: #4CAF50; /* Cor verde para indicar crescimento */
+            color: #4CAF50;
         }
 
-        /* Responsive */
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .widget {
+                max-width: 48%; /* 2 widgets por linha em telas médias */
+            }
+        }
+
         @media (max-width: 768px) {
             body {
-                padding: 15px;
+                padding: 10px;
             }
 
             .widget {
-                width: 100%; /* Ocupa toda a largura disponível em telas pequenas */
-                margin-bottom: 20px;
+                max-width: 100%; /* Widgets ocupam toda a largura em telas pequenas */
             }
 
             .btn-group {
                 flex-direction: column; /* Botões empilhados em telas pequenas */
+            }
+
+            .btn-group .btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .x_title h2 {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .widget_tally {
+                flex-direction: column; /* Itens da lista empilhados em telas muito pequenas */
+            }
+
+            .widget_tally li {
+                margin-bottom: 10px;
+            }
+
+            .widget_tally .count {
+                font-size: 12px;
+            }
+
+            .chart .percent {
+                font-size: 16px; /* Ajuste no tamanho da porcentagem */
             }
         }
     </style>
@@ -253,29 +286,40 @@
         var serverPerformanceChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                labels: ['Jan', 'Fev', 'Mar', 'Abr'],
                 datasets: [{
                     label: 'Desempenho do Servidor',
-                    data: [15, 20, 35, 40, 30],
-                    backgroundColor: 'rgba(76, 175, 80, 0.2)',
-                    borderColor: 'rgba(76, 175, 80, 1)',
-                    borderWidth: 1
+                    data: [65, 59, 80, 81],
+                    borderColor: '#4CAF50',
+                    fill: false,
                 }]
             }
         });
 
-        var latencyChart = document.getElementById('latencyBenchmarkChart').getContext('2d');
-        var latencyBenchmarkChart = new Chart(latencyChart, {
+        var latencyBenchmarkChart = new Chart(document.getElementById('latencyBenchmarkChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr'],
+                datasets: [{
+                    label: 'Latência',
+                    data: [30, 25, 40, 45],
+                    borderColor: '#FF5722',
+                    fill: false,
+                }]
+            }
+        });
+
+        var serverLoadChart = new Chart(document.getElementById('serverLoadChart').getContext('2d'), {
             type: 'pie',
             data: {
-                labels: ['Baixa', 'Média', 'Alta'],
+                labels: ['Serviço 1', 'Serviço 2', 'Serviço 3'],
                 datasets: [{
-                    data: [60, 30, 10],
-                    backgroundColor: ['#4CAF50', '#FF9800', '#F44336'],
+                    label: 'Carga do Servidor',
+                    data: [40, 40, 20],
+                    backgroundColor: ['#FF9800', '#9C27B0', '#4CAF50'],
                 }]
             }
         });
     </script>
-
 </body>
 </html>
