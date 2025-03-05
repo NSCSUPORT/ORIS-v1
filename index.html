@@ -19,7 +19,6 @@
             flex-direction: column;
             overflow: hidden;
         }
-
         .chat-container {
             display: flex;
             flex-direction: column;
@@ -35,7 +34,6 @@
             overflow: hidden;
             transition: all 0.3s ease-in-out;
         }
-
         .chat-box {
             flex-grow: 1;
             overflow-y: auto;
@@ -48,7 +46,6 @@
             white-space: pre-wrap;
             word-wrap: break-word;
         }
-
         .input-container {
             display: flex;
             align-items: center;
@@ -59,7 +56,6 @@
             border-radius: 30px;
             padding: 12px;
         }
-
         input[type="text"] {
             flex-grow: 1;
             padding: 14px;
@@ -71,18 +67,15 @@
             outline: none;
             transition: all 0.3s ease;
         }
-
         input[type="text"]:focus {
             border-color: #4CAF50;
             background-color: #222;
         }
-
         .button-container {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-
         .connect-btn {
             padding: 12px 20px;
             background-color: #E91E63;
@@ -94,11 +87,9 @@
             transition: all 0.2s ease;
             width: 100%;
         }
-
         .connect-btn:hover {
             background-color: #d81b60;
         }
-
         .nav-btn {
             padding: 12px 20px;
             background-color: #4CAF50;
@@ -110,12 +101,10 @@
             transition: all 0.2s ease;
             width: 100%;
         }
-
         .nav-btn:hover {
             background-color: #45a049;
             color: #000;
         }
-
         footer {
             position: fixed;
             bottom: 0;
@@ -130,14 +119,12 @@
             font-weight: bold;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
         }
-
         @media (max-width: 768px) {
             .form-container {
                 width: 90%;
                 height: 80vh;
             }
         }
-
         @media (max-width: 480px) {
             .form-container {
                 width: 100%;
@@ -176,37 +163,8 @@
         <p>© 2025 HoloFi. Todos os direitos reservados. Lucas Januário</p>
     </footer>
 
-<script src="comandos.js"></script>
-<script>
-    const inputField = document.getElementById('inputField');
-    const terminalOutput = document.getElementById('terminalOutput');
-
-    // Não redefina o objeto comandos aqui, utilize o que foi definido em comandos.js
-
-    inputField.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            const userInput = inputField.value.trim();
-            if (userInput) {
-                appendOutput(`<span>$</span> ${userInput}`);
-                inputField.value = '';
-                processCommand(userInput);
-            }
-        }
-    });
-
-    function processCommand(command) {
-        if (comandos[command]) {
-            comandos[command]();
-        } else {
-            appendOutput(`Command not found: ${command}`);
-        }
-    }
-
-    function appendOutput(text) {
-        terminalOutput.innerHTML += `<br>${text}`;
-        terminalOutput.scrollTop = terminalOutput.scrollHeight;
-    }
-</script>
-
+    <!-- Carrega os scripts na ordem correta -->
+    <script src="comandos.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
