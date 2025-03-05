@@ -1,8 +1,3 @@
-// comandos.js
-
-// Função auxiliar para exibir a saída no terminal
-// Essa função utiliza a função global "appendOutput" definida no script principal.
-// Se "appendOutput" não estiver definida, a saída será enviada para o console.
 function log(message) {
     if (typeof appendOutput === "function") {
         appendOutput(message);
@@ -11,6 +6,7 @@ function log(message) {
     }
 }
 
+// Objeto com os comandos disponíveis
 const comandos = {
     "clear": () => {
         if (typeof terminalOutput !== "undefined") {
