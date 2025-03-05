@@ -4,181 +4,176 @@
     <meta charset="UTF-8">
     <link rel="icon" href="logo.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Dashboard - HoloFi</title>
+    <title>Dashboard - HoloFi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<style>
-/* Global Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #121212; /* Fundo escuro */
-    color: #fff; /* Texto branco */
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Centraliza verticalmente */
-    height: 100vh;
-    flex-direction: column;
-    padding: 30px; /* Adiciona espaçamento ao redor */
-    overflow-y: auto; /* Permite rolagem */
-}
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* Fundo escuro */
+            color: #fff; /* Texto branco */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Ajuste o alinhamento para flex-start */
+            height: 100vh;
+            flex-direction: column;
+            padding: 30px; /* Adiciona espaçamento ao redor */
+            overflow-y: auto; /* Permite rolagem */
+        }
 
-/* Page Content */
-.widget {
-    background-color: #263238; /* Fundo cinza escuro para contraste */
-    margin-bottom: 30px; /* Mais espaço entre os widgets */
-    padding: 20px;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 800px;
-    box-sizing: border-box;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra suave para destacar */
-}
+        /* Page Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
 
-/* Título do painel */
-.x_title h2 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #fff;
-    text-align: center;
-}
+        /* Widget Styles */
+        .widget {
+            background-color: #263238; /* Fundo cinza escuro para contraste */
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            width: 48%;
+            box-sizing: border-box;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra suave para destacar */
+            transition: all 0.3s ease;
+        }
 
-/* Botões de navegação */
-.btn-group {
-    display: flex;
-    justify-content: center;
-    gap: 15px; /* Aumenta o espaçamento entre os botões */
-    margin-top: 15px;
-}
+        .widget:hover {
+            transform: translateY(-10px);
+        }
 
-.btn-group .btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transição suave */
-}
+        /* Title */
+        .x_title h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #fff;
+            text-align: center;
+        }
 
-.btn-group .btn:hover {
-    background-color: #388E3C;
-    transform: scale(1.05); /* Efeito de aumento ao passar o mouse */
-}
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
 
-.btn-group .btn-sm {
-    font-size: 14px;
-    padding: 10px 15px;
-}
+        .btn-group .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
 
-/* Gráficos */
+        .btn-group .btn:hover {
+            background-color: #388E3C;
+            transform: scale(1.05);
+        }
 
+        .btn-group .btn-sm {
+            font-size: 14px;
+            padding: 10px 15px;
+        }
 
-/* Percent dentro do gráfico */
-.chart .percent {
-    font-size: 18px;
-    font-weight: bold;
-}
+        /* Chart Styles */
+        .chart canvas {
+            border-radius: 50%;
+            border: 2px solid #4CAF50; /* Borda verde para destacá-los */
+            margin-top: 20px;
+        }
 
-/* Listagem de dados */
-.widget_tally {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    list-style: none;
-}
+        .chart .percent {
+            font-size: 22px;
+            font-weight: bold;
+        }
 
-.widget_tally li p {
-    font-size: 16px;
-    color: #fff;
-}
+        /* Data Listing */
+        .widget_tally {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            list-style: none;
+        }
 
-.widget_tally .month {
-    font-weight: bold;
-    margin-right: 10px;
-}
+        .widget_tally li p {
+            font-size: 16px;
+            color: #fff;
+        }
 
-.widget_tally .count {
-    color: #4CAF50; /* Cor verde para indicar crescimento */
-}
+        .widget_tally .month {
+            font-weight: bold;
+            margin-right: 10px;
+        }
 
-/* Adicionando uma borda suave no gráfico */
-.chart canvas {
-    border-radius: 50%;
-    border: 2px solid #4CAF50; /* Borda verde para destacá-los */
-}
+        .widget_tally .count {
+            color: #4CAF50; /* Cor verde para indicar crescimento */
+        }
 
-/* Responsividade para centralizar ainda mais em telas menores */
-@media (max-width: 768px) {
-    body {
-        padding: 15px; /* Reduz o padding em telas pequenas */
-    }
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
 
-    .widget {
-        width: 100%; /* Garante que a largura ocupe 100% em telas pequenas */
-    }
+            .widget {
+                width: 100%; /* Ocupa toda a largura disponível em telas pequenas */
+                margin-bottom: 20px;
+            }
 
-    .chart {
-        width: 40vw;
-        height: 40vw;
-        max-width: 200px;
-        max-height: 200px;
-    }
-}
-
-</style>
-
+            .btn-group {
+                flex-direction: column; /* Botões empilhados em telas pequenas */
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Page Content -->
-    <div class="col-md-9">
+    <div class="container">
+
+        <!-- BRNC INC Widget -->
         <div class="widget">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>BRNC INC </h2>
-                   
-                    </ul>
+                    <h2>BRNC INC</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <div style="text-align: center; margin-bottom: 17px">
+                    <div class="chart" style="text-align: center;">
                         <span class="chart" data-percent="86">
                             <span class="percent">86%</span>
                         </span>
                     </div>
-                    <div style="text-align: center;">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1D')">1 D</button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1W')">1 W</button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1M')">1 M</button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1Y')">1 Y</button>
-                        </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1D')">1 D</button>
+                        <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1W')">1 W</button>
+                        <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1M')">1 M</button>
+                        <button type="button" class="btn btn-default btn-sm" onclick="updateChart('1Y')">1 Y</button>
                     </div>
-                    <div style="text-align: center; overflow: hidden; margin: 10px 5px 3px;">
+                    <div style="margin: 10px 5px;">
                         <canvas id="canvas_line4" height="190"></canvas>
                     </div>
-                    <div>
-                        <ul class="list-inline widget_tally">
-                            <li>
-                                <p><span class="month">12 Dezembro 2020</span><span class="count">+12%</span></p>
-                            </li>
-                            <li>
-                                <p><span class="month">29 Dezembro 2023</span><span class="count">+12%</span></p>
-                            </li>
-                            <li>
-                                <p><span class="month">16 Janeiro 2025</span><span class="count">+12%</span></p>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul class="list-inline widget_tally">
+                        <li><p><span class="month">12 Dezembro 2020</span><span class="count">+12%</span></p></li>
+                        <li><p><span class="month">29 Dezembro 2023</span><span class="count">+12%</span></p></li>
+                        <li><p><span class="month">16 Janeiro 2025</span><span class="count">+12%</span></p></li>
+                    </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Benchmark Widget 1 -->
+        <!-- Server Performance Widget -->
         <div class="widget">
             <div class="x_panel">
                 <div class="x_title">
@@ -198,7 +193,7 @@ body {
             </div>
         </div>
 
-        <!-- Benchmark Widget 2 -->
+        <!-- Latency Benchmark Widget -->
         <div class="widget">
             <div class="x_panel">
                 <div class="x_title">
@@ -217,140 +212,70 @@ body {
                 </div>
             </div>
         </div>
+
+        <!-- Additional Widget (Server Load Analysis) -->
+        <div class="widget">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Análise de Carga do Servidor</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="chart">
+                        <canvas id="serverLoadChart" width="100" height="100"></canvas>
+                    </div>
+                    <ul class="list-inline widget_tally">
+                        <li><p><span class="month">Serviço 1</span><span class="count">40%</span></p></li>
+                        <li><p><span class="month">Serviço 2</span><span class="count">40%</span></p></li>
+                        <li><p><span class="month">Serviço 3</span><span class="count">20%</span></p></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-<script>
-// Funções de inicialização de gráficos aqui
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        var lineChart;
-        var serverPerformanceChart;
-        var latencyBenchmarkChart;
-        var serverLoadChart;
-        var databasePerformanceChart;
-
-        // Função para inicializar os gráficos de linha
-        function initLineChart() {
-            var ctx = document.getElementById('canvas_line4').getContext('2d');
-            lineChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
-                    datasets: [{
-                        label: 'Exemplo de Dados',
-                        data: [500, 550, 600, 650, 700],
-                        borderColor: '#4CAF50',
-                        backgroundColor: 'rgba(76, 175, 80, 0.2)',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
+    <script>
+        // Função para atualizar os gráficos com base no filtro selecionado
+        function updateChart(timePeriod) {
+            console.log("Atualizando gráfico para o período: " + timePeriod);
+            // Aqui você pode adicionar a lógica para atualizar os gráficos
         }
 
-        // Função para inicializar o gráfico de desempenho do servidor
-        function initServerPerformanceChart() {
-            var ctx = document.getElementById('serverPerformanceChart').getContext('2d');
-            serverPerformanceChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['CPU', 'Memória', 'Disco'],
-                    datasets: [{
-                        data: [70, 60, 50],
-                        backgroundColor: ['#4CAF50', '#FFC107', '#F44336'],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutoutPercentage: 80
-                }
-            });
-        }
+        // Exemplo de inicialização dos gráficos
+        var ctx = document.getElementById('canvas_line4').getContext('2d');
+        var serverPerformanceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                datasets: [{
+                    label: 'Desempenho do Servidor',
+                    data: [15, 20, 35, 40, 30],
+                    backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                    borderColor: 'rgba(76, 175, 80, 1)',
+                    borderWidth: 1
+                }]
+            }
+        });
 
-        // Função para inicializar o gráfico de benchmark de latência
-        function initLatencyBenchmarkChart() {
-            var ctx = document.getElementById('latencyBenchmarkChart').getContext('2d');
-            latencyBenchmarkChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Latência Mínima', 'Latência Máxima', 'Latência Média'],
-                    datasets: [{
-                        data: [15, 50, 30],
-                        backgroundColor: ['#4CAF50', '#FFC107', '#F44336'],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutoutPercentage: 80
-                }
-            });
-        }
-
-        // Função para inicializar o gráfico de análise de carga do servidor
-        function initServerLoadChart() {
-            var ctx = document.getElementById('serverLoadChart').getContext('2d');
-            serverLoadChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['Serviço 1', 'Serviço 2', 'Serviço 3'],
-                    datasets: [{
-                        data: [40, 40, 20],
-                        backgroundColor: ['#F44336', '#4CAF50', '#FFC107']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
-        }
-
-        // Função para inicializar o gráfico de desempenho do banco de dados
-        function initDatabasePerformanceChart() {
-            var ctx = document.getElementById('databasePerformanceChart').getContext('2d');
-            databasePerformanceChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Leitura', 'Escrita', 'Cache'],
-                    datasets: [{
-                        data: [60, 30, 10],
-                        backgroundColor: ['#4CAF50', '#FFC107', '#F44336'],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutoutPercentage: 80
-                }
-            });
-        }
-
-        // Inicializa todos os gráficos
-        initLineChart();
-        initServerPerformanceChart();
-        initLatencyBenchmarkChart();
-        initServerLoadChart();
-        initDatabasePerformanceChart();
+        var latencyChart = document.getElementById('latencyBenchmarkChart').getContext('2d');
+        var latencyBenchmarkChart = new Chart(latencyChart, {
+            type: 'pie',
+            data: {
+                labels: ['Baixa', 'Média', 'Alta'],
+                datasets: [{
+                    data: [60, 30, 10],
+                    backgroundColor: ['#4CAF50', '#FF9800', '#F44336'],
+                }]
+            }
+        });
     </script>
-
 
 </body>
 </html>
