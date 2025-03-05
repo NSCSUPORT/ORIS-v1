@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,116 +5,117 @@
     <link rel="icon" href="logo.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ORIS OS</title>
-   <style>
-    body {
-        background-color: #121212;
-        color: #fff;
-        font-family: 'IBM Plex Mono', 'Courier New', monospace;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        flex-direction: column;
-        overflow: hidden;
-    }
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+        }
 
-    .chat-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        height: 70vh;
-        width: 100%;
-        max-width: 480px;
-        padding: 20px;
-        border: 2px solid #4CAF50;
-        border-radius: 12px;
-        background-color: #1e1e1e;
-        box-shadow: 0px 0px 50px rgba(76, 175, 80, 0.7);
-        overflow: hidden;
-        transition: all 0.3s ease-in-out;
-    }
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            height: 70vh;
+            width: 100%;
+            max-width: 480px;
+            padding: 20px;
+            border: 2px solid #4CAF50;
+            border-radius: 12px;
+            background-color: #1e1e1e;
+            box-shadow: 0px 0px 50px rgba(76, 175, 80, 0.7);
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+        }
 
-    .chat-box {
-        flex-grow: 1;
-        overflow-y: auto;
-        margin-bottom: 15px;
-        background-color: #333;
-        border-radius: 10px;
-        padding: 15px;
-        max-height: 60vh;
-        transition: max-height 0.3s ease-in-out;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
+        .chat-box {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            background-color: #333;
+            border-radius: 10px;
+            padding: 15px;
+            max-height: 60vh;
+            transition: max-height 0.3s ease-in-out;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
 
-    .input-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        margin-top: 10px;
-        background-color: #333;
-        border-radius: 30px;
-        padding: 12px;
-    }
+        .input-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 10px;
+            background-color: #333;
+            border-radius: 30px;
+            padding: 12px;
+        }
 
-    input[type="text"] {
-        flex-grow: 1;
-        padding: 14px;
-        border: 2px solid #333;
-        border-radius: 30px;
-        background-color: #333;
-        color: #fff;
-        font-size: 16px;
-        outline: none;
-        transition: all 0.3s ease;
-    }
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 14px;
+            border: 2px solid #333;
+            border-radius: 30px;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
 
-    input[type="text"]:focus {
-        border-color: #4CAF50;
-        background-color: #222;
-    }
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+            background-color: #222;
+        }
 
-    .button-container {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-    .connect-btn {
-        padding: 12px 20px;
-        background-color: #E91E63;
-        color: #fff;
-        font-size: 16px;
-        border: none;
-        border-radius: 25px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        width: 100%;
-    }
+        .connect-btn {
+            padding: 12px 20px;
+            background-color: #E91E63;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
 
-    .connect-btn:hover {
-        background-color: #d81b60;
-    }
+        .connect-btn:hover {
+            background-color: #d81b60;
+        }
 
-    .nav-btn {
-        padding: 12px 20px;
-        background-color: #4CAF50;
-        color: #000;
-        font-size: 16px;
-        border: none;
-        border-radius: 25px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        width: 100%;
-    }
+        .nav-btn {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: #000;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
 
-    .nav-btn:hover {
-        background-color: #45a049;
-        color: #000;
-    }
+        .nav-btn:hover {
+            background-color: #45a049;
+            color: #000;
+        }
+
         footer {
             position: fixed;
             bottom: 0;
@@ -144,7 +144,7 @@
                 height: 75vh;
             }
         }
-</style>
+    </style>
 </head>
 <body>
     <div class="logo">
@@ -153,7 +153,7 @@
 
     <div class="chat-container">
         <div class="chat-box" id="terminal">
-            <div id="terminalOutput"> Welcome to ORIS OS PRESS F11 </div>
+            <div id="terminalOutput">Welcome to ORIS OS PRESS F11</div>
         </div>
         <div class="input-container">
             <span>$</span>
@@ -171,7 +171,8 @@
             </a>
         </div>
     </div>
-<script src="comandos.js"></script>
+
+    <script src="comandos.js"></script>
 
     <footer>
         <p>© 2025 HoloFi. Todos os direitos reservados. Lucas Januário</p>
@@ -181,11 +182,17 @@
         const inputField = document.getElementById('inputField');
         const terminalOutput = document.getElementById('terminalOutput');
 
+        const comandos = {
+            help: () => appendOutput("Available commands: help, about, exit"),
+            about: () => appendOutput("ORIS OS - A simulation of old-school computer terminals."),
+            exit: () => appendOutput("Goodbye!")
+        };
+
         inputField.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 const userInput = inputField.value.trim();
                 if (userInput) {
-                    terminalOutput.innerHTML += `<br><span>$</span> ${userInput}`;
+                    appendOutput(`<span>$</span> ${userInput}`);
                     inputField.value = '';
                     processCommand(userInput);
                 }
@@ -193,23 +200,16 @@
         });
 
         function processCommand(command) {
-            if (command === 'help') {
-                terminalOutput.innerHTML += `<br>Available commands: help, about, exit`;
-            } else if (command === 'about') {
-                terminalOutput.innerHTML += `<br>ORIS OS - A simulation of old-school computer terminals.`;
-            } else if (command === 'exit') {
-                terminalOutput.innerHTML += `<br>Goodbye!`;
+            if (comandos[command]) {
+                comandos[command]();
             } else {
-                terminalOutput.innerHTML += `<br>Command not found: ${command}`;
+                appendOutput(`Command not found: ${command}`);
             }
-            function processCommand(command) {
-    if (comandos[command]) {
-        comandos[command](); // Executa o comando correspondente
-    } else {
-        terminalOutput.innerHTML += `<br>Command not found: ${command}`;
-    }
-}
+        }
 
+        function appendOutput(text) {
+            terminalOutput.innerHTML += `<br>${text}`;
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
         }
     </script>
 </body>
