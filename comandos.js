@@ -1344,8 +1344,26 @@ const comandos = {
     "rename file": () => log("Renomeando arquivo..."),
     "copy file": () => log("Copiando arquivo..."),
 };
+function processCommand(command) {
+    const trimmedCommand = command.trim(); // Remove espaços extras
+    console.log(`Command received: "${trimmedCommand}"`); // Depuração do comando recebido
+    if (comandos[trimmedCommand]) {
+        comandos[trimmedCommand](); // Executa o comando se existir no objeto comandos
+    } else {
+        terminalOutput.innerHTML += `<br>Command not found: ${trimmedCommand}`;
+    }
+}
 
-module.exports = comandos; // Exporta os comandos para o index.js
+const inputField = document.getElementById('inputField');
+const terminalOutput = document.getElementById('terminalOutput');
 
-// Iniciar o terminal assim que o conteúdo da página for carregado
-window.addEventListener('DOMContentLoaded', startTerminal);
+inputField.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        const userInput = inputField.value.trim();
+        if (userInput) {
+            terminalOutput.innerHTML += `<br><span>$</span> ${userInput}`;
+            inputField.value = '';
+            processCommand(userInput);
+        }
+    }
+});
