@@ -179,7 +179,7 @@
 
         // Comandos definidos
         const comandos = {
-            help: () => appendOutput("Comandos disponíveis: help, about, exit"),
+            help: () => appendOutput("Comandos disponíveis: help, about, exit, monitorDataCenter, configureServer, performUpdate, analyzeData, predictDataTrends, generateReport, runDiagnostics, systemInfo"),
             about: () => appendOutput("ORIS OS terminal de computador."),
             exit: () => appendOutput("Até logo!"),
 
@@ -189,18 +189,25 @@
                 temperature: () => appendOutput("Monitorando temperatura do centro de dados..."),
                 airflow: () => appendOutput("Monitorando o fluxo de ar do centro de dados..."),
                 network: () => appendOutput("Monitorando rede do centro de dados..."),
+                power: () => appendOutput("Monitorando consumo de energia do centro de dados..."),
+                diskUsage: () => appendOutput("Monitorando uso de disco do centro de dados..."),
+                cooling: () => appendOutput("Monitorando sistemas de resfriamento..."),
             },
 
             // Monitoramento de Rack e Servidores
             monitorRack: {
                 temperature: () => appendOutput("Monitorando temperatura do rack..."),
                 humidity: () => appendOutput("Monitorando umidade do rack..."),
+                status: () => appendOutput("Monitorando status dos racks..."),
+                power: () => appendOutput("Monitorando consumo de energia dos racks..."),
             },
+
             monitorServer: {
                 diskSpaceUsage: () => appendOutput("Monitorando uso de espaço em disco do servidor..."),
                 RAMUsage: () => appendOutput("Monitorando uso de RAM do servidor..."),
                 diskHealth: () => appendOutput("Monitorando saúde do disco do servidor..."),
                 powerConsumption: () => appendOutput("Monitorando consumo de energia do servidor..."),
+                temperature: () => appendOutput("Monitorando temperatura do servidor..."),
             },
 
             // Configuração e Setup
@@ -209,6 +216,8 @@
                 timeSync: () => appendOutput("Configurando sincronização de tempo do servidor..."),
                 security: () => appendOutput("Configurando segurança do servidor..."),
                 firewall: () => appendOutput("Atualizando configurações do firewall do servidor..."),
+                updateSoftware: () => appendOutput("Atualizando software do servidor..."),
+                optimize: () => appendOutput("Otimizando configurações do servidor..."),
             },
 
             // Manutenção e Atualizações
@@ -216,36 +225,41 @@
             performAudit: () => appendOutput("Realizando auditoria de segurança..."),
             performDiagnostic: () => appendOutput("Executando diagnósticos do sistema..."),
             performHardwareMaintenance: () => appendOutput("Realizando manutenção de hardware..."),
+            checkHealth: () => appendOutput("Verificando a saúde do sistema..."),
+            runVirusScan: () => appendOutput("Executando varredura de vírus..."),
 
             // Backup e Recuperação
-            performBackup: () => appendOutput("Realizando backup do sistema..."),
-            restoreSystems: () => appendOutput("Restaurando sistemas do centro de dados..."),
-            testBackupSystems: () => appendOutput("Testando sistemas de backup..."),
+            backup: () => appendOutput("Fazendo backup do sistema..."),
+            restoreBackup: () => appendOutput("Restaurando backup..."),
+            backupStatus: () => appendOutput("Verificando status do backup..."),
+            testBackup: () => appendOutput("Testando backup..."),
+            testRestore: () => appendOutput("Testando recuperação de backup..."),
 
-            // Monitoramento e Análise de Dados
-            analyzeData: {
-                serverTraffic: () => appendOutput("Analisando padrões de tráfego do servidor..."),
-                dataTransfer: () => appendOutput("Analisando taxas de transferência de dados..."),
-                databasePerformance: () => appendOutput("Analisando desempenho do banco de dados..."),
-                diskIO: () => appendOutput("Analisando desempenho de I/O de disco..."),
-                memoryUsage: () => appendOutput("Analisando uso de memória..."),
-                cpuUsage: () => appendOutput("Analisando uso de CPU..."),
-            },
+            // Análise de Dados
+            analyzeTraffic: () => appendOutput("Analisando tráfego de rede..."),
+            analyzeServerTraffic: () => appendOutput("Analisando tráfego de servidor..."),
+            analyzeDBPerformance: () => appendOutput("Analisando desempenho do banco de dados..."),
+            analyzeDiskIO: () => appendOutput("Analisando I/O de disco..."),
+            analyzeCPUUsage: () => appendOutput("Analisando uso de CPU..."),
+            analyzeMemoryUsage: () => appendOutput("Analisando uso de memória..."),
+            analyzeTransferRates: () => appendOutput("Analisando taxas de transferência de dados..."),
+            analyzeServerErrors: () => appendOutput("Analisando erros do servidor..."),
 
-            // Previsão e Tendências de Dados
-            predictDataTrends: () => appendOutput("Prevendo tendências futuras de dados..."),
-            runRegressionAnalysis: () => appendOutput("Executando análise de regressão de dados..."),
-            runClusterAnalysis: () => appendOutput("Executando análise de cluster de dados..."),
+            // Previsões e Tendências de Dados
+            predictDataTrends: () => appendOutput("Previsão de tendências de dados..."),
+            predictDataAnomalies: () => appendOutput("Previsão de anomalias de dados..."),
+            regressionAnalysis: () => appendOutput("Realizando análise de regressão..."),
+            forecastData: () => appendOutput("Prevendo dados futuros..."),
+            analyzeClusters: () => appendOutput("Analisando clusters de dados..."),
+            analyzePatterns: () => appendOutput("Analisando padrões de dados..."),
 
             // Relatórios de Dados
-            generateReport: {
-                networkUsage: () => appendOutput("Gerando relatório de uso da rede..."),
-                serverPerformance: () => appendOutput("Gerando relatório de desempenho do servidor..."),
-                diskUsage: () => appendOutput("Gerando relatório de uso de espaço em disco..."),
-                cpuUsage: () => appendOutput("Gerando relatório de uso da CPU..."),
-                memoryUsage: () => appendOutput("Gerando relatório de uso de memória..."),
-                applicationPerformance: () => appendOutput("Gerando relatório de desempenho de aplicativos..."),
-            },
+            generateReport: () => appendOutput("Gerando relatório de dados..."),
+            generateNetworkReport: () => appendOutput("Gerando relatório de rede..."),
+            generateDiskReport: () => appendOutput("Gerando relatório de uso de disco..."),
+            generateMemoryReport: () => appendOutput("Gerando relatório de uso de memória..."),
+            generateServerReport: () => appendOutput("Gerando relatório de servidor..."),
+            generateCPUReport: () => appendOutput("Gerando relatório de CPU..."),
 
             // Diagnóstico de Sistema
             runDiagnostics: {
