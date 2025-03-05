@@ -1,5 +1,37 @@
 // main.js
+  document.getElementById("connection-form").addEventListener("submit", function (event) {
+            event.preventDefault();
 
+            const awsKey = document.getElementById("aws-key").value;
+            const azureKey = document.getElementById("azure-key").value;
+            const wanpId = document.getElementById("wanp-id").value;
+            const service = document.getElementById("service").value;
+
+            if (!awsKey && !azureKey && !wanpId) {
+                alert("Erro: Nenhuma chave de servidor foi inserida! Pelo menos um campo deve ser preenchido.");
+                return;
+            }
+
+            // Chamar a função do arquivo quantum-process.js
+            if (typeof processConnectionData === "function") {
+                processConnectionData(awsKey, azureKey, wanpId, service);
+                alert("Conectado com sucesso ao serviço: " + service.toUpperCase());
+                enableMultipleServers(); // Ativar conexão com múltiplos servidores
+            } else {
+                alert("Erro: O arquivo quantum-process.js não foi carregado corretamente!");
+            }
+        });
+
+        function enableMultipleServers() {
+            const serviceDropdown = document.getElementById("service");
+            const connectButton = document.querySelector(".submit-btn");
+            // Adicionando uma opção para múltiplos servidores
+            const multipleServerOption = document.createElement("option");
+            multipleServerOption.value = "multi";
+            multipleServerOption.text = "Conectar a múltiplos servidores";
+            serviceDropdown.appendChild(multipleServerOption);
+            connectButton.textContent = "Conectar a múltiplos servidores";
+        }
 // Aguarda o carregamento do DOM para garantir que os elementos estejam disponíveis
 document.addEventListener('DOMContentLoaded', () => {
     const inputField = document.getElementById('inputField');
