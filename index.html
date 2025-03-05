@@ -172,49 +172,41 @@
         </div>
     </div>
 
-    <script src="comandos.js"></script>
-
     <footer>
         <p>© 2025 HoloFi. Todos os direitos reservados. Lucas Januário</p>
     </footer>
 
-    <script>
-        const inputField = document.getElementById('inputField');
-        const terminalOutput = document.getElementById('terminalOutput');
+<script src="comandos.js"></script>
+<script>
+    const inputField = document.getElementById('inputField');
+    const terminalOutput = document.getElementById('terminalOutput');
 
-        // Comandos definidos
-        const comandos = {
-            help: () => appendOutput("Available commands: help, about, exit"),
-            about: () => appendOutput("ORIS OS computer terminal."),
-            exit: () => appendOutput("Goodbye!")
-        };
+    // Não redefina o objeto comandos aqui, utilize o que foi definido em comandos.js
 
-        // Ação quando a tecla Enter for pressionada
-        inputField.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                const userInput = inputField.value.trim();
-                if (userInput) {
-                    appendOutput(`<span>$</span> ${userInput}`);
-                    inputField.value = '';
-                    processCommand(userInput);
-                }
-            }
-        });
-
-        // Processar o comando
-        function processCommand(command) {
-            if (comandos[command]) {
-                comandos[command]();  // Executa o comando se estiver na lista
-            } else {
-                appendOutput(`Command not found: ${command}`);
+    inputField.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            const userInput = inputField.value.trim();
+            if (userInput) {
+                appendOutput(`<span>$</span> ${userInput}`);
+                inputField.value = '';
+                processCommand(userInput);
             }
         }
+    });
 
-        // Função para adicionar a saída no terminal
-        function appendOutput(text) {
-            terminalOutput.innerHTML += `<br>${text}`;
-            terminalOutput.scrollTop = terminalOutput.scrollHeight; // Auto-scroll
+    function processCommand(command) {
+        if (comandos[command]) {
+            comandos[command]();
+        } else {
+            appendOutput(`Command not found: ${command}`);
         }
-    </script>
+    }
+
+    function appendOutput(text) {
+        terminalOutput.innerHTML += `<br>${text}`;
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    }
+</script>
+
 </body>
 </html>
