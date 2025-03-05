@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -170,39 +169,128 @@
         const inputField = document.getElementById('inputField');
         const terminalOutput = document.getElementById('terminalOutput');
 
+        // Função para adicionar a saída no terminal
+        function appendOutput(output) {
+            const outputDiv = document.createElement("div");
+            outputDiv.textContent = output;
+            terminalOutput.appendChild(outputDiv);
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;  // Scroll para a última linha
+        }
+
         // Comandos definidos
         const comandos = {
-            help: () => appendOutput("Available commands: help, about, exit"),
-            about: () => appendOutput("ORIS OS computer terminal."),
-            exit: () => appendOutput("Goodbye!")
+            help: () => appendOutput("Comandos disponíveis: help, about, exit"),
+            about: () => appendOutput("ORIS OS terminal de computador."),
+            exit: () => appendOutput("Até logo!"),
+
+            // Monitoramento de Dados
+            monitorDataCenter: {
+                security: () => appendOutput("Monitorando segurança do centro de dados..."),
+                temperature: () => appendOutput("Monitorando temperatura do centro de dados..."),
+                airflow: () => appendOutput("Monitorando o fluxo de ar do centro de dados..."),
+                network: () => appendOutput("Monitorando rede do centro de dados..."),
+            },
+
+            // Monitoramento de Rack e Servidores
+            monitorRack: {
+                temperature: () => appendOutput("Monitorando temperatura do rack..."),
+                humidity: () => appendOutput("Monitorando umidade do rack..."),
+            },
+            monitorServer: {
+                diskSpaceUsage: () => appendOutput("Monitorando uso de espaço em disco do servidor..."),
+                RAMUsage: () => appendOutput("Monitorando uso de RAM do servidor..."),
+                diskHealth: () => appendOutput("Monitorando saúde do disco do servidor..."),
+                powerConsumption: () => appendOutput("Monitorando consumo de energia do servidor..."),
+            },
+
+            // Configuração e Setup
+            configureServer: {
+                failover: () => appendOutput("Configurando failover do servidor..."),
+                timeSync: () => appendOutput("Configurando sincronização de tempo do servidor..."),
+                security: () => appendOutput("Configurando segurança do servidor..."),
+                firewall: () => appendOutput("Atualizando configurações do firewall do servidor..."),
+            },
+
+            // Manutenção e Atualizações
+            performUpdate: () => appendOutput("Realizando atualização do sistema..."),
+            performAudit: () => appendOutput("Realizando auditoria de segurança..."),
+            performDiagnostic: () => appendOutput("Executando diagnósticos do sistema..."),
+            performHardwareMaintenance: () => appendOutput("Realizando manutenção de hardware..."),
+
+            // Backup e Recuperação
+            performBackup: () => appendOutput("Realizando backup do sistema..."),
+            restoreSystems: () => appendOutput("Restaurando sistemas do centro de dados..."),
+            testBackupSystems: () => appendOutput("Testando sistemas de backup..."),
+
+            // Monitoramento e Análise de Dados
+            analyzeData: {
+                serverTraffic: () => appendOutput("Analisando padrões de tráfego do servidor..."),
+                dataTransfer: () => appendOutput("Analisando taxas de transferência de dados..."),
+                databasePerformance: () => appendOutput("Analisando desempenho do banco de dados..."),
+                diskIO: () => appendOutput("Analisando desempenho de I/O de disco..."),
+                memoryUsage: () => appendOutput("Analisando uso de memória..."),
+                cpuUsage: () => appendOutput("Analisando uso de CPU..."),
+            },
+
+            // Previsão e Tendências de Dados
+            predictDataTrends: () => appendOutput("Prevendo tendências futuras de dados..."),
+            runRegressionAnalysis: () => appendOutput("Executando análise de regressão de dados..."),
+            runClusterAnalysis: () => appendOutput("Executando análise de cluster de dados..."),
+
+            // Relatórios de Dados
+            generateReport: {
+                networkUsage: () => appendOutput("Gerando relatório de uso da rede..."),
+                serverPerformance: () => appendOutput("Gerando relatório de desempenho do servidor..."),
+                diskUsage: () => appendOutput("Gerando relatório de uso de espaço em disco..."),
+                cpuUsage: () => appendOutput("Gerando relatório de uso da CPU..."),
+                memoryUsage: () => appendOutput("Gerando relatório de uso de memória..."),
+                applicationPerformance: () => appendOutput("Gerando relatório de desempenho de aplicativos..."),
+            },
+
+            // Diagnóstico de Sistema
+            runDiagnostics: {
+                diskSpace: () => appendOutput("Executando diagnóstico de espaço em disco..."),
+                RAM: () => appendOutput("Executando diagnóstico de RAM..."),
+                CPU: () => appendOutput("Executando diagnóstico de CPU..."),
+                network: () => appendOutput("Executando diagnóstico de rede..."),
+            },
+
+            // Informações sobre o Sistema
+            systemInfo: () => appendOutput("Sistema ORIS OS em operação..."),
+            listCommands: () => appendOutput("Comandos disponíveis: help, about, exit, monitorDataCenter, configureServer, performUpdate, analyzeData, predictDataTrends, generateReport, runDiagnostics, systemInfo"),
         };
 
-        // Ação quando a tecla Enter for pressionada
-        inputField.addEventListener('keypress', function(event) {
+        // Função para processar comandos
+        function processCommand(command) {
+            const commandParts = command.split(" ");
+            const mainCommand = commandParts[0];
+            const subCommand = commandParts[1];
+
+            if (comandos[mainCommand]) {
+                if (subCommand && comandos[mainCommand][subCommand]) {
+                    comandos[mainCommand][subCommand]();
+                } else if (!subCommand) {
+                    comandos[mainCommand]();
+                } else {
+                    appendOutput(`Comando desconhecido: ${command}`);
+                }
+            } else {
+                appendOutput(`Comando desconhecido: ${command}`);
+            }
+        }
+
+        // Adicionar evento de envio de comando
+        inputField.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
-                const userInput = inputField.value.trim();
-                if (userInput) {
-                    appendOutput(`<span>$</span> ${userInput}`);
-                    inputField.value = '';
-                    processCommand(userInput);
+                event.preventDefault();
+                const command = inputField.value.trim();
+                if (command) {
+                    appendOutput(`$ ${command}`);
+                    processCommand(command);
+                    inputField.value = '';  // Limpar campo de entrada
                 }
             }
         });
-
-        // Processar o comando
-        function processCommand(command) {
-            if (comandos[command]) {
-                comandos[command]();  // Executa o comando se estiver na lista
-            } else {
-                appendOutput(`Command not found: ${command}`);
-            }
-        }
-
-        // Função para adicionar a saída no terminal
-        function appendOutput(text) {
-            terminalOutput.innerHTML += `<br>${text}`;
-            terminalOutput.scrollTop = terminalOutput.scrollHeight; // Auto-scroll
-        }
     </script>
 </body>
 </html>
