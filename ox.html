@@ -167,16 +167,19 @@
         &copy; 2024 BJX CELEOR. All rights reserved.
     </div>
 
-  <script>
+<script>
     function loginWithGitHub() {
         const clientId = 'Iv23li2dsE3onkdPGws2'; // Substitua pelo seu Client ID do GitHub
-        const redirectUri = encodeURIComponent('https://nscsuport.github.io/boscojones/main.html'); // Alterado para main.html
+        const secretKey = 'f080dd30288dd6063c126c80fb3403011508fc1b'; // Substitua pela sua chave secreta
+        const redirectUri = encodeURIComponent('https://nscsuport.github.io/boscojones/market.html');
         const scope = 'user:email';
         
-        const githubLoginUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
+        // Criação da URL de login do GitHub com a chave secreta
+        const githubLoginUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&state=${secretKey}`;
         
         window.location.href = githubLoginUrl;
     }
 </script>
+
 </body>
 </html>
